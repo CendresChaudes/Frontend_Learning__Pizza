@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    /* General */
+    "composite": true,
+    "paths": {
+      "~generated/*": ["./generated/*"],
+      "~msw/*": ["./msw/*"],
+      "~app/*": ["./src/1_app/*"],
+      "~pages/*": ["./src/2_pages/*"],
+      "~widgets/*": ["./src/3_widgets/*"],
+      "~features/*": ["./src/4_features/*"],
+      "~entities/*": ["./src/5_entities/*"],
+      "~core/*": ["./src/6_core/*"],
+      "~shared/*": ["./src/7_shared/*"],
+      "~global/*": ["./src/8_global/*"]
+    },
+    "target": "ES2025",
+    "module": "ESNext",
+    "noEmit": true,
+
+    /* Module */
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Type checking */
+    "skipLibCheck": true,
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitAny": true,
+    "useUnknownInCatchVariables": true,
+
+    /* Diagnostics */
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

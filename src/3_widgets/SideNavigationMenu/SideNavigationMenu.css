@@ -1,0 +1,6 @@
+/* stylelint-disable-next-line selector-class-pattern */
+.mantine-NavLink-label:has(svg) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

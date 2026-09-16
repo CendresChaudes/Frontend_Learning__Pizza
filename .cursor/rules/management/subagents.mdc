@@ -1,0 +1,42 @@
+---
+description: When to delegate to custom subagents (implementer, debugger, refactor, reviewer, docs) and typical flows
+alwaysApply: true
+---
+
+# Subagent orchestration
+
+Custom subagents live in `.cursor/agents/`. The main agent orchestrates: it plans, decides who to launch, in what order, and runs the verification gate itself. Do not delegate planning or orchestration — those stay with the main agent.
+
+## When to delegate vs. do it yourself
+
+- Delegate when the task needs isolated context, a specialized methodology, or parallel work.
+- Do it yourself for: one-line fixes, edits in a file you just read, the verification gate (`tsc`, narrow `vitest`, `eslint --quiet`, re-reading the diff), and planning (`TodoWrite`).
+
+## Subagents
+
+| Subagent | Use for | Not for |
+|----------|---------|---------|
+| `implementer` | behavioral change from a ready plan | no plan yet; structural-only change; one-liners |
+| `debugger` | real error/regression, root-cause investigation | obvious one-line fix; structural refactor |
+| `refactor` | approved structural step, no behavior change | "I don't like it"; hotfix; behavioral change |
+| `reviewer` | non-trivial/cross-slice diff before reporting done | one-liner; trivial diff |
+| `tester` | adding/strengthening tests for a scope, fixing broken tests | test-first implementation (implementer+tdd); diagnosis (debugger); the verification gate (parent) |
+| `documenter` | creating/updating/syncing `docs/` (Russian, human-facing) | code edits; agent rules; one-liners |
+
+Use the built-in `explore` for codebase research; add a custom `explorer` only if it must know FSD layers.
+
+## Typical flows
+
+- Feature: `explore` → plan → `implementer` → verify → `reviewer`
+- Feature with tests: `explore` → plan → `implementer` → `tester` → verify → `reviewer`
+- Bug: `debugger` → `implementer` (minimal fix) → `tester` (regression test) → verify
+- Refactor: `explore` → `refactor` → verify → `reviewer`
+- Docs change: `documenter` (sync `docs/` to product/code) → verify (prettier/cspell)
+- Trivial: edit directly → verify (no subagents)
+
+## Rules
+
+- Launch by trigger, not by default — don't spawn all subagents on every task.
+- One in progress at a time unless parallelism is the point (then launch concurrently in one message).
+- Pass full context in the prompt: subagents don't see chat history.
+- Address `reviewer` blocking findings before reporting done; don't claim success the reviewer didn't confirm.

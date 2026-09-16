@@ -1,0 +1,24 @@
+.root {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.root:hover {
+  background-color: var(--color-primary-light);
+}
+
+.root:focus-visible {
+  background-color: var(--color-primary-dark);
+  outline: none;
+}
+
+.root:active {
+  background-color: var(--color-primary-dark);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+  border-color: var(--color-disabled);
+  color: color-mix(in srgb, var(--color-white) 50%, transparent);
+  background-color: var(--color-disabled);
+}

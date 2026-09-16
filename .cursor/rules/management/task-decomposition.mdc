@@ -1,0 +1,15 @@
+---
+description: Task decomposition — when to split work, how to use todos, one in-progress at a time
+alwaysApply: true
+---
+
+# Task decomposition
+
+- Decompose before editing: for 3+ distinct steps, create a todo list first — one item per concrete step, ordered by dependency. Don't code into a vague task.
+- One in-progress at a time: mark exactly one `in_progress`, `completed` the moment it's done, then move on.
+- Keep todos concrete and actionable: "Add validation to the form" is a todo; "Improve the form" is not. Each item is finishable and verifiable on its own.
+- Order by dependency; if independent, order by risk — do the risky/uncertain one first to fail fast.
+- Split by concern, not by file: a todo is a logical unit (add schema, wire hook, update test), not "edit form.tsx then form.test.tsx".
+- Don't over-decompose trivial work: a one-line fix doesn't need todos.
+- Update todos in real time: add, split, or drop as you learn. A stale list is worse than none.
+- Close the loop: every todo ends `completed` or `cancelled` with a reason.

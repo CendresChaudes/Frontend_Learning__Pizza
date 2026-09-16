@@ -1,0 +1,11 @@
+---
+description: Stack state model — MobX (mobx-react-lite) for client domain state, not server data
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# Model (stack)
+
+- Use MobX correctly and sparingly: `mobx-react-lite` `observer` only for components that read observable state; keep actions and computed derivations explicit.
+- Don't mirror server state into observables — server data lives in the TanStack Query cache (see `stack/api`). Reserve MobX for genuine client domain state.
+- Keep stores slice-scoped (feature/entity `model` segment); avoid global stores for what belongs to a feature (see `architecture/segments`).

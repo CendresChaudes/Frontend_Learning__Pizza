@@ -1,0 +1,18 @@
+---
+description: Comment and documentation practices — TSDoc, TODO/FIXME format, when to comment, when not to
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# Comments
+
+- Write comments for the "why", not the "what": code already says what it does. A comment must explain a non-obvious decision, a workaround, a business rule, or a gotcha — not restate the code.
+- Use TSDoc for public API: every exported function, hook, component, type, and constant in a slice's public API gets `/** ... */` with `@param`, `@returns`, `@throws` where meaningful. The project ships `eslint-plugin-tsdoc` and `typedoc` — keep TSDoc valid so they pass.
+- Don't comment out code: dead code in comments rots and confuses readers. Remove it; git keeps the history. The only exception is a temporary debug line you're about to revert in the same session.
+- Mark intent with `TODO`/`FIXME`/`HACK` consistently: `// TODO(name): description`, `// FIXME(name): description`, `// HACK: reason`. Always include the reason; a bare `// TODO` is noise. Link an issue when one exists.
+- Explain non-obvious types: if a generic constraint, a discriminated union, or a mapped type is subtle, add a one-line comment above it. Don't comment types that read like prose (`type User = { id: string }`).
+- Document side effects and invariants: effects with non-obvious deps, stores that must be a singleton, functions that mutate — note the contract in a comment. Future readers (and you) will thank it.
+- Keep comments next to the code they describe: don't write a header comment far from the implementation. If a function needs a long explanation, it's probably too complex — split it first, then comment the why.
+- Don't leave commented-out TODOs from the agent: when the agent proposes a change, explanations belong in the reply, not in the code. Only commit comments with lasting value.
+- Russian is allowed in comments for the team, but identifiers, TSDoc tags, and TODO markers stay English. Don't mix scripts inside one comment block.
+- Remove stale comments during edits: if you change behavior, update or delete the comment that described the old behavior. A comment that contradicts the code is worse than no comment.

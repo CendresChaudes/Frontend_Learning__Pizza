@@ -1,0 +1,16 @@
+---
+description: Refactoring practices — boy scout rule, separating refactor from features, safe steps, when not to refactor
+alwaysApply: true
+---
+
+# Refactoring
+
+- Boy scout rule: leave touched code cleaner — rename an unclear variable, fix a typo, remove a dead import, extract a small duplication. Keep micro-refactors within the file you're editing; don't expand scope unprompted.
+- Separate refactoring from features/fixes: a change is either behavioral or structural, not both. If a feature needs a refactor, do the refactor first as its own step, then add the feature. Keeps diffs reviewable and blame useful.
+- Make refactors safe and mechanical: prefer automated moves (rename, extract) over hand-rewrites. After each step, build and tests stay green. Don't combine a rename with a logic change.
+- Don't refactor without a reason: "I don't like this" isn't enough. Refactor when code blocks a real change, is actively buggy, or is unreadable enough to slow the next person.
+- Keep refactors local: extract within the feature, move a helper to `~shared/lib`, split a large file — without touching other slices. Cross-slice only when structure demands it, and call it out.
+- Preserve public APIs: a slice's `index.ts` is a contract. Refactor internals freely; don't rename or remove exports without updating consumers in the same change.
+- Verify after each step: run `check:types` and relevant tests. Don't batch 5 refactors and hope — you won't know which broke.
+- Don't refactor during a hotfix: minimal fix and ship; schedule the refactor for after.
+- Call out large refactors in the reply: explain what moved, why, and what to review.

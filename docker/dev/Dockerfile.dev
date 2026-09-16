@@ -1,0 +1,18 @@
+FROM node:24-slim
+
+ENV CI=true
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+RUN corepack enable && \
+    corepack prepare pnpm@11.25.0 --activate && \
+    pnpm install --frozen-lockfile
+
+COPY . .
+
+EXPOSE 60000
+
+CMD ["pnpm", "run", "start:dev"]

@@ -1,0 +1,15 @@
+---
+description: Tailwind v4 practices for this stack — utilities, variants, tokens, Prettier/stylelint interplay, Mantine reconciliation
+alwaysApply: false
+globs: "**/*.tsx"
+---
+
+# Tailwind
+
+- Tailwind v4 is the styling foundation: utility-first via `@import "tailwindcss"` and `@tailwindcss/postcss`. Prefer utility classes over custom CSS; reach for plain CSS only for things Tailwind can't express (keyframes, complex selectors, third-party overrides).
+- Compose variants with this stack: `class-variance-authority` for variant contracts, `clsx` for conditional classes, `tailwind-merge` to dedupe conflicting utilities. Route them through a single `cn` helper; don't scatter raw `clsx`/`twMerge` calls.
+- Keep Prettier's Tailwind awareness intact: classes are sorted by `prettier-plugin-tailwindcss`, and `tailwindFunctions: ['cn', 'cva']` is configured — don't bypass `cn`/`cva` with ad-hoc string concatenation Prettier can't sort.
+- Use Tailwind tokens for consistency: spacing, colors, radii, typography come from the theme; avoid magic values (`px-[13px]`, `text-[#abc]`) unless a design demands a one-off. Prefer semantic tokens over raw values.
+- Use responsive prefixes mobile-first: `sm:`/`md:`/`lg:`…; don't write min-width media queries by hand when a prefix exists. Don't fight the cascade — avoid `!important` and deep specificity hacks Tailwind already handles.
+- Reconcile with Mantine: Mantine components ship their own styles; override via Mantine's style props / classNames API, not by force-matching with Tailwind utilities that fight Mantine's internals. Don't double-style a Mantine component with conflicting Tailwind layout classes.
+- Keep Tailwind directives in the global entry: `@import "tailwindcss"`, `@theme`, `@layer` customizations belong in `src/1_app/ui/styles/index.css` or a dedicated theme file — not scattered across component CSS.

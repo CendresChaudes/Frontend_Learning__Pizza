@@ -1,0 +1,25 @@
+---
+description: TypeScript practices — types, narrowing, generics, imports, enums, async/errors, plus stack config (strictness flags, path aliases, tsconfig.app.json, generated code)
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# TypeScript
+
+## Generic practices
+
+- Let types guide the design: model domains with discriminated unions and `as const` literals; prefer `type` for unions/aliases and `interface` for extensible object shapes. Drive narrowing with `in`, `typeof`, tagged unions, and type guards instead of casts.
+- Use generics deliberately: constrain them meaningfully (`<T extends ...>`), avoid needless generics on single-use helpers, prefer `satisfies` to validate without widening. Don't reach for `any`/`unknown` to silence the compiler — fix the type.
+- Keep imports type-clean: `import type` for types-only; separate runtime and type imports. Each file must transpile independently under `isolatedModules` — re-export types with `export type`; don't rely on cross-file const folding.
+- Prefer `as const` objects + union types over enums; reserve `enum` only when you need runtime values with reverse mapping. Avoid `any`/`unknown` return types in public APIs — annotate explicitly.
+- Narrow errors and async correctly: type `catch` against `unknown` — narrow before use; type async results with the awaited type, not `Promise<any>`. Use discriminated unions for async state (`{ status: 'loading' | 'error' | 'success', ... }`) over booleans.
+- Don't weaken strictness with `any` or non-null assertions; index access returns `T | undefined`, optional props require explicit `| undefined` — narrow, don't assert.
+
+## Stack config
+
+- Strictness is on: `strict`, `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `useUnknownInCatchVariables`. Index access returns `T | undefined`; optional props require explicit `| undefined`; catch variables are `unknown`. Don't weaken with `any` or non-null assertions.
+- `import type` is enforced via `verbatimModuleSyntax`-style rules; never import types from `generated/` casually — they are `@ts-nocheck` and not type-checked.
+- Honor `composite: true` and `tsBuildInfoFile`; don't break project references by removing them or adding circular references.
+- Use path aliases, not relative climbs: `~app`, `~pages`, `~widgets`, `~features`, `~entities`, `~core`, `~shared`, `~global`, `~generated`, `~msw` per the FSD flow. Never `../../..` across layers; the boundaries ESLint config enforces this.
+- Keep the build green: `tsc -p tsconfig.app.json --noEmit` stays at 0 errors; `noUnusedLocals`/`noUnusedParameters`/`noFallthroughCasesInSwitch` are on — remove dead vars and cover switch cases. `skipLibCheck` is `false`, so bad ambient `.d.ts` surfaces; fix the declaration, don't silence it.
+- `generated/` is read-only and untyped — see `stack/general`. Don't let generated errors leak into hand-written code; wrap generated APIs in adapters in `~shared`/`~entities`.

@@ -1,0 +1,6 @@
+@layer theme, base, mantine, components, utilities;
+
+@import "./styles/global/base.global.css";
+@import "./styles/global/fonts.global.css";
+@import "./styles/global/vendor/mantine.global.css";
+@import "./styles/global/vendor/tailwind.global.css";

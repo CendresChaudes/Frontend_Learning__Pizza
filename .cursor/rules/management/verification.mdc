@@ -1,0 +1,13 @@
+---
+description: Verification steps — what to run before declaring done, what never to run without asking
+alwaysApply: true
+---
+
+# Verification
+
+- Type-check affected files: `tsc -p tsconfig.app.json --noEmit` when you've touched types or imports. Don't claim a type change is done without confirming it's green.
+- Lint the scope you changed: `eslint --quiet <path>` on edited files, or `check:es:fix` only when asked. Don't leave new lint errors — `check:es` will fail otherwise.
+- Run the narrow tests covering your change via `vitest`; don't run the whole suite unprompted.
+- Re-read your own diff before reporting: catch leftover debug logs, dead imports, and half-applied edits before the user does.
+- When unsure whether a command is safe, ask — a wrong `pnpm install` or stray `git reset` costs more than a one-line question.
+- Toolchain prohibitions (no side-effect runs, no package managers, no git mutations, no file deletion, no regenerating `generated/` without approval) live in `stack/general`.

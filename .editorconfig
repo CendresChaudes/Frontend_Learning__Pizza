@@ -1,0 +1,13 @@
+# Корневой файл конфигурации
+root = true
+
+[*]
+charset = utf-8                     # Кодировка файлов
+end_of_line = lf                    # Конец строки (LF)
+indent_style = space                # Стиль отступа (пробелы)
+indent_size = 2                     # Размер отступа
+insert_final_newline = true         # Вставка новой строки в конце файла
+trim_trailing_whitespace = true     # Удаление пробелов в конце строк
+
+[*.md]
+trim_trailing_whitespace = false    # В Markdown пробелы в конце строки могут влиять на форматирование

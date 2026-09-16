@@ -1,0 +1,8 @@
+services:
+  frontend:
+    image: frontend-stage
+    build:
+      context: ../../
+      dockerfile: docker/stage/Dockerfile.stage
+    ports:
+      - '8080:8080'

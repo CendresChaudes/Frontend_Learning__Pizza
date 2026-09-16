@@ -1,0 +1,15 @@
+---
+description: Stack CSS setup — Tailwind v4, stylelint, @theme tokens, colocation
+alwaysApply: false
+globs: "**/*.css"
+---
+
+# CSS (stack)
+
+Generic CSS practices (escape-hatch principle, cascade hygiene, inline styles, selectors, variables) live in `engineering/styles`. Below is this stack's setup.
+
+- Tailwind v4 is the styling foundation: utility-first via `@import "tailwindcss"` and `@tailwindcss/postcss`. Plain CSS only for what Tailwind can't express (see `engineering/styles`).
+- Honor the stylelint config: `stylelint-config-standard` + `stylelint-config-tailwindcss` + `stylelint-config-clean-order` enforce property order and Tailwind directive rules. `check:styles` must pass; run `check:styles:fix` only when asked.
+- Keep CSS files minimal and colocated: a component's styles live with the component, not in a global stylesheet. Global CSS (`src/1_app/ui/styles/index.css`) is only for the Tailwind import, base resets, and truly app-wide tokens.
+- Static design tokens belong in Tailwind's `@theme`; CSS variables (`--token`) only for runtime-driven values. Don't duplicate tokens across both systems.
+- Keep Tailwind directives in the global entry: `@import "tailwindcss"`, `@theme`, `@layer` customizations belong in `src/1_app/ui/styles/index.css` or a dedicated theme file — not scattered across component CSS.

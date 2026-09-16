@@ -1,0 +1,26 @@
+---
+description: Maintain the human-facing docs/ folder (Russian) — update when meaningful product/code changes occur
+alwaysApply: true
+---
+
+# Documentation maintenance
+
+`docs/` holds human-facing product and user documentation in Russian. It mirrors the agent-facing `product/*` rules but is written for people, not the agent.
+
+## When to update
+
+Update `docs/` when a change meaningfully affects the product: new or changed screens, roles, glossary terms, NFR, or the product description. Don't update for trivial edits, pure refactors with no behavioral change, or internal code moves.
+
+## What to update
+
+Match the affected `docs/` file to the change:
+
+- screens / roles / glossary / NFR / description changes → the corresponding `docs/*.md`.
+- keep `docs/README.md` index in sync when files are added or removed.
+
+## How
+
+- Delegate the actual `docs/` edits to the `documenter` subagent — it owns documentation changes and writes in Russian. The main agent decides when and passes full context.
+- Content in `docs/` is Russian only — enforced by the `docs-ru` skill; the `documenter` subagent follows it.
+- Don't copy the `product/*` rules verbatim — write for a human reader and expand context where it helps.
+- `docs/` is documentation, not an agent artifact: it is exempt from the "English only" rule in `management/general`.

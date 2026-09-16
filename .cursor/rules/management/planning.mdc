@@ -1,0 +1,15 @@
+---
+description: Planning — when to plan before editing, how to align approach without over-asking
+alwaysApply: true
+---
+
+# Planning
+
+- Plan before editing for non-trivial tasks: multiple files, layers, or more than one valid approach. A one-line fix doesn't need a plan.
+- Identify the approach and alternatives: know which option and why. When several are viable, pick the safest and most obvious, not the clever one.
+- Don't block on a clarifying question unless it changes the whole approach; otherwise state assumptions and proceed.
+- Don't over-plan trivial work: plan scales with risk and scope — a 5-file refactor earns a plan, a typo fix doesn't.
+- Keep the plan internal unless it's worth surfacing: a short todo list or a few lines in the reply, not a wall of design.
+- Align on approach before large edits: for refactors, new slices, or cross-layer changes, state the approach and let the user redirect before code. Cheaper to redirect a plan than a diff.
+- Re-plan when reality diverges: stop, revise, continue. Don't push through a broken plan.
+- Don't ask approval on every step: plan where it matters (approach, scope, risky moves), execute the rest.

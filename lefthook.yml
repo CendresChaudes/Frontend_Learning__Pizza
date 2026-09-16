@@ -1,0 +1,36 @@
+output:
+  - meta # Показать версию lefthook
+  - summary # Показать блок сводки (успешные и проваленные шаги)
+  - empty_summary # Показать заголовок сводки, когда нет шагов для выполнения
+  - success # Показать успешные шаги
+  - failure # Показать проваленные шаги
+  - execution # Показать любые логи выполнения
+  - execution_out # Показать вывод выполнения
+  - execution_info # Показать лог EXECUTE > ...
+  - skips # Показать "пропущено" (т.е. нет подходящих файлов)
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit $1
+
+pre-commit:
+  jobs:
+    - group:
+        parallel: true
+        jobs:
+          - name: scripts
+            run: pnpm exec eslint {staged_files} --quiet --fix && pnpm exec prettier {staged_files} -w --log-level warn
+            glob: '*.{js,ts,tsx}'
+            stage_fixed: true
+            fail_text: 💀❌ Проверки завершились неуспешно!
+          - name: styles
+            run: pnpm exec stylelint {staged_files} --fix && pnpm exec prettier {staged_files} -w --log-level warn
+            glob: '*.css'
+            stage_fixed: true
+            fail_text: 💀❌ Проверки завершились неуспешно!
+
+pre-push:
+  scripts:
+    'pre-push':
+      runner: bash

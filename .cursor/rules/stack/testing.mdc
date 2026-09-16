@@ -1,0 +1,17 @@
+---
+description: Stack testing tooling — vitest, vitest-browser-react, Playwright, MSW, generated code
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# Testing (stack)
+
+Generic testing practices (levels, placement, mocking, structure, coverage) live in `engineering/testing`. Below is this stack's tooling.
+
+- Unit tests run via `vitest` (node + browser configs); pure logic lives in `~shared/lib` and feature `lib`/`model` segments.
+- Component/integration tests use `vitest-browser-react`.
+- E2E tests run via Playwright (`check:tests:e2e`); reserve for critical flows.
+- Test files are `*.test.ts`/`*.test.tsx` colocated with the source; the project excludes `src/**/__tests__` from the app build.
+- Mock HTTP with `msw` and `@kubb/plugin-msw` — prefer over hand-rolled fetch mocks.
+- Don't test generated code: `generated/` is output, not source (see `stack/general`). If a generated client is wrong, fix the OpenAPI and regenerate. Tests belong around hand-written code wrapping generated APIs.
+- Run the narrow tests covering your change (see `management/verification`); don't run the whole suite unprompted.

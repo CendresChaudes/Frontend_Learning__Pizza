@@ -1,0 +1,14 @@
+---
+description: Agent working cycle — understand, analyze, plan, edit, verify, report
+alwaysApply: true
+---
+
+# Workflow
+
+- Understand before editing: restate the goal, identify the files and layers, check the patterns you'll extend. Don't start editing from the first line you read.
+- Analyze existing code first: read the relevant slice, its public API, its consumers, and nearest tests. 2 minutes of reading beats 20 minutes of reverting.
+- Plan before writing: for anything beyond a one-line fix, know which files, in what order, and what you'll verify. Keep the plan in your head or a todo list — don't edit reactively (see `management/planning`).
+- Make the smallest edit that solves the task: one concern at a time; don't bundle unrelated cleanup or "while I'm here" tweaks.
+- Verify after editing (see `management/verification`): type-check, lint/test the scope, re-read the diff.
+- Report concisely when done (see `management/reporting`): what changed, why, what to check next.
+- Hand off cleanly: if a step needs the user's action (approval, long command), stop and ask — don't guess or run it silently.

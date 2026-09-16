@@ -1,0 +1,79 @@
+---
+description: FSD layer definitions — what lives in each of the 8 layers, structure, and import permissions
+alwaysApply: true
+---
+
+# Architecture — layers
+
+See [`architecture/general.mdc`](./general.mdc) for the import flow and cross-cutting rules.
+
+## `1_app` — `~app`, layer `app`
+
+Application initialization — the root that wires everything together.
+
+- Lives here: providers (theme, router, query client, MobX, Mantine), global styles (`index.css`), the root render entry (`index.tsx`), app-wide store setup.
+- Structure: segment-based, no slices — `providers/`, `styles/`, `config/`, plus the `index.tsx` entry. Capture is `segment`.
+- May import: everything below it (all layers). Nothing imports `app`.
+- Public API: `index.ts` re-exports the entry/providers upper layers need.
+
+## `2_pages` — `~pages`, layer `pages`
+
+Page-level composition for a route.
+
+- Lives here: one slice per route (`<route>/index.tsx`), assembling widgets and features into a screen. No business logic — only composition and route-bound wiring.
+- Structure: slice-based. Each page is a slice with `ui` (the page component) and optionally `model`/`api` for route-local state/data. Capture is `page`.
+- May import: widgets, features, entities, core, shared, global. Not `app`. Not other pages.
+- Cross-import between pages is forbidden.
+
+## `3_widgets` — `~widgets`, layer `widgets`
+
+Compositional blocks combining entities and features into self-sufficient chunks used by pages.
+
+- Lives here: UI sections too composed to be a single feature — dashboards, sidebars, page sections aggregating multiple entities/features.
+- Structure: slice-based. Segments `ui` (the widget + its hooks), `model`/`lib`/`api` as needed. Capture is `widget`.
+- May import: features, entities, core, shared, global. Not pages. Not `app`. Not other widgets.
+- Public API via `index.ts`.
+
+## `4_features` — `~features`, layer `features`
+
+User scenarios — full modules delivering a piece of business value (login, add-to-cart, filter), not a single action.
+
+- Lives here: a user-facing scenario with its UI, business logic, and API. Self-contained; composes entities.
+- Structure: slice-based. Segments `ui`, `model`, `lib`, `api`, `config`, `constants` as needed. Capture is `feature`.
+- May import: entities, core, shared, global. Not widgets/pages/app. Not other features.
+- Public API via `index.ts`.
+
+## `5_entities` — `~entities`, layer `entities`
+
+Business domain models — data and rules for a domain object (user, product, order), no UI awareness.
+
+- Lives here: domain types, selectors, stores, DTO→domain mapping, the entity's API hooks. The `domain` segment (a `model` subtype) holds pure domain rules and imports nothing.
+- Structure: slice-based. Segments `model` (incl. `domain`), `api`, `lib`, `ui` (entity-specific presentational components), `constants`. Capture is `entity`.
+- May import: core, shared, global. Not features/widgets/pages/app. Not other entities.
+- The `domain` segment must not import anything (enforced by `no-restricted-imports`).
+
+## `6_core` — `~core`, layer `core`
+
+Project-scoped infrastructure wired once and consumed by upper layers.
+
+- Lives here: the API client instance, store setup, cross-cutting services and entities (auth, user, session) that are app-wide but not UI.
+- Structure: segment-based, no slices — `api/`, `auth/`, `session/`, `lib/`, etc. Capture is `segment`.
+- May import: shared, global. Not entities/features/widgets/pages/app.
+- Public API via `index.ts`.
+
+## `7_shared` — `~shared`, layer `shared`
+
+Reusable code with no business meaning — UI kit, utils, types, configs, constants.
+
+- Lives here: the design system (Mantine-based kit), generic hooks, formatters, generic types, icons, config. No domain knowledge.
+- Structure: segment-based, no slices — `ui/`, `lib/`, `config/`, `constants/`, `types/`. Capture is `segment`.
+- May import: global only. Nothing above it.
+- Public API via `index.ts`.
+
+## `8_global` — `~global`, layer `global`
+
+Global abstractions applied across the entire app — project-wide types, styles, polyfills.
+
+- Lives here: ambient declarations (`modules.d.ts`, `react.utilities.d.ts`), global type augmentations, polyfills. No runtime business code.
+- Structure: flat files, no entry-point enforcement. Capture is `segment`.
+- May import: nothing from the app (it's the foundation) — external libs only.

@@ -1,0 +1,62 @@
+# Workspace
+dist/
+node_modules/
+.pnpm-store/
+
+# Docker
+.dockerignore
+docker-compose*.yml
+Dockerfile*
+
+# Version Control
+.git/
+.gitignore
+.gitattributes
+.hg/
+.svn/
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.project
+.settings/
+.cursor/
+
+# CI / Docs / Logs
+.github/
+.gitlab-ci.yml
+.circleci/
+.helm/
+.travis.yml
+docs/
+tests/
+test/
+*.md
+*.log
+.env
+.env.*
+!.env.example
+
+# Dev tooling
+.lefthook/
+eslint*
+prettier*
+stylelint*
+cspell*
+knip*
+commitlint*
+lefthook.yml
+playwright.config.ts
+vitest.*.config.ts
+
+# Tests & mocks
+e2e/
+msw/
+**/__tests__/
+**/__mocks__/
+*.test.*
+*.spec.*

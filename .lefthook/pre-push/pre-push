@@ -1,0 +1,27 @@
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)";
+PROTECTED_BRANCHES="^(main|master)$";
+
+if [[ $CURRENT_BRANCH =~ $PROTECTED_BRANCHES ]]; then
+  echo "❌ Нельзя пушить в эту ветку напрямую!";
+  exit 1;
+fi
+
+TRACKED_BRANCHES="^(test)$"
+
+if [[ $CURRENT_BRANCH =~ $TRACKED_BRANCHES ]]; then
+  echo "Началась полная проверка кода...";
+
+  npm run check:all ||
+    (
+      echo "💀❌ Проверки завершились неуспешно!";
+      false;
+    )
+else
+  echo "Началась проверка ts-файлов...";
+
+  npm run check:types && npm run check:styles ||
+    (
+      echo "💀❌ Проверки завершились неуспешно!";
+      false;
+    )
+fi

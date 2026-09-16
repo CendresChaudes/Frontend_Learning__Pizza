@@ -1,0 +1,49 @@
+---
+description: What goes into each FSD segment — api, model, domain, lib, ui. Use when creating or editing a slice, adding a segment, or deciding where code belongs in entities/features/widgets/pages.
+alwaysApply: false
+globs: "**/2_pages/**,**/3_widgets/**,**/4_features/**,**/5_entities/**"
+---
+
+# Architecture — segments
+
+What goes into each segment across slice layers (entities, features, widgets, pages). See [`architecture/layers.mdc`](./layers.mdc) for where slices live.
+
+### `api`
+
+API-facing code for the slice.
+
+- Lives here: request/response schemas (Zod), schema validators, the endpoint definitions (generated or hand-written wrappers), and the API hooks built on top of them.
+- May import: `shared`, `core` (API client), the slice's `model` (for DTO→domain mapping) and `lib`. Not `ui`.
+- Must not contain: UI, business rules, or store logic.
+
+### `model`
+
+Application-level data layer of the slice — everything the slice uses at runtime except the API contract itself.
+
+- Lives here: adapters (DTO↔domain mapping), app-facing types used across the slice, MobX stores, and view-models (selectors/computed state for the UI).
+- May import: `shared`, `core`, the slice's `domain`, `lib`, and `api` types. Not `ui`.
+- Must not contain: pure domain rules (those live in `domain`) or raw endpoint definitions (those live in `api`).
+
+### `domain`
+
+Pure domain logic — the rules of the business object, independent of any infrastructure.
+
+- Lives here: pure functions, domain types, and constants that encode business rules (totals, status transitions, validation predicates over domain values).
+- Must not import anything — no `shared`, no `core`, no other segments, no external libs with side effects. Only language built-ins and pure type-only imports if absolutely necessary (enforced by `no-restricted-imports`).
+- Must not contain: API calls, stores, adapters, or anything UI- or framework-aware.
+
+### `lib`
+
+Slice-local helpers — utility code scoped to this slice, not generic enough for `shared`.
+
+- Lives here: helper functions, both those wrapping library APIs (formatters, mappers built on a lib) and plain pure helpers with no dependencies.
+- May import: `shared`, `core`, the slice's `domain` and `lib` siblings. Not `ui`, not `api`/`model` (keep helpers dependency-free of the data layer where possible).
+- Must not contain: business rules (those live in `domain`), API endpoints, stores, or UI.
+
+### `ui`
+
+Presentation layer of the slice — the React components and anything that only exists to render the interface.
+
+- Lives here: components, presentational hooks tied to a component, and small functions whose only purpose is shaping UI (e.g. building option lists for a select, class-name composers).
+- May import: `shared` (UI kit, icons), `core`, the slice's `model` (view-model, types) and `lib`. Not `api` directly — data reaches UI through `model`.
+- Must not contain: business rules, domain logic, or raw API calls.

@@ -1,0 +1,12 @@
+---
+description: Stack API layer — Zod schemas, TanStack Query server state, mobx-tanstack-query bridge, MSW mocking
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# API (stack)
+
+- Server state via TanStack Query: define query keys deliberately, handle loading/error/success explicitly, invalidate or optimistically update on mutation. Never fire fetches in effects without a cache layer.
+- Bridge to MobX via `mobx-tanstack-query` observer — observe query results in components/stores without copying data into observables (see `stack/model`).
+- Validate with Zod schemas: request/response shapes, form schemas (via `@hookform/resolvers` — see `stack/react`). Generated schemas come from Kubb in `generated/` (see `stack/general`, the `openapi-codegen` skill); wrap generated clients in adapters in `~shared`/`~entities`.
+- Mock with MSW (`~msw`): request handlers for dev/e2e; keep mocks aligned with Zod schemas and the OpenAPI spec.

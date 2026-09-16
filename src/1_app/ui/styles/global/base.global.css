@@ -1,0 +1,33 @@
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-black);
+
+    background-color: var(--color-white);
+  }
+
+  /* stylelint-disable-next-line media-query-no-invalid -- Tailwind inlines theme() at build time */
+  @media (width >= theme(--breakpoint-2xl)) {
+    html,
+    body {
+      font-size: var(--text-base);
+    }
+  }
+
+  /* stylelint-disable-next-line media-query-no-invalid -- Tailwind inlines theme() at build time */
+  @media (width >= theme(--breakpoint-3xl)) {
+    html,
+    body {
+      font-size: var(--text-lg);
+    }
+  }
+}

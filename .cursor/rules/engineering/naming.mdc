@@ -1,0 +1,26 @@
+---
+description: Naming conventions — components, hooks, utilities, constants, booleans, event handlers, file roles, plus stack-specific Hungarian prefixes and FSD segments
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# Naming
+
+## Generic
+
+- Components: `PascalCase` for the component name and its file (`UserProfile.tsx`, `export function UserProfile`). One component per file; the file name matches the default export.
+- Hooks: `use*` prefix for any function that calls other hooks (`useDebounce`, `useAuth`). Hook files are `camelCase` (`useDebounce.ts`); barrel-export them named.
+- Utilities and helpers: `camelCase` for functions and files (`formatDate.ts`, `export function formatDate`).
+- Constants: `UPPER_SNAKE_CASE` for true scalar constants (`MAX_RETRIES`, `API_URL`).
+- Files by role: `*.config.ts` for configs, `*.test.ts`/`*.test.tsx` for tests, `*.types.ts` for type-only modules, `*.mock.ts` for mocks. Keep suffixes consistent — the toolchain relies on them.
+- Boolean props and variables: prefix with `is`/`has`/`should`/`can` (`isLoading`, `hasError`, `shouldRetry`); avoid negated names (`isNotLoading` — flip the polarity instead).
+- Event handlers: `on*` for props (`onSubmit`, `onChange`), `handle*` for internal handlers (`handleSubmit`, `handleChange`). Don't mix the two within one component.
+
+## Stack-specific
+
+- Types and interfaces: Hungarian notation — `I` prefix for interfaces (`IUser`, `IAuthResponse`), `T` prefix for type aliases (`TUserRole`, `TStatus`). The `type` vs `interface` choice is covered in `engineering/typescript`.
+- Enums: Hungarian notation — `E` prefix (`EColor`, `EUserRole`). Prefer `as const` objects + union types over enums (see `engineering/typescript`); when you do use an `enum`, prefix it `E`.
+- Static arrays and objects: `UPPER_SNAKE_CASE` (CONSTANT_CASE) — `ROUTES`, `DEFAULT_HEADERS`, `STATUS_MAP`.
+- Configs: `PascalCase` with Hungarian `C` prefix (`CAppConfig`, `CRouterConfig`, `CAuthConfig`). Config values/objects live in the `config` segment; keep `*.config.ts` file suffix.
+- Slices and segments: `kebab-case` for directories (`user-profile`, `auth-form`); segments are the canonical `ui`, `model`, `lib`, `api`, `config`, `constants` — don't invent new segment names without reason. Pure helpers live in `~shared/lib` or the feature's `lib` segment.
+- Generated code keeps its own naming: Kubb output is read-only (see `stack/general`); don't rename generated files or re-export them under hand-made names.

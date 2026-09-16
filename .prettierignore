@@ -1,0 +1,10 @@
+.helm/
+.lefthook/
+.pnpm-store/
+dist/
+node_modules/
+
+.gitlab-ci.yml
+pnpm-lock.yaml
+
+public/mockServiceWorker.js

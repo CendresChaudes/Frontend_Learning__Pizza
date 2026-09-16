@@ -1,0 +1,19 @@
+---
+description: Generic testing practices — what to test, levels, placement, mocking, structure, coverage
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# Testing
+
+- Test behavior, not implementation: assert what the code does from the outside, not which internal functions it called. Implementation-coupled tests break on every refactor and re-assert the framework. Test the public API of a module.
+- Unit-test pure logic: utilities, selectors, reducers, schema validators, pure functions. Cheap, fast, high-value.
+- Component/integration-test behavior: render with props, interact, assert output and side effects. Don't test that the framework rendered — test that the right thing rendered and reacts to input.
+- E2E-test critical flows only: login, checkout, core journeys. Don't write e2e for every component; they're slow and brittle. Reserve e2e for paths that must not break.
+- Place tests next to the code: `*.test.ts`/`*.test.tsx` colocated with the source. Don't create a parallel `tests/` tree that drifts.
+- Mock at the boundary, not the inside: mock the network or the outermost dependency or a port. Don't mock internal modules — that couples the test to the module graph.
+- Keep tests readable and independent: each test sets up its own state, runs, cleans up. Avoid shared mutable setup, `beforeAll` with side effects, and order-dependent tests. A failing test must not cascade into false failures.
+- Assert one thing per test where reasonable: a test should fail for one clear reason. Use `describe`/`it` to structure, not to bundle unrelated checks.
+- Don't chase coverage: 100% isn't a goal. Test the risky, complex, often-changed code; skip trivial getters/setters and framework boilerplate. Don't add tests just to hit a number.
+
+Stack testing tooling (vitest, vitest-browser-react, Playwright, MSW, generated code) lives in `stack/testing`.

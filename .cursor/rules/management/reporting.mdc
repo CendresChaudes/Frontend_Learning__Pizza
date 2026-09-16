@@ -1,0 +1,14 @@
+---
+description: Reporting style — how to summarize the result concisely without filler
+alwaysApply: true
+---
+
+# Reporting
+
+- Lead with the outcome: first line says what's done ("Готово. Создал `rules/stack/react.mdc`…"). Don't restate the task or apologize for context.
+- State what changed, not what you read: name the files and the essence of the change.
+- Explain the "why" only when non-obvious: one-line rationale for a non-default choice, not every decision.
+- List what to check or run next: the verification command, the manual step, the approval needed.
+- Keep it short: a few lines for a small change, a short list for a larger one. No preamble, no "Let me know if…".
+- When stopped for approval, say exactly what you need: the command, the file, the decision. Don't make the user guess.
+- Don't claim success you didn't verify: if you didn't run the type-check or tests, say so and propose the command.

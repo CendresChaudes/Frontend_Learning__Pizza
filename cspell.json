@@ -1,0 +1,60 @@
+{
+  "dictionaryDefinitions": [
+    {
+      "name": "common-en",
+      "path": "./cspell/common-en.txt",
+      "addWords": true
+    },
+    {
+      "name": "common-ru",
+      "path": "./cspell/common-ru.txt",
+      "addWords": true
+    },
+    {
+      "name": "forbidden",
+      "path": "./cspell/forbidden.txt",
+      "addWords": true
+    },
+    {
+      "name": "project-en",
+      "path": "./cspell/project-en.txt",
+      "addWords": true
+    },
+    {
+      "name": "project-ru",
+      "path": "./cspell/project-ru.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["common-en", "common-ru", "forbidden", "project-en", "project-ru"],
+  "enableFiletypes": ["javascript", "typescript", "typescriptreact"],
+  "ignorePaths": [
+    ".cursor",
+    ".pnpm-store",
+    "cspell",
+    "dist",
+    "generated",
+    "node_modules",
+    "coverage",
+    "src/**/__mocks__",
+    "public/mockServiceWorker.js",
+    "openapi.json",
+    "pnpm-lock.yaml"
+  ],
+  "import": ["@cspell/dict-ru_ru/cspell-ext.json", "@cspell/dict-en_us/cspell-ext.json"],
+  "language": "en,ru",
+  "languageSettings": [
+    {
+      "languageId": "ru",
+      "locale": "ru",
+      "caseSensitive": false,
+      "allowCompoundWords": true
+    },
+    {
+      "languageId": "en",
+      "locale": "en",
+      "caseSensitive": false,
+      "allowCompoundWords": true
+    }
+  ]
+}

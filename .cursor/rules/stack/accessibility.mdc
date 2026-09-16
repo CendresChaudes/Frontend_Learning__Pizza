@@ -1,0 +1,13 @@
+---
+description: Stack accessibility wiring — Mantine focus ring, @mantine/notifications toasts, preserving Mantine a11y on override
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# Accessibility (stack)
+
+Generic a11y principles (semantics, keyboard, contrast, DOM order) live in `engineering/frontend`. Below is this stack's a11y wiring.
+
+- Visible focus via Mantine's focus ring or Tailwind's `focus-visible:` variants — don't replace it without an equivalent visible focus style.
+- Toasts via `@mantine/notifications` — accessible out of the box (`aria-live` built in); don't hand-roll banners that miss it.
+- Don't break Mantine's a11y when overriding: keep `role`, `aria-*`, and keyboard handlers intact. A "styled" Mantine component that drops its semantics is a regression.

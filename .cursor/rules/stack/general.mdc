@@ -1,0 +1,15 @@
+---
+description: Engineering conventions for this frontend project — architecture, generated code, TypeScript, commits, tooling
+alwaysApply: true
+---
+
+# General (hard rules)
+
+- `generated/` is Kubb output from `openapi.json`, read-only. Never hand-edit; regenerate via `pnpm run generate`. All `generated/**/*.ts` carry `// @ts-nocheck` and aren't type-checked.
+- Package manager is `pnpm`: use `pnpm run <script>` / `pnpm exec <bin>`. Never introduce `npm`/`yarn`/`bun`. New dependencies need approval.
+- Prefer the stack in `package.json`; don't propose new libraries when an existing one covers the need.
+- Don't run dev server, build, tests, or linters as a side effect of edits — propose the exact command and let the user run it, unless asked.
+- Keep Prettier formatting intact: no trailing whitespace, import order (`import-x/order`), files passing `check:es` and `check:format`. Run `check:es:fix` / `check:format:fix` only when asked.
+- When a change touches generated code, OpenAPI, or Kubb config, regenerate (after approval) and verify `tsc -p tsconfig.app.json --noEmit` stays at 0 errors.
+- Never delete files or run package managers without explicit approval.
+- Never make git commits (`commit`/`add`/amend/push) without explicit approval.

@@ -1,0 +1,15 @@
+services:
+  frontend:
+    image: frontend-dev
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile.dev
+    working_dir: /app
+    volumes:
+      - ../../:/app
+      - node_modules_volume:/app/node_modules
+    ports:
+      - '60000:60000'
+
+volumes:
+  node_modules_volume: {}

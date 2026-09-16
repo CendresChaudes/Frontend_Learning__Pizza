@@ -1,0 +1,21 @@
+---
+description: React practices — composition, hooks, state scope, errors, rendering, React 19, plus RHF form driver and error boundaries
+alwaysApply: false
+globs: "**/*.{ts,tsx}"
+---
+
+# React (stack)
+
+## Generic practices
+
+- Treat components as the unit of composition: one responsibility per component, props as the public API, composition over inheritance. Keep presentational and container concerns separate; lift state only when genuinely shared.
+- Master hooks and their rules: call hooks at the top level, never in conditions or loops; keep effect deps honest; prefer derived state over effects; use `useMemo`/`useCallback` only when measured, not by default. Prefer the compiler over manual memoization where available.
+- Follow React 19 conventions: use `use()` for promises and context where it fits; rely on Actions and `useActionState`/`useOptimistic` for form-driven async transitions; don't reach for third-party "async state" libs when the platform covers it.
+- Manage state by scope: local UI state in the component, feature state in the feature, server state via a cache layer. Keep the cache the single source of truth for server data; don't mirror server data into component state.
+- Bound errors and loading at the right level: error boundaries for UI fault isolation; Suspense for declarative loading; never let a rejected promise or render error crash a whole page. Provide meaningful fallbacks.
+- Keep renders cheap and correct: keep props stable and state close to where it's used; don't fight reconciliation — measure first. Respect concurrent rendering: effects may run twice in StrictMode; make them idempotent and cleanup-correct.
+
+## Stack wiring
+
+- Drive forms through React Hook Form + `@hookform/resolvers`; validate on schema, surface errors accessibly. Don't hand-roll validation or store form state in MobX. Mantine inputs via the `mantine-form` adapter (see `stack/uikit`); Zod schemas (see `stack/api`).
+- Error boundaries via `react-error-boundary`; pair with Suspense fallbacks. Server state/cache via TanStack Query (see `stack/api`); MobX for client state (see `stack/model`); Mantine UI kit (see `stack/uikit`).

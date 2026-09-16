@@ -1,0 +1,23 @@
+---
+description: Frontend engineering expectations — generic forms and accessibility principles, library-agnostic
+alwaysApply: true
+---
+
+# Frontend
+
+Generic frontend expectations. Stack wiring (Mantine, Tailwind, React Hook Form) lives in `stack/` — see `stack/react`, `stack/tailwind`, `stack/accessibility`.
+
+## Forms
+
+- Schema-driven validation; surface errors accessibly. Reuse the project's form stack rather than rolling your own.
+
+## Accessibility
+
+- Semantics first; ARIA only when HTML can't express intent. `<button>` for actions, `<a>` for navigation, landmarks for structure. No `onClick` on a `<div>`.
+- Keyboard path first: every interactive element reachable and operable. Manage `tabIndex` deliberately; restore focus on dialog close.
+- Visible focus is non-negotiable: keep `:focus-visible`; never remove outlines globally.
+- Label every control (`<label htmlFor>` or wrapping `<label>`); `aria-label` only for icon buttons.
+- Announce dynamic state via `aria-live`/`aria-busy`.
+- Don't rely on color alone — pair with text/icon. Meet WCAG AA contrast.
+- Keep DOM order = visual order; restructure the DOM rather than reorder with CSS.
+- `display:none`/`hidden` removes from the a11y tree; `sr-only` keeps it for AT. Pick deliberately.
