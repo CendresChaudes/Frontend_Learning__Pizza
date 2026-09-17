@@ -1,6 +1,6 @@
 # Bad: docs content anti-patterns
 
-## ❌ English prose in docs/
+## ❌ English prose in docs/product/
 
 ```md
 # Screens
@@ -8,7 +8,7 @@
 1. **Employee lookup** — search employees by pass or personnel number. Access: regular.
 ```
 
-Why: `docs/` prose must be Russian. This belongs in the English `product/*` rules, not `docs/`.
+Why: `docs/product/` prose must be Russian. This belongs in the English `product/*` rules, not `docs/product/`.
 
 **Use instead** (good counterpart):
 
@@ -40,7 +40,7 @@ Why: commands and script names stay in their original form.
 Two roles: Простой and Админ. Простой — read + ops. Админ — + CRUD vending/cash/users.
 ```
 
-Why: `docs/` is for humans — write full sentences, not telegraphic agent guidance.
+Why: `docs/product/` is for humans — write full sentences, not telegraphic agent guidance.
 
 **Use instead**:
 

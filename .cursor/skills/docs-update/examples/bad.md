@@ -3,7 +3,7 @@
 ## ❌ Fabricating without checking the code
 
 ```md
-Added screen «Отчёты» to docs/screens.md with admin access.
+Added screen «Отчёты» to docs/product/screens.md with admin access.
 ```
 
 Why: the access level was guessed. It must be read from the router/role guard, not assumed.
@@ -19,7 +19,7 @@ Why: the access level was guessed. It must be read from the router/role guard, n
 
 Why: this command updates `docs/`, not the source-of-truth rules. If a rule is wrong, stop and tell the user.
 
-**Use instead**: update `docs/screens.md` to match the (correct) rule and codebase.
+**Use instead**: update `docs/product/screens.md` to match the (correct) rule and codebase.
 
 ## ❌ Writing docs content in English
 
@@ -29,7 +29,7 @@ Why: this command updates `docs/`, not the source-of-truth rules. If a rule is w
 8. **Reports** — view compensation reports. Access: regular.
 ```
 
-Why: `docs/` prose is Russian only (enforced by `docs-ru`).
+Why: `docs/product/` prose is Russian only (enforced by `docs-ru`).
 
 **Use instead**:
 

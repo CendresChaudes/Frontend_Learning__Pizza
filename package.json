@@ -35,7 +35,7 @@
     "check:types": "tsc -p tsconfig.app.json",
     "prettify": "pnpm run check:es:fix && pnpm run check:format:fix && pnpm run check:styles:fix",
     "build": "tsc -p tsconfig.app.json --noEmit false",
-    "docs": "typedoc --entryPoints src --out docs/api --tsconfig tsconfig.app.json",
+    "docs": "typedoc --entryPoints src --out docs/app --tsconfig tsconfig.app.json",
     "generate": "kubb generate"
   },
   "dependencies": {

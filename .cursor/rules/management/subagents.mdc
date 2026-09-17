@@ -21,7 +21,7 @@ Custom subagents live in `.cursor/agents/`. The main agent orchestrates: it plan
 | `refactor` | approved structural step, no behavior change | "I don't like it"; hotfix; behavioral change |
 | `reviewer` | non-trivial/cross-slice diff before reporting done | one-liner; trivial diff |
 | `tester` | adding/strengthening tests for a scope, fixing broken tests | test-first implementation (implementer+tdd); diagnosis (debugger); the verification gate (parent) |
-| `documenter` | creating/updating/syncing `docs/` (Russian, human-facing) | code edits; agent rules; one-liners |
+| `documenter` | creating/updating/syncing `docs/product/` (Russian, human-facing) | code edits; agent rules; `docs/app/` (generated); one-liners |
 
 Use the built-in `explore` for codebase research; add a custom `explorer` only if it must know FSD layers.
 
@@ -31,7 +31,7 @@ Use the built-in `explore` for codebase research; add a custom `explorer` only i
 - Feature with tests: `explore` → plan → `implementer` → `tester` → verify → `reviewer`
 - Bug: `debugger` → `implementer` (minimal fix) → `tester` (regression test) → verify
 - Refactor: `explore` → `refactor` → verify → `reviewer`
-- Docs change: `documenter` (sync `docs/` to product/code) → verify (prettier/cspell)
+- Docs change: `documenter` (sync `docs/product/` to product/code) → verify (prettier/cspell)
 - Trivial: edit directly → verify (no subagents)
 
 ## Rules

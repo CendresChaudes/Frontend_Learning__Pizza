@@ -1,6 +1,6 @@
 # Good: Russian docs content
 
-## docs/screens.md
+## docs/product/screens.md
 
 ```md
 # Экраны
@@ -10,10 +10,10 @@
 1. **Поиск сотрудников** — поиск сотрудников по номеру пропуска или табельному номеру (только поиск). Доступ: Простой.
 ```
 
-- Prose in Russian; the role term (Простой) matches `docs/roles.md`.
+- Prose in Russian; the role term (Простой) matches `docs/product/roles.md`.
 - Identifiers stay in original form when referenced (see the NFR example below).
 
-## docs/nfr.md
+## docs/product/nfr.md
 
 ```md
 - **Поддержка браузеров**: задаётся в [.browserslistrc](/.browserslistrc) — `last 2 years` для `development`, `production` и `e2e`.
