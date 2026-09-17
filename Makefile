@@ -3,7 +3,7 @@ init:
 	pnpm install --frozen-lockfile
 
 # --- Основные команды ---
-start-dev: ## Запустить в dev-режиме
+start: ## Запустить в dev-режиме
 	pnpm run start:dev
 
 start-prod: ## Запустить в prod-режиме
@@ -18,7 +18,7 @@ generate: ## Запустить генерацию кода
 check: ## Запустить проверки проекта
 	pnpm run check:all
 
-types-check: ## Запустить проверку типов
+types: ## Запустить проверку типов
 	pnpm run check:types
 
 lint: ## Запустить проверки кода
@@ -26,7 +26,7 @@ lint: ## Запустить проверки кода
 	pnpm run check:linters
 	@echo "Проверки кода завершились успешно"
 
-lint-fix: ## Запустить автоисправление кода
+pretty: ## Запустить автоисправление кода
 	pnpm run prettify
 
 test: ## Запустить тесты
