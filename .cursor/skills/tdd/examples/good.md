@@ -2,7 +2,7 @@
 
 ## 1. Pure `.ts` logic — red first
 
-`src/7_shared/lib/formatDate.test.ts` (created before `formatDate.ts`):
+`src/6_shared/lib/formatDate.test.ts` (created before `formatDate.ts`):
 
 ```ts
 import { describe, expect, it } from 'vitest';
@@ -19,14 +19,14 @@ describe('formatDate', () => {
 Run it, see it fail for the right reason (assertion, not import error):
 
 ```sh
-python3 .cursor/skills/tdd/scripts/tdd.py src/7_shared/lib/formatDate.test.ts
+python3 .cursor/skills/tdd/scripts/tdd.py src/6_shared/lib/formatDate.test.ts
 ```
 
 Then write the minimum `formatDate.ts` to turn it green, and refactor with the test staying green.
 
 ## 2. `.tsx` component — behavior, not implementation
 
-`src/4_features/user-profile/ui/UserProfile.test.tsx`:
+`src/4_modules/user-profile/ui/UserProfile.test.tsx`:
 
 ```tsx
 import { render, screen } from 'vitest-browser-react';
@@ -42,7 +42,7 @@ it('shows the user full name', async () => {
 Run with the browser config (auto-selected by `.tsx`):
 
 ```sh
-python3 .cursor/skills/tdd/scripts/tdd.py src/4_features/user-profile/ui/UserProfile.test.tsx
+python3 .cursor/skills/tdd/scripts/tdd.py src/4_modules/user-profile/ui/UserProfile.test.tsx
 ```
 
 ## 3. HTTP via MSW at the boundary

@@ -18,14 +18,14 @@ Apply automatically for tasks involving generation or consumption of code from `
 - add / change / remove an API endpoint;
 - update `openapi.json` or `kubb.config.ts`;
 - generate types, zod schemas, fetch clients, React Query hooks, MSW and faker mocks;
-- wrap generated code in hand-written adapters in `~entities` / `~shared`;
-- use generated hooks/clients in components and features.
+- wrap generated code in hand-written adapters in `~modules` / `~shared`;
+- use generated hooks/clients in components and modules.
 
 ## `generated/` contracts
 
 - **Read-only.** `generated/` is produced entirely by Kubb from `openapi.json`. Never edit files inside it manually — change `openapi.json` and/or `kubb.config.ts` and regenerate.
 - **`@ts-nocheck`.** All `generated/**/*.ts` are not type-checked. Don't expect a type error in generated code to surface via `tsc`.
-- **Don't import generated code into runtime directly.** Types — only via `import type`; hooks/clients/mocks — only through hand-written wrappers in `~entities` / `~shared`. Importing from `generated/` into `~features` / `~widgets` / `~pages` breaks the import flow (see `eslint-plugin-boundaries`).
+- **Don't import generated code into runtime directly.** Types — only via `import type`; hooks/clients/mocks — only through hand-written wrappers in `~modules` / `~shared`. Importing from `generated/` into `~modules` / `~widgets` / `~pages` breaks the import flow (see `eslint-plugin-boundaries`).
 - **Grouped by tag.** Kubb groups output by `tag` into `*Service` directories (`http/`, `mocks/`, `msw/`, `tanstack/`, `types/`, `zod/`). New endpoints land in an existing or new group automatically.
 
 ## Workflow
@@ -52,7 +52,7 @@ Don't call `kubb generate` directly: bypassing the script loses the post type-ch
 
 Generated code is a port, not the app's public API. Wrap it with hand-written adapters:
 
-- **`~entities/<entity>/api`** — hooks and clients for a domain entity: re-export the tanstack hook with a typed query key, map DTO → domain type, handle errors.
+- **`~modules/<module>/api`** — hooks and clients for a domain module: re-export the tanstack hook with a typed query key, map DTO → domain type, handle errors.
 - **`~shared/api`** — cross-cutting infrastructure: base fetcher, interceptors, auth, when not covered by the generated client.
 - **`~shared/lib`** — wrap zod schemas from `generated/zod` into domain validators with narrow types; don't pull raw generated schemas into forms.
 

@@ -42,7 +42,7 @@ For CSS-only changes, also run `pnpm exec stylelint "<changed-css>"` (stylelint 
 
 Only if you changed a module that has tests, or added behavior worth testing. Pick the matching config — don't run the whole suite:
 
-- pure logic (`~shared/lib`, feature `lib`/`model`) → `pnpm run check:tests:unit:ts`
+- pure logic (`~shared/lib`, module `lib`/`model`) → `pnpm run check:tests:unit:ts`
 - component behavior (`vitest-browser-react`) → `pnpm run check:tests:unit:tsx`
 - integration (component + dependencies) → `pnpm run check:tests:int:tsx`
 - a single file → `pnpm exec vitest run <path> --config <matching-config>`

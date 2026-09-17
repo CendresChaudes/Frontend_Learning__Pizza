@@ -8,11 +8,10 @@
       "~app/*": ["./src/1_app/*"],
       "~pages/*": ["./src/2_pages/*"],
       "~widgets/*": ["./src/3_widgets/*"],
-      "~features/*": ["./src/4_features/*"],
-      "~entities/*": ["./src/5_entities/*"],
-      "~core/*": ["./src/6_core/*"],
-      "~shared/*": ["./src/7_shared/*"],
-      "~global/*": ["./src/8_global/*"]
+      "~modules/*": ["./src/4_modules/*"],
+      "~core/*": ["./src/5_core/*"],
+      "~shared/*": ["./src/6_shared/*"],
+      "~global/*": ["./src/7_global/*"]
     },
     "target": "ES2025",
     "module": "ESNext",

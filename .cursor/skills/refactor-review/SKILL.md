@@ -20,7 +20,7 @@ Invoke with `/refactor-review` when you want a refactoring review of `src/` — 
 Launch the `refactor` subagent via the Task tool (`subagent_type: "refactor"`). The subagent does not see chat history, so pass full context in the prompt:
 
 - Goal: **review only, do not edit**. Produce a report, not a diff.
-- Scope: `src/` (the FSD layers: `1_app` … `8_global`).
+- Scope: `src/` (the FSD layers: `1_app` … `7_global`).
 - Reference the project's refactoring rules: `.cursor/rules/engineering/refactoring.mdc` (boy-scout rule, separate refactor from features, safe mechanical moves, don't refactor without a reason, keep local, preserve public APIs, verify after each step).
 - Reference the architecture rules: `.cursor/rules/architecture/general.mdc` and `layers.mdc` (import flow, slice boundaries, segment rules).
 
@@ -29,7 +29,7 @@ Launch the `refactor` subagent via the Task tool (`subagent_type: "refactor"`). 
 ```
 You are assessing the codebase for refactoring opportunities. READ-ONLY: do not edit any files.
 
-Scope: src/ (FSD layers 1_app … 8_global).
+Scope: src/ (FSD layers 1_app … 7_global).
 
 Rules to apply (read them first):
 - .cursor/rules/engineering/refactoring.mdc

@@ -2,7 +2,7 @@
 
 ## 1. Pure `.ts` logic — assert input → output
 
-`src/7_shared/lib/formatDate.test.ts`:
+`src/6_shared/lib/formatDate.test.ts`:
 
 ```ts
 import { describe, expect, it } from 'vitest';
@@ -23,12 +23,12 @@ describe('formatDate', () => {
 Run with the node config (pure logic):
 
 ```sh
-pnpm exec vitest run src/7_shared/lib/formatDate.test.ts --config vitest.unit.node.config.ts
+pnpm exec vitest run src/6_shared/lib/formatDate.test.ts --config vitest.unit.node.config.ts
 ```
 
 ## 2. `.tsx` component — behavior, not implementation
 
-`src/4_features/user-profile/ui/UserProfile.test.tsx`:
+`src/4_modules/user-profile/ui/UserProfile.test.tsx`:
 
 ```tsx
 import { render, screen } from 'vitest-browser-react';
@@ -53,7 +53,7 @@ it('shows the full name and fires onEdit on click', async () => {
 Run with the browser config (component behavior):
 
 ```sh
-pnpm exec vitest run src/4_features/user-profile/ui/UserProfile.test.tsx --config vitest.unit.browser.config.ts
+pnpm exec vitest run src/4_modules/user-profile/ui/UserProfile.test.tsx --config vitest.unit.browser.config.ts
 ```
 
 ## 3. API hook against MSW at the boundary

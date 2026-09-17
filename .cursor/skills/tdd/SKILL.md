@@ -22,7 +22,7 @@ Red → Green → Refactor. The test is the spec: write it first, watch it fail 
 ## Stack
 
 - **Vitest** with three configs — pick by scope, not by habit:
-  - `vitest.unit.node.config.ts` — pure `.ts` logic (utils, selectors, validators in `~shared/lib`, feature `lib`/`model`).
+  - `vitest.unit.node.config.ts` — pure `.ts` logic (utils, selectors, validators in `~shared/lib`, module `lib`/`model`).
   - `vitest.unit.browser.config.ts` — `.tsx` component behavior via `vitest-browser-react`.
   - `vitest.int.browser.config.ts` — integration (component + dependencies).
 - **MSW** for HTTP — mock at the network boundary, never internal modules.

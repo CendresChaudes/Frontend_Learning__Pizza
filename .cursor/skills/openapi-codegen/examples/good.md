@@ -12,9 +12,9 @@ python3 .cursor/skills/openapi-codegen/scripts/generate.py
 # → ✓ Done: generated/ updated, types are green.
 ```
 
-## 2. Wrap a generated hook in an entity adapter
+## 2. Wrap a generated hook in a module adapter
 
-`src/5_entities/user/api/user.ts` — the only place that imports from `generated/`:
+`src/4_modules/user/api/user.ts` — the only place that imports from `generated/`:
 
 ```ts
 import type { UserDto } from '~generated/types/UserService';
@@ -36,7 +36,7 @@ export function useUser(id: User['id']) {
 }
 ```
 
-Components in `~features`/`~widgets` import `useUser` from the entity, never the generated hook.
+Components in `~widgets` import `useUser` from the module, never the generated hook.
 
 ## 3. Type-only import from `generated/`
 

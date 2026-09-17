@@ -10,17 +10,17 @@ FSD-based layering. The directory is `N_<layer>`, the import alias is `~<layer>`
 Import flow, enforced by `eslint-plugin-boundaries`:
 
 ```
-global → shared → core → entities → features → widgets → pages → app
+global → shared → core → modules → widgets → pages → app
 ```
 
-A layer may import only layers to its right (lower in the flow). No cross-imports between slices of the same layer. Slice layers (pages, widgets, features, entities) are imported only via their `index.ts` public API.
+A layer may import only layers to its right (lower in the flow). No cross-imports between slices of the same layer. Slice layers (pages, widgets, modules) are imported only via their `index.ts` public API.
 
 Layer-by-layer definitions live in [`architecture/layers.mdc`](./layers.mdc). Segment contents (`api`/`model`/`domain`/`lib`/`ui`) live in [`architecture/segments.mdc`](./segments.mdc).
 
 ## Cross-cutting rules
 
-- Import flow: `global → shared → core → entities → features → widgets → pages → app`; a layer imports only layers to its right.
-- No cross-imports between slices of the same layer (pages, widgets, features, entities).
+- Import flow: `global → shared → core → modules → widgets → pages → app`; a layer imports only layers to its right.
+- No cross-imports between slices of the same layer (pages, widgets, modules).
 - Slice layers are imported only via their `index.ts` public API (`boundaries/entry-point`).
 - The `domain` segment imports nothing.
 - Full rules: [`/eslint/configs/boundaries/eslint.boundaries.config.ts`](/eslint/configs/boundaries/eslint.boundaries.config.ts).

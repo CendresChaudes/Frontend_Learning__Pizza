@@ -12,11 +12,11 @@ Why: `generated/` is produced by Kubb. Fix `openapi.json`/`kubb.config.ts` and r
 ## ❌ Import a generated hook directly in a feature
 
 ```ts
-// src/4_features/user-profile/ui/UserProfile.tsx
+// src/4_modules/user-profile/ui/UserProfile.tsx
 import { useGetUserQuery } from '~generated/tanstack/UserService'; // wrong
 ```
 
-Why: breaks the import flow (`eslint-plugin-boundaries`). Go through an adapter in `~entities`/`~shared`.
+Why: breaks the import flow (`eslint-plugin-boundaries`). Go through an adapter in `~modules`/`~shared`.
 
 ## ❌ Run `kubb generate` directly
 

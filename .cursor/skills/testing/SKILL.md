@@ -23,12 +23,12 @@ Test **behavior from the outside**, not implementation. A test asserts what the 
 
 Pick the config by **scope**, not habit. The project ships three vitest configs plus Playwright for e2e:
 
-| Scope                     | Config / command                                                  | Use for                                                                              |
-| ------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| pure `.ts` logic          | `vitest.unit.node.config.ts` (`pnpm run check:tests:unit:ts`)     | utils, selectors, validators, zod schemas in `~shared/lib` and feature `lib`/`model` |
-| `.tsx` component behavior | `vitest.unit.browser.config.ts` (`pnpm run check:tests:unit:tsx`) | components via `vitest-browser-react` — render, interact, assert DOM                 |
-| integration               | `vitest.int.browser.config.ts` (`pnpm run check:tests:int:tsx`)   | component + its real dependencies (stores, query cache, routers)                     |
-| e2e critical flows        | `playwright.config.ts` (`pnpm run check:tests:e2e`)               | login, core journeys only — slow and brittle, don't e2e every component              |
+| Scope                     | Config / command                                                  | Use for                                                                             |
+| ------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| pure `.ts` logic          | `vitest.unit.node.config.ts` (`pnpm run check:tests:unit:ts`)     | utils, selectors, validators, zod schemas in `~shared/lib` and module `lib`/`model` |
+| `.tsx` component behavior | `vitest.unit.browser.config.ts` (`pnpm run check:tests:unit:tsx`) | components via `vitest-browser-react` — render, interact, assert DOM                |
+| integration               | `vitest.int.browser.config.ts` (`pnpm run check:tests:int:tsx`)   | component + its real dependencies (stores, query cache, routers)                    |
+| e2e critical flows        | `playwright.config.ts` (`pnpm run check:tests:e2e`)               | login, core journeys only — slow and brittle, don't e2e every component             |
 
 Run a single file with the matching config instead of the whole suite:
 
@@ -48,7 +48,7 @@ pnpm exec vitest run <path> --config <matching-config>
 - **`generated/`** — output, not source. If a generated client/schema is wrong, fix the OpenAPI/Kubb config and regenerate. Test the hand-written wrapper, not the generated code.
 - **The framework** — don't re-assert that the UI kit renders a button or that React reconciles. Assert _your_ component's behavior.
 - **Trivial getters/setters and pass-throughs** — no behavior to assert; tests add noise.
-- **Private internals** — if you need to test a private function, it's probably worth extracting to a tested pure helper in `~shared/lib` or the feature `lib`.
+- **Private internals** — if you need to test a private function, it's probably worth extracting to a tested pure helper in `~shared/lib` or the module `lib`.
 
 ## Mocking
 

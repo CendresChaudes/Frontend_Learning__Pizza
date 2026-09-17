@@ -5,16 +5,16 @@ description: >-
   segments only. Allow the canonical segments (ui, model, lib, api, config,
   constants) and forbid abstract role-less ones (hooks, components, utils,
   helpers, services, store, types, providers). Use when creating a new slice
-  or segment in any layer (app, pages, widgets, features, entities, core,
-  shared, global). Triggers: create slice, new feature, new entity, new
-  widget, new page, add segment, scaffold slice, FSD slice.
+  or segment in any layer (app, pages, widgets, modules, core, shared, global).
+  Triggers: create slice, new module, new widget, new page, add segment,
+  scaffold slice, FSD slice.
 ---
 
 # Create Slice
 
 ## When to apply
 
-Apply automatically when creating a new slice or segment in any layer (`1_app` … `8_global`), or when adding a segment to an existing slice. Don't apply to `generated/`.
+Apply automatically when creating a new slice or segment in any layer (`1_app` … `7_global`), or when adding a segment to an existing slice. Don't apply to `generated/`.
 
 ## Allowed segments (role-based)
 
@@ -23,7 +23,7 @@ A segment name must describe a **role**, not a code shape. Only these are canoni
 - `ui` — the slice's UI: components and the hooks that drive them. A hook lives here when it's tied to rendering this slice's UI.
 - `model` — business logic and domain state: MobX stores, selectors, domain types, business rules. The `domain` segment (a `model` subtype) imports nothing.
 - `lib` — infrastructure helpers local to the slice: pure functions, formatting, mappers that are not business logic.
-- `api` — network boundary for the slice: query keys, hooks wrapping generated clients, DTO → domain mapping. (Typically `~entities`/`~features`.)
+- `api` — network boundary for the slice: query keys, hooks wrapping generated clients, DTO → domain mapping. (Typically `~modules`.)
 - `config` — the slice's configuration values.
 - `constants` — the slice's constants (`constants.ts`).
 
@@ -61,7 +61,7 @@ The slice's `index.ts` is its public API. Re-export only what consumers in highe
 
 ## Import flow
 
-Respect the layer flow (`global → shared → core → entities → features → widgets → pages → app`), enforced by `eslint-plugin-boundaries`. No cross-imports within the same slice layer; no imports against the flow. The `domain` segment imports nothing.
+Respect the layer flow (`global → shared → core → modules → widgets → pages → app`), enforced by `eslint-plugin-boundaries`. No cross-imports within the same slice layer; no imports against the flow. The `domain` segment imports nothing.
 
 ## Scaffold
 
@@ -71,10 +71,10 @@ Create the slice skeleton (validates the layer and segments, refuses abstract on
 python3 .cursor/skills/create-slice/scripts/create-slice.py <layer-alias> <slice-name> [segment...]
 ```
 
-`<layer-alias>` is one of `app pages widgets features entities core shared global`. Example:
+`<layer-alias>` is one of `app pages widgets modules core shared global`. Example:
 
 ```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py features user-profile ui model api
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules user-profile ui model api
 ```
 
 ## Examples

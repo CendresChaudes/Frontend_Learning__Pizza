@@ -1,12 +1,12 @@
 ---
-description: What goes into each FSD segment — api, model, domain, lib, ui. Use when creating or editing a slice, adding a segment, or deciding where code belongs in entities/features/widgets/pages.
+description: What goes into each FSD segment — api, model, domain, lib, ui. Use when creating or editing a slice, adding a segment, or deciding where code belongs in modules/widgets/pages.
 alwaysApply: false
-globs: "**/2_pages/**,**/3_widgets/**,**/4_features/**,**/5_entities/**"
+globs: "**/2_pages/**,**/3_widgets/**,**/4_modules/**"
 ---
 
 # Architecture — segments
 
-What goes into each segment across slice layers (entities, features, widgets, pages). See [`architecture/layers.mdc`](./layers.mdc) for where slices live.
+What goes into each segment across slice layers (modules, widgets, pages). See [`architecture/layers.mdc`](./layers.mdc) for where slices live.
 
 ### `api`
 

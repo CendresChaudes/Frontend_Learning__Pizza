@@ -18,7 +18,7 @@ export const elementTypesRule = {
     {
       default: 'allow',
       message:
-        'Запрещенный импорт "${file.type}" <- "${dependency.type}". Верный флоу: global -> shared -> core -> entities -> features -> widgets -> pages -> app',
+        'Запрещенный импорт "${file.type}" <- "${dependency.type}". Верный флоу: global -> shared -> core -> modules -> widgets -> pages -> app',
       rules: [
         ...crossSlicePolicies,
         {

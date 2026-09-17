@@ -7,7 +7,7 @@ each with an index.ts barrel. Refuses abstract, role-less segment names.
 Usage:
     python3 .cursor/skills/create-slice/scripts/create-slice.py <layer-alias> <slice-name> [segment...]
 
-layer-alias: app | pages | widgets | features | entities | core | shared | global
+    layer-alias: app | pages | widgets | modules | core | shared | global
 segment:     ui | model | lib | api | config | constants
 
 Exit codes:
@@ -24,11 +24,10 @@ LAYER_FOLDERS = {
     "app": "1_app",
     "pages": "2_pages",
     "widgets": "3_widgets",
-    "features": "4_features",
-    "entities": "5_entities",
-    "core": "6_core",
-    "shared": "7_shared",
-    "global": "8_global",
+    "modules": "4_modules",
+    "core": "5_core",
+    "shared": "6_shared",
+    "global": "7_global",
 }
 
 CANONICAL_SEGMENTS = ("ui", "model", "lib", "api", "config", "constants")
@@ -82,7 +81,7 @@ def main(argv: list[str]) -> int:
             "<layer-alias> <slice-name> [segment...]",
             file=sys.stderr,
         )
-        print("  layer-alias: app | pages | widgets | features | entities | core | shared | global", file=sys.stderr)
+        print("  layer-alias: app | pages | widgets | modules | core | shared | global", file=sys.stderr)
         print("  segment:     ui | model | lib | api | config | constants", file=sys.stderr)
         return 1
 

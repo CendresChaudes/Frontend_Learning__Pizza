@@ -20,6 +20,6 @@ globs: "**/*.{ts,tsx}"
 - Strictness is on: `strict`, `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `useUnknownInCatchVariables`. Index access returns `T | undefined`; optional props require explicit `| undefined`; catch variables are `unknown`. Don't weaken with `any` or non-null assertions.
 - `import type` is enforced via `verbatimModuleSyntax`-style rules; never import types from `generated/` casually — they are `@ts-nocheck` and not type-checked.
 - Honor `composite: true` and `tsBuildInfoFile`; don't break project references by removing them or adding circular references.
-- Use path aliases, not relative climbs: `~app`, `~pages`, `~widgets`, `~features`, `~entities`, `~core`, `~shared`, `~global`, `~generated`, `~msw` per the FSD flow. Never `../../..` across layers; the boundaries ESLint config enforces this.
+- Use path aliases, not relative climbs: `~app`, `~pages`, `~widgets`, `~modules`, `~core`, `~shared`, `~global`, `~generated`, `~msw` per the FSD flow. Never `../../..` across layers; the boundaries ESLint config enforces this.
 - Keep the build green: `tsc -p tsconfig.app.json --noEmit` stays at 0 errors; `noUnusedLocals`/`noUnusedParameters`/`noFallthroughCasesInSwitch` are on — remove dead vars and cover switch cases. `skipLibCheck` is `false`, so bad ambient `.d.ts` surfaces; fix the declaration, don't silence it.
-- `generated/` is read-only and untyped — see `stack/general`. Don't let generated errors leak into hand-written code; wrap generated APIs in adapters in `~shared`/`~entities`.
+- `generated/` is read-only and untyped — see `stack/general`. Don't let generated errors leak into hand-written code; wrap generated APIs in adapters in `~shared`/`~modules`.

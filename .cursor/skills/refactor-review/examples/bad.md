@@ -3,7 +3,7 @@
 ## ❌ The subagent edits files
 
 ```sh
-# refactor subagent rewrote src/5_entities/user/model/mapper.ts during review
+# refactor subagent rewrote src/4_modules/user/model/mapper.ts during review
 ```
 
 Why: this command is a read-only review. The `refactor` subagent must be told explicitly: do not edit.
@@ -22,7 +22,7 @@ Why: no path, line range, or risk — not actionable, and violates "don't refact
 **Use instead**:
 
 ```md
-- src/4_features/login/ui/LoginForm.tsx:80-120 — inline validation mixed with UI; blocks testing. Risk: low. Proposed: extract validateLogin into lib.
+- src/4_modules/login/ui/LoginForm.tsx:80-120 — inline validation mixed with UI; blocks testing. Risk: low. Proposed: extract validateLogin into lib.
 ```
 
 ## ❌ Cosmetic "I don't like it" suggestions

@@ -39,12 +39,7 @@ export const importXRules: FlatConfig.Rules = {
           position: 'before',
         },
         {
-          pattern: '~features/**',
-          group: 'internal',
-          position: 'before',
-        },
-        {
-          pattern: '~entities/**',
+          pattern: '~modules/**',
           group: 'internal',
           position: 'before',
         },
