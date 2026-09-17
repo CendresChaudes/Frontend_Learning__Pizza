@@ -31,7 +31,7 @@ Track progress mentally or in a todo list:
 Run the single entrypoint from the project root, passing the changed files/dirs:
 
 ```sh
-sh .cursor/skills/verify/scripts/verify.sh <changed-files-or-paths>
+python3 .cursor/skills/verify/scripts/verify.py <changed-files-or-paths>
 ```
 
 It runs `tsc -p tsconfig.app.json --noEmit`, then `eslint --quiet`, `prettier --check --ignore-unknown`, and `cspell` on the passed paths. Exit codes: `0` — success, `1` — no paths / not from root, `2` — tsc, `3` — eslint, `4` — prettier, `5` — cspell. Don't consider the task done until it returns `0`.

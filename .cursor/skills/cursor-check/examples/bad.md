@@ -3,12 +3,12 @@
 ## ❌ Editing files during the audit
 
 ```sh
-chmod +x .cursor/hooks/post-work-verify.sh   # "fixing" while checking
+chmod +x .cursor/hooks/post-work-verify.py   # "fixing" while checking
 ```
 
 Why: this command reports state only — read-only. Don't mutate files as part of `/cursor-check`.
 
-**Use instead**: report «`.cursor/hooks/post-work-verify.sh` не исполняемый» and offer to fix as a follow-up.
+**Use instead**: report «`.cursor/hooks/post-work-verify.py` не исполняемый» and offer to fix as a follow-up.
 
 ## ❌ Vague findings without location
 
@@ -23,7 +23,7 @@ Why: no file path or line — the user can't act on it.
 
 ```md
 - .cursor/skills/foo/SKILL.md — missing examples/good.md (required by create-skill)
-- .cursor/hooks/post-work-verify.sh — not executable (chmod -x)
+- .cursor/hooks/post-work-verify.py — not executable (chmod -x)
 ```
 
 ## ❌ Running builds/tests/package managers

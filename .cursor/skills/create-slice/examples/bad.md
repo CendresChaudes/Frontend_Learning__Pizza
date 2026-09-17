@@ -3,8 +3,8 @@
 ## ❌ `hooks` segment
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh features user-profile hooks
-# create-slice.sh: refusing abstract segment 'hooks'. hooks -> ui (UI hooks) or model (business hooks).
+python3 .cursor/skills/create-slice/scripts/create-slice.py features user-profile hooks
+# create-slice.py: refusing abstract segment 'hooks'. hooks -> ui (UI hooks) or model (business hooks).
 ```
 
 Why: a hook is an implementation detail, not a role. A UI hook belongs in `ui` next to its component; a business hook belongs in `model`.
@@ -44,7 +44,7 @@ Why: a type is a file, not a segment. Put `User` in the segment that owns it by 
 ## ❌ Pre-creating all six segments
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh features user-profile ui model lib api config constants
+python3 .cursor/skills/create-slice/scripts/create-slice.py features user-profile ui model lib api config constants
 ```
 
 Why: empty segments rot. Create only the segments the slice uses; add more later when a real need appears.

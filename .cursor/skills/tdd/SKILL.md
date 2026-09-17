@@ -37,7 +37,7 @@ Create the test colocated with the source (`foo.test.ts` next to `foo.ts`; `__te
 ### 2. Run the test
 
 ```sh
-sh .cursor/skills/tdd/scripts/tdd.sh <test-path> [--int]
+python3 .cursor/skills/tdd/scripts/tdd.py <test-path> [--int]
 ```
 
 The script picks the vitest config by extension (`.tsx` → unit.browser, `.ts` → unit.node) or `--int` for integration, and starts watch mode.

@@ -43,7 +43,7 @@ Regeneration rewrites the whole `generated/` tree — it's a heavy operation. **
 Use the single entrypoint — it runs `pnpm run generate` and immediately type-checks the project:
 
 ```sh
-sh .cursor/skills/openapi-codegen/scripts/generate.sh
+python3 .cursor/skills/openapi-codegen/scripts/generate.py
 ```
 
 Don't call `kubb generate` directly: bypassing the script loses the post type-check. The script returns a non-zero code on generation errors (2) or type errors (3) — don't consider the task done until you see `✓ Done`.

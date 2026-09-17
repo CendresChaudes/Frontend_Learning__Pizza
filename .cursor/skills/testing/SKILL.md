@@ -66,7 +66,7 @@ pnpm exec vitest run <path> --config <matching-config>
 
 - For a tight red-green loop on one file, use the `tdd` skill's script (watch mode, config auto-selected by extension):
   ```sh
-  sh .cursor/skills/tdd/scripts/tdd.sh <test-path> [--int]
+  python3 .cursor/skills/tdd/scripts/tdd.py <test-path> [--int]
   ```
 - For the pre-done verification gate (static checks + narrow tests + re-read diff), use the `verify` skill — testing is one step of it, not a replacement.
 

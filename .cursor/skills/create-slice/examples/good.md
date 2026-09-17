@@ -3,7 +3,7 @@
 ## 1. Feature slice with the segments it actually needs
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh features user-profile ui model api
+python3 .cursor/skills/create-slice/scripts/create-slice.py features user-profile ui model api
 ```
 
 Result:
@@ -21,7 +21,7 @@ Only three segments — the slice uses `ui`, `model`, `api`. No empty `config`/`
 ## 2. Entity slice — data + types, no UI
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh entities user model api
+python3 .cursor/skills/create-slice/scripts/create-slice.py entities user model api
 ```
 
 An entity has no UI of its own; `ui` is correctly absent. `model` holds the domain type and selectors, `api` wraps the generated client.
@@ -29,7 +29,7 @@ An entity has no UI of its own; `ui` is correctly absent. `model` holds the doma
 ## 3. Shared UI-kit slice
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh shared button ui
+python3 .cursor/skills/create-slice/scripts/create-slice.py shared button ui
 ```
 
 A pure presentational slice needs only `ui`. One segment, one role.

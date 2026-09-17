@@ -17,7 +17,7 @@ export default defineConfig({
   output: {
     format: 'prettier',
     path: './generated',
-    postGenerate: ['scripts/ts-no-check-kubb.sh'],
+    postGenerate: ['python3 scripts/ts-no-check-kubb.py'],
     clean: true,
     lint: false,
   },

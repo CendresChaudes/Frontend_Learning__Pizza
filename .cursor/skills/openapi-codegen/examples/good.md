@@ -8,7 +8,7 @@ User: «Add a `GET /api/users/:id` endpoint.»
 # 1. Edit the contract (not generated/)
 #    add the path + schema to openapi.json under components/schemas
 # 2. Get explicit confirmation, then run the single entrypoint from the project root:
-sh .cursor/skills/openapi-codegen/scripts/generate.sh
+python3 .cursor/skills/openapi-codegen/scripts/generate.py
 # → ✓ Done: generated/ updated, types are green.
 ```
 

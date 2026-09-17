@@ -27,13 +27,13 @@ Invoke with `/cursor-check` when you want a health check of the Cursor configura
 
 - Required frontmatter: `name` (lowercase, hyphens, ≤64 chars) and `description` (≤1024 chars).
 - Required files present: `examples/good.md`, `examples/bad.md`.
-- `scripts/` (if any) contains only `.sh` files (per `management/general`); no inlined script bodies in `SKILL.md`.
+- `scripts/` (if any) contains only `.py` files (per `management/general`); no inlined script bodies in `SKILL.md`.
 - Prose in English (per `create-skill`); identifiers/paths/commands in original form.
 
-### Hooks — `.cursor/hooks.json` + `.cursor/hooks/*.sh`
+### Hooks — `.cursor/hooks.json` + `.cursor/hooks/*.py`
 
 - `hooks.json` parses as valid JSON and references only existing scripts.
-- Hook scripts are `.sh` (POSIX), present, and executable.
+- Hook scripts are `.py` (Python 3), present, and executable.
 
 ### Agents — `.cursor/agents/*` (if present)
 

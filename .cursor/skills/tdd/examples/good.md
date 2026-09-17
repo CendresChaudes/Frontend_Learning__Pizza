@@ -19,7 +19,7 @@ describe('formatDate', () => {
 Run it, see it fail for the right reason (assertion, not import error):
 
 ```sh
-sh .cursor/skills/tdd/scripts/tdd.sh src/7_shared/lib/formatDate.test.ts
+python3 .cursor/skills/tdd/scripts/tdd.py src/7_shared/lib/formatDate.test.ts
 ```
 
 Then write the minimum `formatDate.ts` to turn it green, and refactor with the test staying green.
@@ -42,7 +42,7 @@ it('shows the user full name', async () => {
 Run with the browser config (auto-selected by `.tsx`):
 
 ```sh
-sh .cursor/skills/tdd/scripts/tdd.sh src/4_features/user-profile/ui/UserProfile.test.tsx
+python3 .cursor/skills/tdd/scripts/tdd.py src/4_features/user-profile/ui/UserProfile.test.tsx
 ```
 
 ## 3. HTTP via MSW at the boundary

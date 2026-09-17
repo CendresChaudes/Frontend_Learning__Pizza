@@ -9,12 +9,12 @@ Why: both example files are required — `good.md` shows correct application, `b
 ## ❌ Inline a script body in `SKILL.md`
 
 ```sh
-#!/bin/sh
-set -eu
-pnpm run generate
+#!/usr/bin/env python3
+import subprocess, sys
+sys.exit(subprocess.run(["pnpm", "run", "generate"]).returncode)
 ```
 
-Why: the script drifts from its inlined copy. Put it in `scripts/foo.sh` and link with the run command; keep behavior/exit codes in the script header.
+Why: the script drifts from its inlined copy. Put it in `scripts/foo.py` and link with the run command; keep behavior/exit codes in the script header.
 
 ## ❌ Non-English skill content
 

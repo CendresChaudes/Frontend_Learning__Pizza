@@ -24,7 +24,7 @@ Why: breaks the import flow (`eslint-plugin-boundaries`). Go through an adapter 
 pnpm exec kubb generate
 ```
 
-Why: bypasses `scripts/generate.sh`, so the post type-check (`tsc --noEmit`) is lost. Use the entrypoint script.
+Why: bypasses `scripts/generate.py`, so the post type-check (`tsc --noEmit`) is lost. Use the entrypoint script.
 
 ## ❌ Store generated types in a MobX store
 
@@ -38,6 +38,6 @@ Why: server state lives in TanStack Query (via `mobx-tanstack-query`); the cache
 
 ## ❌ Regenerate without confirmation
 
-Silently running `sh .cursor/skills/openapi-codegen/scripts/generate.sh` because «it seemed needed».
+Silently running `python3 .cursor/skills/openapi-codegen/scripts/generate.py` because «it seemed needed».
 
 Why: regeneration rewrites the whole `generated/` tree and may affect others' work — always get explicit user approval first.

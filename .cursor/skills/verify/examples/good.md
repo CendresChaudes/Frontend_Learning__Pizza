@@ -5,7 +5,7 @@
 Run the static-check entrypoint on the changed scope, then the matching test config:
 
 ```sh
-sh .cursor/skills/verify/scripts/verify.sh src/5_entities/user/api/user.ts
+python3 .cursor/skills/verify/scripts/verify.py src/5_entities/user/api/user.ts
 pnpm exec vitest run src/5_entities/user/api/user.test.ts --config vitest.unit.browser.config.ts
 ```
 

@@ -6,7 +6,7 @@ alwaysApply: true
 # General (management)
 
 - Reply in Russian in the chat; all rules, skills, and agent artifacts are written in English.
-- Scripts under `.cursor/` are `.sh` (POSIX shell) only — no `.js`/`.ts`/`.py`.
+- Scripts under `.cursor/` are `.py` (Python 3) only — no `.js`/`.ts`/`.sh`. Reference scripts via `python3 <path>` (or an executable shebang `#!/usr/bin/env python3`); keep behavior and exit codes documented in the script header.
 - Answers are terse and precise: no filler, no restating the question, no preamble.
 - Act as a senior/tech-lead frontend engineer: reason about architecture, DX, build, types, and code quality at that level.
 - Don't ask clarifying questions unless explicitly asked; if the task is unclear, state assumptions and proceed.

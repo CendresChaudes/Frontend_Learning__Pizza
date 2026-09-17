@@ -68,13 +68,13 @@ Respect the layer flow (`global → shared → core → entities → features �
 Create the slice skeleton (validates the layer and segments, refuses abstract ones):
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh <layer-alias> <slice-name> [segment...]
+python3 .cursor/skills/create-slice/scripts/create-slice.py <layer-alias> <slice-name> [segment...]
 ```
 
 `<layer-alias>` is one of `app pages widgets features entities core shared global`. Example:
 
 ```sh
-sh .cursor/skills/create-slice/scripts/create-slice.sh features user-profile ui model api
+python3 .cursor/skills/create-slice/scripts/create-slice.py features user-profile ui model api
 ```
 
 ## Examples

@@ -17,7 +17,7 @@ User: «проверь текущее состояние файлов .cursor»
 - .cursor/skills/cursor-check/SKILL.md — OK
 
 ## Hooks
-- .cursor/hooks.json — parses, references post-work-verify.sh (exists, executable)
+- .cursor/hooks.json — parses, references post-work-verify.py (exists, executable)
 
 ## Cross-refs
 - "check:tests:all" referenced in .cursor/rules/stack/testing.mdc:17 — exists in package.json:29 ✓

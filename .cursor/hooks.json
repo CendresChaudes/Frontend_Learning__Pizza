@@ -3,7 +3,7 @@
   "hooks": {
     "stop": [
       {
-        "command": ".cursor/hooks/post-work-verify.sh",
+        "command": "python3 .cursor/hooks/post-work-verify.py",
         "timeout": 600,
         "loop_limit": 3
       }

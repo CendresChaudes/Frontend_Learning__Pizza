@@ -27,7 +27,7 @@ Why: installs change the lockfile and can hit the internal registry — always g
 ## ❌ Regenerate `generated/` without approval
 
 ```sh
-sh .cursor/skills/openapi-codegen/scripts/generate.sh   # silently
+python3 .cursor/skills/openapi-codegen/scripts/generate.py   # silently
 ```
 
 Why: regeneration rewrites a large tree — use the `openapi-codegen` skill and get explicit confirmation.

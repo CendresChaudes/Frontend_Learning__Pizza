@@ -32,13 +32,13 @@ Body links to examples instead of inlining them.
 │   ├── good.md
 │   └── bad.md
 └── scripts/
-    └── verify.sh
+    └── verify.py
 ```
 
 `SKILL.md` references the script with a relative link and the run command — the script body is **not** inlined:
 
 ```sh
-sh .cursor/skills/verify/scripts/verify.sh <paths>
+python3 .cursor/skills/verify/scripts/verify.py <paths>
 ```
 
 The script header documents behavior and exit codes.
@@ -49,4 +49,4 @@ Each bad item states the wrong pattern, a one-line reason, and points at the goo
 
 - **Wrong:** inline the script body in `SKILL.md`.
 - **Why:** duplicates the script and drifts from it.
-- **Fix:** link to `scripts/foo.sh` with the run command instead.
+- **Fix:** link to `scripts/foo.py` with the run command instead.
