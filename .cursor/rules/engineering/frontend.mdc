@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Frontend
 
-Generic frontend expectations. Stack wiring (Mantine, Tailwind, React Hook Form) lives in `stack/` — see `stack/react`, `stack/tailwind`, `stack/accessibility`.
+Generic frontend expectations. Stack wiring (Tailwind, React Hook Form) lives in `stack/` — see `stack/react`, `stack/tailwind`, `stack/accessibility`.
 
 ## Forms
 

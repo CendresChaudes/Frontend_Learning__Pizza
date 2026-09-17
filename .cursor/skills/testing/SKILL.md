@@ -46,7 +46,7 @@ pnpm exec vitest run <path> --config <matching-config>
 ## What NOT to test
 
 - **`generated/`** — output, not source. If a generated client/schema is wrong, fix the OpenAPI/Kubb config and regenerate. Test the hand-written wrapper, not the generated code.
-- **The framework** — don't re-assert that Mantine renders a button or that React reconciles. Assert _your_ component's behavior.
+- **The framework** — don't re-assert that the UI kit renders a button or that React reconciles. Assert _your_ component's behavior.
 - **Trivial getters/setters and pass-throughs** — no behavior to assert; tests add noise.
 - **Private internals** — if you need to test a private function, it's probably worth extracting to a tested pure helper in `~shared/lib` or the feature `lib`.
 

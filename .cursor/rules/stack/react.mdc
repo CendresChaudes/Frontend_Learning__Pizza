@@ -17,5 +17,5 @@ globs: "**/*.{ts,tsx}"
 
 ## Stack wiring
 
-- Drive forms through React Hook Form + `@hookform/resolvers`; validate on schema, surface errors accessibly. Don't hand-roll validation or store form state in MobX. Mantine inputs via the `mantine-form` adapter (see `stack/uikit`); Zod schemas (see `stack/api`).
-- Error boundaries via `react-error-boundary`; pair with Suspense fallbacks. Server state/cache via TanStack Query (see `stack/api`); MobX for client state (see `stack/model`); Mantine UI kit (see `stack/uikit`).
+- Drive forms through React Hook Form + `@hookform/resolvers`; validate on schema, surface errors accessibly. Don't hand-roll validation or store form state in MobX. UI-kit inputs wired to RHF (see `stack/uikit`); Zod schemas (see `stack/api`).
+- Error boundaries via `react-error-boundary`; pair with Suspense fallbacks. Server state/cache via TanStack Query (see `stack/api`); MobX for client state (see `stack/model`); UI kit (see `stack/uikit`).

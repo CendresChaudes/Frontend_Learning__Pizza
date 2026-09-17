@@ -11,7 +11,7 @@ See [`architecture/general.mdc`](./general.mdc) for the import flow and cross-cu
 
 Application initialization — the root that wires everything together.
 
-- Lives here: providers (theme, router, query client, MobX, Mantine), global styles (`index.css`), the root render entry (`index.tsx`), app-wide store setup.
+- Lives here: providers (theme, router, query client, MobX, UI kit), global styles (`index.css`), the root render entry (`index.tsx`), app-wide store setup.
 - Structure: segment-based, no slices — `providers/`, `styles/`, `config/`, plus the `index.tsx` entry. Capture is `segment`.
 - May import: everything below it (all layers). Nothing imports `app`.
 - Public API: `index.ts` re-exports the entry/providers upper layers need.
@@ -65,7 +65,7 @@ Project-scoped infrastructure wired once and consumed by upper layers.
 
 Reusable code with no business meaning — UI kit, utils, types, configs, constants.
 
-- Lives here: the design system (Mantine-based kit), generic hooks, formatters, generic types, icons, config. No domain knowledge.
+- Lives here: the design system (UI-kit components), generic hooks, formatters, generic types, icons, config. No domain knowledge.
 - Structure: segment-based, no slices — `ui/`, `lib/`, `config/`, `constants/`, `types/`. Capture is `segment`.
 - May import: global only. Nothing above it.
 - Public API via `index.ts`.

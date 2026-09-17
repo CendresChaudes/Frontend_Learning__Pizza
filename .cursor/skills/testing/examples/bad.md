@@ -51,4 +51,4 @@ it('renders a button', () => {
 });
 ```
 
-Why: Mantine/React already guarantees that. Assert _your_ component's behavior — what the button does on click, what label it shows under which props — not that the framework rendered a `<button>`.
+Why: the UI kit/React already guarantees that. Assert _your_ component's behavior — what the button does on click, what label it shows under which props — not that the framework rendered a `<button>`.

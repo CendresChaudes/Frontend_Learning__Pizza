@@ -13,7 +13,7 @@ description: >-
 
 ## When to apply
 
-Apply automatically when implementing or changing `.ts`/`.tsx` logic or components: pure functions, hooks, selectors, validators, zod schemas, Mantine components. Don't apply to `generated/` (read-only, not tested) or to trivial pass-through code.
+Apply automatically when implementing or changing `.ts`/`.tsx` logic or components: pure functions, hooks, selectors, validators, zod schemas, UI-kit components. Don't apply to `generated/` (read-only, not tested) or to trivial pass-through code.
 
 ## Principle
 

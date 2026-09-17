@@ -1,12 +1,12 @@
 ---
-description: Stack UI kit — Mantine components, hooks, styling via Tailwind + cn/cva, Mantine inputs for forms
+description: Stack UI kit — components, hooks, styling via Tailwind + cn/cva, form inputs
 alwaysApply: false
 globs: "**/*.{ts,tsx}"
 ---
 
 # UI kit (stack)
 
-- Reach for Mantine components and hooks first; don't reinvent what the kit provides. Override via Mantine's style props / `classNames` API, not by fighting Mantine internals with Tailwind (see `stack/tailwind`, `stack/css`).
+- Reach for the project's UI-kit components and hooks first; don't reinvent what the kit provides. Override via the kit's style props / `classNames` API, not by fighting kit internals with Tailwind (see `stack/tailwind`, `stack/css`).
 - Style variants via `class-variance-authority` + `tailwind-merge` routed through the project's `cn` helper; don't scatter raw `clsx`/`twMerge` calls (see `stack/tailwind`).
-- Forms: Mantine inputs wired through the `mantine-form` adapter; wire `label`/`error` props — don't strip them for layout. Form driver is React Hook Form (see `stack/react`); schemas are Zod (see `stack/api`).
-- Don't break Mantine's a11y when overriding: keep `role`, `aria-*`, and keyboard handlers intact (see `stack/accessibility`).
+- Forms: kit inputs wired to React Hook Form; wire `label`/`error` props — don't strip them for layout. Form driver is React Hook Form (see `stack/react`); schemas are Zod (see `stack/api`).
+- Don't break the kit's a11y when overriding: keep `role`, `aria-*`, and keyboard handlers intact (see `stack/accessibility`).
