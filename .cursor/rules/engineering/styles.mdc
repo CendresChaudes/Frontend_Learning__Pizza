@@ -6,9 +6,9 @@ globs: "**/*.css"
 
 # Styles
 
-Generic CSS practices. Stack setup (Tailwind v4, stylelint, `@theme`, colocation) lives in `stack/css`.
+Generic CSS practices. Stack setup (CSS modules, stylelint, design tokens, colocation) lives in `stack/css`.
 
-- Plain CSS is the escape hatch, not the default: reach for it only for things the project's utility system can't express — keyframes, complex selectors, third-party overrides, cascade-layer tuning. Don't reimplement utilities in custom CSS.
+- CSS Modules are the default for component styles; plain global CSS is the escape hatch for resets, tokens, keyframes, complex selectors, and third-party overrides.
 - Don't fight the cascade: avoid `!important`, deep specificity hacks, and `@layer` misuse. Prefer specificity by structure, not escalation; let the natural cascade work.
 - Avoid inline styles for anything reusable: `style={{ ... }}` is acceptable only for truly dynamic runtime values (computed positions, drag transforms); for everything else use classes. Inline styles bypass the linter and formatter.
 - Keep selectors flat and meaningful: prefer class-based selectors over tag/`#id`; avoid over-nesting (no deep BEM ladders). One level of nesting is the ceiling for component-scoped CSS.

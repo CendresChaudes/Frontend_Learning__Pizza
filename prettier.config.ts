@@ -10,9 +10,6 @@ export default {
   endOfLine: 'lf',
   bracketSameLine: false,
   singleAttributePerLine: true,
-  plugins: ['prettier-plugin-tailwindcss'],
-  tailwindStylesheet: 'src/1_app/ui/styles/global/vendor/tailwind.global.css',
-  tailwindFunctions: ['cn', 'cva'],
   overrides: [
     {
       files: ['**/*.css'],

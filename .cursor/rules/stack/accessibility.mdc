@@ -8,6 +8,6 @@ globs: "**/*.{ts,tsx}"
 
 Generic a11y principles (semantics, keyboard, contrast, DOM order) live in `engineering/frontend`. Below is this stack's a11y wiring.
 
-- Visible focus via Tailwind's `focus-visible:` variants (or the UI kit's focus ring) — don't replace it without an equivalent visible focus style.
+- Visible focus via `:focus-visible` in CSS (or the UI kit's focus ring) — don't replace it without an equivalent visible focus style.
 - Toasts via an accessible toast/notification library with `aria-live` built in; don't hand-roll banners that miss it.
 - Don't break the kit's a11y when overriding: keep `role`, `aria-*`, and keyboard handlers intact. A "styled" component that drops its semantics is a regression.

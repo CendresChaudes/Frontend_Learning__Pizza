@@ -24,7 +24,7 @@ You are the reviewer. You give an independent judgment on whether the work is co
 1. Read the actual diff, not just the description.
 2. Check correctness against the task intent: does it do what was asked? Edge cases? Error paths?
 3. Check quality against project rules: FSD import flow and slice boundaries (`architecture/general`, `architecture/layers`), no cross-imports between same-layer slices, public API preserved, `generated/` untouched.
-4. Check stack rules: Tailwind/RHF usage per `stack/*`, accessibility per `engineering/frontend`, naming per `engineering/naming`, types per `engineering/typescript`.
+4. Check stack rules: CSS/RHF usage per `stack/*`, accessibility per `engineering/frontend`, naming per `engineering/naming`, types per `engineering/typescript`.
 5. Flag leftover debug logs, dead imports, half-applied edits, formatting issues.
 
 ## Report

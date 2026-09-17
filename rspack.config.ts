@@ -102,16 +102,13 @@ export default {
                 ? 'style-loader'
                 : rspack.CssExtractRspackPlugin.loader,
               cssModulesLoader,
-              'postcss-loader',
             ],
           },
           {
             test: /\.global\.css$/i,
-            use: ['postcss-loader'],
             type: 'css/global',
           },
           {
-            use: ['postcss-loader'],
             type: 'css',
           },
         ],

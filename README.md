@@ -16,7 +16,6 @@
 ## Стек
 
 ![CSS]
-![TailwindCSS]
 ![Mantine]
 ![FramerMotion]
 ![TypeScript]
@@ -31,7 +30,6 @@
 <!-- LINKS -->
 
 [CSS]: https://img.shields.io/badge/CSS-000000?logo=css&logoColor=1572B6&style=for-the-badge
-[TailwindCSS]: https://img.shields.io/badge/TailwindCSS-000000?logo=tailwindcss&logoColor=06B6D4&style=for-the-badge
 [Mantine]: https://img.shields.io/badge/Mantine-000000?logo=mantine&logoColor=339AF0&style=for-the-badge
 [FramerMotion]: https://img.shields.io/badge/Framer_Motion-000000?logo=framer&logoColor=0055FF&style=for-the-badge
 [TypeScript]: https://img.shields.io/badge/TypeScript-000000?logo=typescript&logoColor=3178C6&style=for-the-badge

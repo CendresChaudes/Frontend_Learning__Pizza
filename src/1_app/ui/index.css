@@ -1,5 +1,3 @@
-@layer theme, base, components, utilities;
-
-@import "./styles/global/base.global.css";
-@import "./styles/global/fonts.global.css";
-@import "./styles/global/vendor/tailwind.global.css";
+@import url("./styles/global/theme.global.css");
+@import url("./styles/global/base.global.css");
+@import url("./styles/global/fonts.global.css");

@@ -33,13 +33,15 @@
     ".pnpm-store",
     "cspell",
     "dist",
+    "docs",
     "generated",
     "node_modules",
     "coverage",
     "src/**/__mocks__",
     "public/mockServiceWorker.js",
     "openapi.json",
-    "pnpm-lock.yaml"
+    "pnpm-lock.yaml",
+    "TODO.md"
   ],
   "import": ["@cspell/dict-ru_ru/cspell-ext.json", "@cspell/dict-en_us/cspell-ext.json"],
   "language": "en,ru",

@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import type { PropsWithChildren } from 'react';
 import { Header } from '~widgets/Header';
 import { CAppRouting } from '~core/config';
+import styles from './Root.layout.module.css';
 
 type TProperties = PropsWithChildren;
 
@@ -17,8 +18,8 @@ function RootLayoutContent(properties: TProperties): ReactJSX {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="grid h-screen grid-cols-[auto_1fr]">
+    <div className={styles.root}>
+      <div className={styles.shell}>
         <div>
           <Header title={title} />
 
