@@ -1,0 +1,4184 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/otps": {
+      "get": {
+        "operationId": "AppController_otps",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "страница с отп кодами",
+        "tags": [
+          "📃 pages"
+        ]
+      }
+    },
+    "/api/auth/sign-in": {
+      "post": {
+        "operationId": "AuthController_signIn",
+        "parameters": [
+          {
+            "name": "x-application",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "web",
+              "enum": [
+                "web",
+                "mobile"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "sign-in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неправильный отп код или некорректные данные запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Войти",
+        "tags": [
+          "🔒 auth"
+        ]
+      }
+    },
+    "/api/auth/sign-out": {
+      "post": {
+        "operationId": "AuthController_signOut",
+        "parameters": [
+          {
+            "name": "x-application",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "web",
+              "enum": [
+                "web",
+                "mobile"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "sign-out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Выйти",
+        "tags": [
+          "🔒 auth"
+        ]
+      }
+    },
+    "/api/users/profile": {
+      "patch": {
+        "operationId": "UsersController_updateProfile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "update profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateProfileResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь не найден, пользователь не существует или некорректные данные запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Обновить профиль пользователя",
+        "tags": [
+          "💂‍♂️ users"
+        ]
+      },
+      "get": {
+        "operationId": "UsersController_getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "get profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProfileResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить профиль пользователя",
+        "tags": [
+          "💂‍♂️ users"
+        ]
+      }
+    },
+    "/api/otps/otp": {
+      "post": {
+        "operationId": "OtpsController_createOtp",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "create otp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOtpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание отп кода",
+        "tags": [
+          "🔑 otps"
+        ]
+      }
+    },
+    "/api/cards/cards": {
+      "get": {
+        "operationId": "CardsController_getCards",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "get user cards",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCardsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить список сохраненных карт пользователя",
+        "tags": [
+          "💳 cards"
+        ]
+      }
+    },
+    "/api/cards/cards/{id}": {
+      "delete": {
+        "operationId": "CardsController_deleteCard",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete user card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCardResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Удалить сохраненную карту пользователя",
+        "tags": [
+          "💳 cards"
+        ]
+      }
+    },
+    "/api/transactions/{id}": {
+      "get": {
+        "operationId": "TransactionsController_getTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Получить транзакцию по ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректный ID транзакции, транзакция не найдена или уже оплачена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить транзакцию по ID",
+        "tags": [
+          "💸 transactions"
+        ]
+      }
+    },
+    "/api/transactions/pay": {
+      "post": {
+        "operationId": "TransactionsController_payTransaction",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Оплата транзакции: новая карта / сохранённая карта",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные оплаты, проблема с транзакцией, картой или истёк срок действия транзакции",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Оплатить (закрыть) транзакцию картой",
+        "tags": [
+          "💸 transactions"
+        ]
+      }
+    },
+    "/api/transactions/{id}/pay/qr": {
+      "post": {
+        "operationId": "TransactionsController_payTransactionByQr",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Оплата транзакции по QR",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Проблема с транзакцией или истёк срок действия транзакции",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Оплатить транзакцию по QR",
+        "tags": [
+          "💸 transactions"
+        ]
+      }
+    },
+    "/api/pizzas/catalog": {
+      "get": {
+        "operationId": "PizzasController_getPizzaCatalog",
+        "parameters": [
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "description": "Фильтр по категории",
+            "schema": {
+              "$ref": "#/components/schemas/PizzaCategory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPizzaCatalogResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные параметры запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить каталог",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/pizzas/calculate": {
+      "post": {
+        "operationId": "PizzasController_calculatePizzaOrder",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatePizzaOrderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "calculate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculateOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректная корзина, продукт, размер или опция не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Рассчитать стоимость корзины и комиссию",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/pizzas/payment": {
+      "post": {
+        "operationId": "PizzasController_createPizzaPayment",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePizzaPaymentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "payment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePizzaPaymentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные заказа, продукт, размер или опция не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создать заказ и транзакцию для оплаты",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/pizzas/orders": {
+      "get": {
+        "operationId": "PizzasController_getPizzaOrders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPizzaOrdersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить все заказы",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/pizzas/orders/paid": {
+      "get": {
+        "operationId": "PizzasController_getPizzaPaidOrder",
+        "parameters": [
+          {
+            "name": "token",
+            "required": true,
+            "in": "query",
+            "description": "Одноразовый токен доступа",
+            "schema": {
+              "example": "1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPizzaOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Не указан или недействителен одноразовый токен доступа, заказ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить оплаченный заказ по одноразовому токену",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/pizzas/orders/{orderId}": {
+      "get": {
+        "operationId": "PizzasController_getPizzaOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "description": "Идентификатор заказа",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPizzaOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь или заказ не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить заказ",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/pizzas/orders/{orderId}/cancel": {
+      "patch": {
+        "operationId": "PizzasController_cancelPizzaOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "description": "Идентификатор заказа",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "order cancel",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelPizzaOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь или заказ не найдены, либо заказ нельзя отменить",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Отменить заказ",
+        "tags": [
+          "🍕 pizzas"
+        ]
+      }
+    },
+    "/api/games/info": {
+      "get": {
+        "operationId": "GamesController_getGames",
+        "parameters": [
+          {
+            "name": "filter",
+            "required": false,
+            "in": "query",
+            "description": "Дополнительные фильтры",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GameFilter"
+              }
+            }
+          },
+          {
+            "name": "view",
+            "required": false,
+            "in": "query",
+            "description": "Предустановленный вид выборки",
+            "schema": {
+              "$ref": "#/components/schemas/GameView"
+            }
+          },
+          {
+            "name": "genre",
+            "required": false,
+            "in": "query",
+            "description": "Жанр",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GameGenre"
+              }
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Лимит",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamesPaginatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные параметры запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить игры",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/search": {
+      "get": {
+        "operationId": "GamesController_searchGames",
+        "parameters": [
+          {
+            "name": "search",
+            "required": true,
+            "in": "query",
+            "description": "Строка поиска",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Лимит",
+            "schema": {
+              "example": 8,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные параметры поиска",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Поиск по играм",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/info/{slug}": {
+      "get": {
+        "operationId": "GamesController_getGame",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "description": "Slug игры",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Игра не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить игру",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/regions": {
+      "get": {
+        "operationId": "GamesController_getGameRegions",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "query",
+            "description": "Slug игры",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deliveryType",
+            "required": true,
+            "in": "query",
+            "description": "Тип доставки",
+            "schema": {
+              "$ref": "#/components/schemas/GameDeliveryType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameRegionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные параметры запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Регионы не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить регионы",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/price-variants": {
+      "get": {
+        "operationId": "GamesController_getPriceVariants",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "query",
+            "description": "Slug игры",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deliveryType",
+            "required": true,
+            "in": "query",
+            "description": "Тип доставки",
+            "schema": {
+              "$ref": "#/components/schemas/GameDeliveryType"
+            }
+          },
+          {
+            "name": "region",
+            "required": true,
+            "in": "query",
+            "description": "Регион",
+            "schema": {
+              "$ref": "#/components/schemas/GameRegion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamePriceVariantsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные параметры запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Варианты не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить варианты цен",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/order": {
+      "post": {
+        "operationId": "GamesController_createGameOrder",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameOrderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGameOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные заказа или не указана ссылка приглашения",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Игра или вариант цены не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создать заказ игры и транзакцию для оплаты",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/orders": {
+      "get": {
+        "operationId": "GamesController_getGameOrders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameOrdersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить все заказы игр",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/orders/paid": {
+      "get": {
+        "operationId": "GamesController_getGamePaidOrder",
+        "parameters": [
+          {
+            "name": "token",
+            "required": true,
+            "in": "query",
+            "description": "Одноразовый токен доступа",
+            "schema": {
+              "example": "1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Не указан или недействителен одноразовый токен доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Заказ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить оплаченный заказ игры по одноразовому токену",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/games/orders/{orderId}": {
+      "get": {
+        "operationId": "GamesController_getGameOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "description": "ID заказа",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Пользователь не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Заказ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить заказ игры",
+        "tags": [
+          "🎮 games"
+        ]
+      }
+    },
+    "/api/tester/otps/otp": {
+      "post": {
+        "operationId": "TesterController_createOtp",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "create otp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOtpResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание отп кода",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/auth/sign-in": {
+      "post": {
+        "operationId": "TesterController_signIn",
+        "parameters": [
+          {
+            "name": "x-application",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "web",
+              "enum": [
+                "web",
+                "mobile"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "sign-in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Авторизация",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/auth/sign-out": {
+      "post": {
+        "operationId": "TesterController_signOut",
+        "parameters": [
+          {
+            "name": "x-application",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "web",
+              "enum": [
+                "web",
+                "mobile"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "sign-out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Выйти",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/users/profile": {
+      "patch": {
+        "operationId": "TesterController_updateProfile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "update profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateProfileResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Обновить профиль пользователя",
+        "tags": [
+          "🧪 tester"
+        ]
+      },
+      "get": {
+        "operationId": "TesterController_getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "get profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProfileResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить профиль пользователя",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/cards/cards": {
+      "get": {
+        "operationId": "TesterController_getCards",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "get user cards",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCardsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить список сохраненных карт пользователя",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/cards/cards/{id}": {
+      "delete": {
+        "operationId": "TesterController_deleteCard",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete user card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCardResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Удалить сохраненную карту пользователя",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/info": {
+      "get": {
+        "operationId": "TesterController_getGames",
+        "parameters": [
+          {
+            "name": "filter",
+            "required": false,
+            "in": "query",
+            "description": "Дополнительные фильтры",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GameFilter"
+              }
+            }
+          },
+          {
+            "name": "view",
+            "required": false,
+            "in": "query",
+            "description": "Предустановленный вид выборки",
+            "schema": {
+              "$ref": "#/components/schemas/GameView"
+            }
+          },
+          {
+            "name": "genre",
+            "required": false,
+            "in": "query",
+            "description": "Жанр",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GameGenre"
+              }
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Лимит",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamesPaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить игры",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/search": {
+      "get": {
+        "operationId": "TesterController_searchGames",
+        "parameters": [
+          {
+            "name": "search",
+            "required": true,
+            "in": "query",
+            "description": "Строка поиска",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Лимит",
+            "schema": {
+              "example": 8,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSearchResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Поиск по играм",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/info/{slug}": {
+      "get": {
+        "operationId": "TesterController_getGame",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "description": "Slug игры",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить игру",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/regions": {
+      "get": {
+        "operationId": "TesterController_getGameRegions",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "query",
+            "description": "Slug игры",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deliveryType",
+            "required": true,
+            "in": "query",
+            "description": "Тип доставки",
+            "schema": {
+              "$ref": "#/components/schemas/GameDeliveryType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameRegionsResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить регионы",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/price-variants": {
+      "get": {
+        "operationId": "TesterController_getGamePriceVariants",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "query",
+            "description": "Slug игры",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deliveryType",
+            "required": true,
+            "in": "query",
+            "description": "Тип доставки",
+            "schema": {
+              "$ref": "#/components/schemas/GameDeliveryType"
+            }
+          },
+          {
+            "name": "region",
+            "required": true,
+            "in": "query",
+            "description": "Регион",
+            "schema": {
+              "$ref": "#/components/schemas/GameRegion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamePriceVariantsResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить варианты цен",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/order": {
+      "post": {
+        "operationId": "TesterController_createGameOrder",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameOrderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGameOrderResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создать заказ игры и транзакцию для оплаты",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/orders": {
+      "get": {
+        "operationId": "TesterController_getGameOrders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameOrdersResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить все заказы игр",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/orders/paid": {
+      "get": {
+        "operationId": "TesterController_getGamePaidOrder",
+        "parameters": [
+          {
+            "name": "token",
+            "required": true,
+            "in": "query",
+            "description": "Одноразовый токен доступа",
+            "schema": {
+              "example": "1f2e3d4c5b6a7980abcdef1234567890abcdef1234567890abcdef1234567890",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameOrderResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получить оплаченный заказ игры",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    },
+    "/api/tester/games/orders/{orderId}": {
+      "get": {
+        "operationId": "TesterController_getGameOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "description": "ID заказа",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameOrderResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "mobile-auth": []
+          },
+          {
+            "web-auth": []
+          }
+        ],
+        "summary": "Получить заказ игры",
+        "tags": [
+          "🧪 tester"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "juniors bootcamp backend 🔥",
+    "description": "Апи для выполнения индивидуальных заданий",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "mobile-auth": {
+        "scheme": "bearer",
+        "bearerFormat": "Session  token",
+        "type": "http",
+        "description": "Для x-application: mobile"
+      },
+      "web-auth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "session_token",
+        "description": "Для x-application: web"
+      }
+    },
+    "schemas": {
+      "SignInDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "Номер телефона",
+            "example": "89990009999"
+          },
+          "code": {
+            "type": "number",
+            "description": "Отп код"
+          }
+        },
+        "required": [
+          "phone",
+          "code"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID пользователя"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Номер телефона",
+            "example": "89990009999"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "Имя",
+            "example": "Иван"
+          },
+          "middlename": {
+            "type": "string",
+            "description": "Отчество",
+            "example": "Иванович"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "Фамилия",
+            "example": "Иванов"
+          },
+          "email": {
+            "type": "string",
+            "description": "Почта",
+            "example": "example.email@gmail.com"
+          },
+          "city": {
+            "type": "string",
+            "description": "Город",
+            "example": "Москва"
+          }
+        },
+        "required": [
+          "_id",
+          "phone"
+        ]
+      },
+      "SignInResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "token": {
+            "type": "string",
+            "description": "Токен сессии"
+          },
+          "user": {
+            "description": "Пользователь",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "token",
+          "user"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": false,
+            "enum": [
+              false
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки",
+            "example": "Не авторизован"
+          }
+        },
+        "required": [
+          "success",
+          "reason"
+        ]
+      },
+      "BaseResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "UpdateProfileDto": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "description": "Имя",
+            "example": "Иван"
+          },
+          "middlename": {
+            "type": "string",
+            "description": "Отчество",
+            "example": "Иванович"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "Фамилия",
+            "example": "Иванов"
+          },
+          "email": {
+            "type": "string",
+            "description": "Почта",
+            "example": "example.email@gmail.com"
+          },
+          "city": {
+            "type": "string",
+            "description": "Город",
+            "example": "Москва"
+          }
+        }
+      },
+      "UpdateProfileResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "user": {
+            "description": "Пользователь",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "user"
+        ]
+      },
+      "GetProfileResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "user": {
+            "description": "Пользователь",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "user"
+        ]
+      },
+      "CreateOtpDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "Номер телефона",
+            "example": "89990009999"
+          }
+        },
+        "required": [
+          "phone"
+        ]
+      },
+      "CreateOtpResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "retryDelay": {
+            "type": "number",
+            "description": "Время запроса повторного отп кода в мс",
+            "example": 120000
+          }
+        },
+        "required": [
+          "success",
+          "retryDelay"
+        ]
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID карты"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Телефон владельца карты",
+            "example": "89990009999"
+          },
+          "panMasked": {
+            "type": "string",
+            "description": "Замаскированный номер карты",
+            "example": "1234"
+          },
+          "expiry": {
+            "type": "string",
+            "description": "Срок действия карты",
+            "example": "12/28"
+          },
+          "cryptoPacket": {
+            "type": "string",
+            "description": "Крипто-пакет карты в base64",
+            "nullable": true
+          }
+        },
+        "required": [
+          "_id",
+          "phone",
+          "panMasked",
+          "expiry"
+        ]
+      },
+      "GetCardsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "cards": {
+            "description": "Список сохраненных карт пользователя",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Card"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "cards"
+        ]
+      },
+      "DeleteCardResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "id": {
+            "type": "string",
+            "description": "ID удаленной карты"
+          }
+        },
+        "required": [
+          "success",
+          "id"
+        ]
+      },
+      "TransactionOrderType": {
+        "type": "string",
+        "enum": [
+          "car",
+          "delivery",
+          "pizza",
+          "cinema",
+          "game"
+        ],
+        "description": "Тип заказа, связанного с транзакцией"
+      },
+      "TransactionStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "paid",
+          "failed"
+        ]
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID транзакции"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Телефон владельца транзакции",
+            "example": "89990009999"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "ID заказа, связанного с транзакцией",
+            "nullable": true
+          },
+          "orderType": {
+            "description": "Тип заказа, связанного с транзакцией",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransactionOrderType"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number",
+            "description": "Сумма транзакции",
+            "example": 1290
+          },
+          "currency": {
+            "type": "string",
+            "description": "Валюта транзакции",
+            "example": "RUB"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransactionStatus"
+              }
+            ]
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Время истечения транзакции (createdAt + 10 мин)"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата создания"
+          },
+          "cardCryptoPacket": {
+            "type": "string",
+            "description": "Крипто-пакет карты в base64-формате",
+            "nullable": true
+          },
+          "paidAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата оплаты",
+            "nullable": true
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "Токен доступа к транзакции",
+            "nullable": true
+          }
+        },
+        "required": [
+          "_id",
+          "phone",
+          "orderType",
+          "amount",
+          "currency",
+          "status",
+          "expiresAt"
+        ]
+      },
+      "GetTransactionResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "transaction": {
+            "description": "Транзакция",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Transaction"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "transaction"
+        ]
+      },
+      "TransactionPayMethod": {
+        "type": "string",
+        "enum": [
+          "new_card",
+          "saved_card",
+          "qr"
+        ],
+        "description": "Способ оплаты"
+      },
+      "PayTransactionDto": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "description": "ID транзакции"
+          },
+          "method": {
+            "description": "Способ оплаты",
+            "example": "new_card",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransactionPayMethod"
+              }
+            ]
+          },
+          "pan": {
+            "type": "string",
+            "description": "Номер карты (новая карта)"
+          },
+          "expireDate": {
+            "type": "string",
+            "description": "Срок действия (новая карта)"
+          },
+          "cardId": {
+            "type": "string",
+            "description": "ID сохранённой карты"
+          },
+          "cvv": {
+            "type": "string",
+            "description": "CVV (любой символ — фикция)"
+          },
+          "saveCard": {
+            "type": "boolean",
+            "description": "Сохранить новую карту",
+            "default": true
+          }
+        },
+        "required": [
+          "transactionId",
+          "method"
+        ]
+      },
+      "PayTransactionResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "transaction": {
+            "description": "Оплаченная транзакция",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Transaction"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "transaction"
+        ]
+      },
+      "PizzaCategory": {
+        "type": "string",
+        "enum": [
+          "pizza",
+          "breakfast",
+          "wings",
+          "milkshake"
+        ]
+      },
+      "PizzaSize": {
+        "type": "string",
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "description": "Идентификатор размера продукта"
+      },
+      "PizzaItemSize": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "Идентификатор размера продукта",
+            "example": "small",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaSize"
+              }
+            ]
+          },
+          "price": {
+            "type": "number",
+            "description": "Цена для данного размера"
+          },
+          "volume": {
+            "type": "number",
+            "description": "Числовой объём/количество",
+            "example": 0.4
+          }
+        },
+        "required": [
+          "type",
+          "price"
+        ]
+      },
+      "PizzaOptionType": {
+        "type": "string",
+        "enum": [
+          "crust_thin",
+          "crust_thick",
+          "crust_cheese",
+          "cream_with",
+          "cream_without"
+        ],
+        "description": "Идентификатор опции"
+      },
+      "PizzaOption": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "Идентификатор опции",
+            "example": "crust_thin",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaOptionType"
+              }
+            ]
+          },
+          "price": {
+            "type": "number",
+            "description": "Цена опции"
+          }
+        },
+        "required": [
+          "type",
+          "price"
+        ]
+      },
+      "PizzaIngredientType": {
+        "type": "string",
+        "enum": [
+          "pineapple",
+          "mozzarella",
+          "pepperoni",
+          "green_pepper",
+          "mushrooms",
+          "basil",
+          "cheddar",
+          "parmesan",
+          "feta",
+          "ham",
+          "pickle",
+          "tomato",
+          "bacon",
+          "onion",
+          "chile",
+          "shrimp",
+          "chicken_fillet",
+          "meatballs"
+        ],
+        "description": "Идентификатор ингредиента"
+      },
+      "PizzaIngredient": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "Идентификатор ингредиента",
+            "example": "pineapple",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaIngredientType"
+              }
+            ]
+          },
+          "price": {
+            "type": "number",
+            "description": "Цена ингредиента"
+          },
+          "img": {
+            "type": "string",
+            "description": "Изображение ингредиента"
+          }
+        },
+        "required": [
+          "type",
+          "price",
+          "img"
+        ]
+      },
+      "PizzaProduct": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID продукта"
+          },
+          "category": {
+            "description": "Категория продукта",
+            "example": "pizza",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaCategory"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Название",
+            "example": "Двойной цыпленок"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание"
+          },
+          "img": {
+            "type": "string",
+            "description": "Изображение"
+          },
+          "sizes": {
+            "description": "Доступные размеры",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaItemSize"
+            }
+          },
+          "options": {
+            "description": "Доступные доп-опции",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaOption"
+            }
+          },
+          "ingredients": {
+            "description": "Состав / доступные доп-ингредиенты",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaIngredient"
+            }
+          },
+          "calories": {
+            "type": "number",
+            "description": "Калории"
+          },
+          "protein": {
+            "type": "string",
+            "description": "Белки"
+          },
+          "totalFat": {
+            "type": "string",
+            "description": "Жиры"
+          },
+          "carbohydrates": {
+            "type": "string",
+            "description": "Углеводы"
+          },
+          "sodium": {
+            "type": "string",
+            "description": "Натрий"
+          },
+          "allergens": {
+            "description": "Аллергены",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isVegetarian": {
+            "type": "boolean",
+            "description": "Вегетарианский"
+          },
+          "isGlutenFree": {
+            "type": "boolean",
+            "description": "Без глютена"
+          },
+          "isNovelty": {
+            "type": "boolean",
+            "description": "Новинка"
+          },
+          "isHit": {
+            "type": "boolean",
+            "description": "Хит"
+          }
+        },
+        "required": [
+          "_id",
+          "category",
+          "name",
+          "description",
+          "img",
+          "sizes",
+          "calories",
+          "protein",
+          "totalFat",
+          "carbohydrates",
+          "sodium",
+          "allergens",
+          "isVegetarian",
+          "isGlutenFree",
+          "isNovelty",
+          "isHit"
+        ]
+      },
+      "GetPizzaCatalogResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "catalog": {
+            "description": "Каталог продуктов",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaProduct"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "catalog"
+        ]
+      },
+      "ObjectId": {
+        "type": "object",
+        "properties": {}
+      },
+      "PizzaOrderedItem": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "Идентификатор продукта",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObjectId"
+              }
+            ]
+          },
+          "category": {
+            "description": "Категория продукта",
+            "example": "pizza",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaCategory"
+              }
+            ]
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Количество одинаковых позиций",
+            "example": 1,
+            "default": 1
+          },
+          "size": {
+            "description": "Размер",
+            "example": "small",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaSize"
+              }
+            ]
+          },
+          "option": {
+            "description": "Выбранная доп-опция: корка, сливки и т.д.",
+            "example": "crust_thin",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaOptionType"
+              }
+            ]
+          },
+          "toppings": {
+            "type": "array",
+            "description": "Доп-ингредиенты",
+            "items": {
+              "$ref": "#/components/schemas/PizzaIngredientType"
+            }
+          }
+        },
+        "required": [
+          "_id",
+          "category",
+          "quantity"
+        ]
+      },
+      "CalculatePizzaOrderDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "Позиции корзины",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaOrderedItem"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "CalculatedItem": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "ID продукта"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Количество"
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "Цена одной позиции"
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Итого по позиции"
+          }
+        },
+        "required": [
+          "productId",
+          "name",
+          "quantity",
+          "unitPrice",
+          "totalPrice"
+        ]
+      },
+      "PizzaCommission": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Сумма комиссии",
+            "example": 149
+          },
+          "currency": {
+            "type": "string",
+            "description": "Валюта",
+            "example": "RUB"
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ]
+      },
+      "CalculateOrderResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "items": {
+            "description": "Позиции с ценами",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculatedItem"
+            }
+          },
+          "itemsPrice": {
+            "type": "number",
+            "description": "Сумма позиций без доставки"
+          },
+          "commission": {
+            "description": "Комиссия за доставку",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaCommission"
+              }
+            ]
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Итоговая сумма"
+          }
+        },
+        "required": [
+          "success",
+          "items",
+          "itemsPrice",
+          "commission",
+          "totalPrice"
+        ]
+      },
+      "CreatePizzaPaymentAddressDto": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Улица",
+            "example": "street"
+          },
+          "house": {
+            "type": "string",
+            "description": "Номер дома",
+            "example": "house"
+          },
+          "apartment": {
+            "type": "string",
+            "description": "Номер квартиры",
+            "example": "apartment"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий",
+            "example": "comment"
+          }
+        },
+        "required": [
+          "street",
+          "house",
+          "apartment"
+        ]
+      },
+      "CreatePizzaPaymentPersonDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "Телефон",
+            "example": "89990009999"
+          }
+        },
+        "required": [
+          "phone"
+        ]
+      },
+      "CreatePizzaPaymentDto": {
+        "type": "object",
+        "properties": {
+          "receiverAddress": {
+            "description": "Адрес доставки",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreatePizzaPaymentAddressDto"
+              }
+            ]
+          },
+          "person": {
+            "description": "Данные пользователя",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreatePizzaPaymentPersonDto"
+              }
+            ]
+          },
+          "items": {
+            "description": "Позиции корзины",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaOrderedItem"
+            }
+          }
+        },
+        "required": [
+          "receiverAddress",
+          "person",
+          "items"
+        ]
+      },
+      "PizzaPerson": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "description": "Имя",
+            "example": "firstname"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "Фамилия",
+            "example": "lastname"
+          },
+          "middlename": {
+            "type": "string",
+            "description": "Отчество",
+            "example": "middlename"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Телефон",
+            "example": "89990009999"
+          }
+        },
+        "required": [
+          "firstname",
+          "lastname",
+          "middlename",
+          "phone"
+        ]
+      },
+      "PizzaAddress": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Улица",
+            "example": "street"
+          },
+          "house": {
+            "type": "string",
+            "description": "Номер дома",
+            "example": "house"
+          },
+          "apartment": {
+            "type": "string",
+            "description": "Номер квартиры",
+            "example": "apartment"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий",
+            "example": "comment"
+          }
+        },
+        "required": [
+          "street",
+          "house",
+          "apartment",
+          "comment"
+        ]
+      },
+      "PizzaStatus": {
+        "type": "string",
+        "enum": [
+          "awaiting_payment",
+          "in_processing",
+          "waiting_courier",
+          "on_my_way",
+          "success",
+          "canceled"
+        ],
+        "description": "Статус заказа"
+      },
+      "PizzaOrder": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID заказа"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата создания заказа"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата обновления заказа"
+          },
+          "items": {
+            "description": "Позиции заказа",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaOrderedItem"
+            }
+          },
+          "itemsPrice": {
+            "type": "number",
+            "description": "Сумма позиций без доставки"
+          },
+          "commission": {
+            "description": "Комиссия за доставку (0 — бесплатно)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaCommission"
+              }
+            ]
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Итоговая сумма (позиции + доставка)"
+          },
+          "person": {
+            "description": "Данные пользователя",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaPerson"
+              }
+            ]
+          },
+          "receiverAddress": {
+            "description": "Адрес доставки",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaAddress"
+              }
+            ]
+          },
+          "status": {
+            "description": "Статус заказа",
+            "example": "awaiting_payment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaStatus"
+              }
+            ]
+          },
+          "cancellable": {
+            "type": "boolean",
+            "description": "Можно ли отменить заказ"
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "ID связанной транзакции",
+            "nullable": true
+          }
+        },
+        "required": [
+          "_id",
+          "createdAt",
+          "updatedAt",
+          "items",
+          "itemsPrice",
+          "commission",
+          "totalPrice",
+          "person",
+          "receiverAddress",
+          "status",
+          "cancellable",
+          "transactionId"
+        ]
+      },
+      "CreatePizzaPaymentResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "order": {
+            "description": "Созданный заказ",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaOrder"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "order"
+        ]
+      },
+      "GetPizzaOrdersResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "orders": {
+            "description": "Доставки",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaOrder"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "orders"
+        ]
+      },
+      "GetPizzaOrderResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "order": {
+            "description": "Доставки",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaOrder"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "order"
+        ]
+      },
+      "CancelPizzaOrderResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "order": {
+            "description": "Отменённый заказ",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PizzaOrder"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "order"
+        ]
+      },
+      "GameFilter": {
+        "type": "string",
+        "enum": [
+          "dlc",
+          "discount"
+        ]
+      },
+      "GameView": {
+        "type": "string",
+        "enum": [
+          "popular",
+          "new"
+        ]
+      },
+      "GameGenre": {
+        "type": "string",
+        "enum": [
+          "action",
+          "adventure",
+          "rpg",
+          "strategy",
+          "shooter",
+          "simulation",
+          "survival",
+          "sports",
+          "racing",
+          "indie",
+          "horror"
+        ]
+      },
+      "GameType": {
+        "type": "string",
+        "enum": [
+          "game",
+          "dlc"
+        ],
+        "description": "Тип"
+      },
+      "GameRegion": {
+        "type": "string",
+        "enum": [
+          "ru",
+          "kz",
+          "by",
+          "ua",
+          "pl",
+          "tr",
+          "all_world",
+          "europe",
+          "asia"
+        ],
+        "description": "Регион"
+      },
+      "GameDeliveryType": {
+        "type": "string",
+        "enum": [
+          "steam_key",
+          "steam_gift",
+          "epic_key",
+          "nintendo_key",
+          "xbox_key",
+          "playstation_key"
+        ],
+        "description": "Способ получения"
+      },
+      "GamePriceVariant": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "description": "Регион",
+            "example": "europe",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameRegion"
+              }
+            ]
+          },
+          "price": {
+            "type": "number",
+            "description": "Текущая цена",
+            "example": 968
+          },
+          "oldPrice": {
+            "type": "number",
+            "description": "Старая цена",
+            "example": 2688
+          },
+          "deliveryType": {
+            "description": "Способ получения",
+            "example": "steam_key",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameDeliveryType"
+              }
+            ]
+          },
+          "edition": {
+            "type": "string",
+            "description": "Издание",
+            "example": "Deluxe"
+          }
+        },
+        "required": [
+          "region",
+          "price",
+          "deliveryType",
+          "edition"
+        ]
+      },
+      "GameFiltered": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Slug игры",
+            "example": "battlefield-2042"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название игры",
+            "example": "Battlefield 2042"
+          },
+          "releaseDate": {
+            "type": "number",
+            "description": "Дата релиза",
+            "example": 1637280000
+          },
+          "type": {
+            "description": "Тип",
+            "example": "game",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameType"
+              }
+            ]
+          },
+          "genres": {
+            "type": "array",
+            "description": "Жанры игры",
+            "example": [
+              "action",
+              "rpg"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/GameGenre"
+            }
+          },
+          "image": {
+            "type": "string",
+            "description": "Изображение игры",
+            "example": "/static/images/games/cs2.webp"
+          },
+          "priceVariant": {
+            "description": "Наименьший вариант цены",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GamePriceVariant"
+              }
+            ]
+          }
+        },
+        "required": [
+          "slug",
+          "name",
+          "releaseDate",
+          "type",
+          "genres",
+          "image",
+          "priceVariant"
+        ]
+      },
+      "GamePaginationMeta": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "Общее количество элементов",
+            "example": 30
+          },
+          "page": {
+            "type": "number",
+            "description": "Текущая страница",
+            "example": 1
+          },
+          "limit": {
+            "type": "number",
+            "description": "Элементов на странице",
+            "example": 10
+          },
+          "totalPages": {
+            "type": "number",
+            "description": "Количество страниц",
+            "example": 3
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "limit",
+          "totalPages"
+        ]
+      },
+      "GamesPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "games": {
+            "description": "Список игр",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameFiltered"
+            }
+          },
+          "meta": {
+            "description": "Пагинация",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GamePaginationMeta"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "games",
+          "meta"
+        ]
+      },
+      "GameSearchResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "games": {
+            "description": "Результаты поиска игр",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameFiltered"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "games"
+        ]
+      },
+      "GameSystemRequirements": {
+        "type": "object",
+        "properties": {
+          "oc": {
+            "type": "string",
+            "description": "Операционная система",
+            "example": "Windows 10"
+          },
+          "processor": {
+            "type": "string",
+            "description": "Процессор",
+            "example": "Intel Core i5-9400F"
+          },
+          "memory": {
+            "type": "string",
+            "description": "Оперативная память",
+            "example": "16 GB"
+          },
+          "graphics": {
+            "type": "string",
+            "description": "Видеокарта",
+            "example": "NVIDIA GeForce GTX 1660"
+          },
+          "storage": {
+            "type": "string",
+            "description": "Место на диске",
+            "example": "500 GB"
+          }
+        }
+      },
+      "GameDetailed": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Slug игры",
+            "example": "battlefield-2042"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название игры",
+            "example": "Battlefield 2042"
+          },
+          "releaseDate": {
+            "type": "number",
+            "description": "Дата релиза",
+            "example": 1637280000
+          },
+          "type": {
+            "description": "Тип",
+            "example": "game",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameType"
+              }
+            ]
+          },
+          "genres": {
+            "type": "array",
+            "description": "Жанры игры",
+            "example": [
+              "action",
+              "rpg"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/GameGenre"
+            }
+          },
+          "image": {
+            "type": "string",
+            "description": "Изображение игры",
+            "example": "/static/images/games/cs2.webp"
+          },
+          "deliveryTypes": {
+            "type": "array",
+            "description": "Способ получения",
+            "example": [
+              "steam_key",
+              "xbox_key",
+              "steam_gift"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/GameDeliveryType"
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание игры",
+            "example": "Онлайн-шутер с масштабными сражениями."
+          },
+          "minimumSystemRequirements": {
+            "description": "Минимальные системные требования",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameSystemRequirements"
+              }
+            ]
+          },
+          "recommendedSystemRequirements": {
+            "description": "Рекомендуемые системные требования",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameSystemRequirements"
+              }
+            ]
+          },
+          "developer": {
+            "type": "string",
+            "description": "Разработчик",
+            "example": "EA Games"
+          },
+          "publisher": {
+            "type": "string",
+            "description": "Издатель",
+            "example": "Electronic Arts"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "Внешний ID (Steam/KupiKod)",
+            "example": "1517290"
+          },
+          "screenshots": {
+            "description": "Скриншоты игры",
+            "example": [
+              "/static/images/games/cs2.webp"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "slug",
+          "name",
+          "releaseDate",
+          "type",
+          "genres",
+          "image",
+          "deliveryTypes",
+          "description",
+          "minimumSystemRequirements",
+          "recommendedSystemRequirements",
+          "developer",
+          "publisher",
+          "externalId",
+          "screenshots"
+        ]
+      },
+      "GameResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "game": {
+            "description": "Игра",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameDetailed"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "game"
+        ]
+      },
+      "GameRegionsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "regions": {
+            "type": "array",
+            "description": "Доступные регионы",
+            "items": {
+              "$ref": "#/components/schemas/GameRegion"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "regions"
+        ]
+      },
+      "GamePriceVariantsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "priceVariants": {
+            "description": "Варианты цен для изданий",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GamePriceVariant"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "priceVariants"
+        ]
+      },
+      "CreateGameOrderPersonDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "Телефон пользователя",
+            "example": "79990001122"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email пользователя",
+            "example": "example@mail.com"
+          },
+          "inviteLink": {
+            "type": "string",
+            "description": "Ссылка на приглашение",
+            "example": "https://s.team/p/"
+          }
+        },
+        "required": [
+          "phone",
+          "email"
+        ]
+      },
+      "CreateGameOrderDto": {
+        "type": "object",
+        "properties": {
+          "gameSlug": {
+            "type": "string",
+            "description": "Slug игры",
+            "example": "battlefield-2042"
+          },
+          "deliveryType": {
+            "description": "Тип доставки",
+            "example": "steam_gift",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameDeliveryType"
+              }
+            ]
+          },
+          "region": {
+            "description": "Регион",
+            "example": "ru",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameRegion"
+              }
+            ]
+          },
+          "edition": {
+            "type": "string",
+            "description": "Издание",
+            "example": "Deluxe"
+          },
+          "person": {
+            "description": "Данные покупателя",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreateGameOrderPersonDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "gameSlug",
+          "deliveryType",
+          "region",
+          "edition",
+          "person"
+        ]
+      },
+      "GameOrderPerson": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "Телефон",
+            "example": "79990001122"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email",
+            "example": "user@mail.com"
+          },
+          "inviteLink": {
+            "type": "string",
+            "description": "Ссылка на приглашение",
+            "example": "https://example.com/invite"
+          }
+        },
+        "required": [
+          "phone",
+          "email"
+        ]
+      },
+      "GameOrderStatus": {
+        "type": "string",
+        "enum": [
+          "awaiting_payment",
+          "paid"
+        ],
+        "description": "Статус заказа"
+      },
+      "GameOrder": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID заказа"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата создания заказа"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата обновления заказа"
+          },
+          "person": {
+            "description": "Данные покупателя",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameOrderPerson"
+              }
+            ]
+          },
+          "gameSlug": {
+            "type": "string",
+            "description": "Slug игры",
+            "example": "battlefield-2042"
+          },
+          "gameName": {
+            "type": "string",
+            "description": "Название игры",
+            "example": "Battlefield 2042"
+          },
+          "gameImage": {
+            "type": "string",
+            "description": "Изображение игры",
+            "example": "/games/battlefield-2042/cover.webp"
+          },
+          "region": {
+            "description": "Регион",
+            "example": "europe",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameRegion"
+              }
+            ]
+          },
+          "price": {
+            "type": "number",
+            "description": "Цена заказа",
+            "example": 968
+          },
+          "deliveryType": {
+            "description": "Способ получения",
+            "example": "steam_key",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameDeliveryType"
+              }
+            ]
+          },
+          "edition": {
+            "type": "string",
+            "description": "Издание",
+            "example": "Deluxe"
+          },
+          "status": {
+            "description": "Статус заказа",
+            "example": "awaiting_payment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameOrderStatus"
+              }
+            ]
+          },
+          "gameKey": {
+            "type": "string",
+            "description": "Сгенерированный игровой ключ (выдаётся после оплаты)",
+            "example": "XXXX-YYYY-ZZZZ",
+            "nullable": true
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "ID связанной транзакции",
+            "nullable": true
+          }
+        },
+        "required": [
+          "_id",
+          "createdAt",
+          "updatedAt",
+          "person",
+          "gameSlug",
+          "gameName",
+          "gameImage",
+          "region",
+          "price",
+          "deliveryType",
+          "edition",
+          "status",
+          "transactionId"
+        ]
+      },
+      "CreateGameOrderResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "order": {
+            "description": "Заказ на игру (ожидает оплаты)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameOrder"
+              }
+            ]
+          },
+          "transaction": {
+            "description": "Транзакция для оплаты",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Transaction"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "order",
+          "transaction"
+        ]
+      },
+      "GameOrdersResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "orders": {
+            "description": "Заказы пользователя",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameOrder"
+            }
+          }
+        },
+        "required": [
+          "success",
+          "orders"
+        ]
+      },
+      "GameOrderResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Статус запроса",
+            "example": true,
+            "enum": [
+              true
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Причина ошибки"
+          },
+          "order": {
+            "description": "Заказ",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GameOrder"
+              }
+            ]
+          }
+        },
+        "required": [
+          "success",
+          "order"
+        ]
+      }
+    }
+  }
+}
