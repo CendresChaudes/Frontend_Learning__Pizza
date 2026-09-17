@@ -1,0 +1,4 @@
+allowBuilds:
+  lefthook: true
+  msw: true
+  unrs-resolver: true
