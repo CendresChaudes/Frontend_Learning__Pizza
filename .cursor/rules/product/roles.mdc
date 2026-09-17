@@ -4,3 +4,5 @@ alwaysApply: true
 ---
 
 # Roles
+
+- **Customer** — the only role. Browses the menu, configures an order, manages the cart, and checks out. Owns the full flow from landing to payment; no staff or admin roles in this product.

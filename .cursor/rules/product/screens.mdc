@@ -4,3 +4,8 @@ alwaysApply: true
 ---
 
 # Screens
+
+1. **Authorization** — sign-in screen; gates the rest of the flow.
+2. **Profile** — the customer's account view.
+3. **Checkout** — order configuration: cart contents, delivery details, payment.
+4. **Order history** — list of the customer's past orders.

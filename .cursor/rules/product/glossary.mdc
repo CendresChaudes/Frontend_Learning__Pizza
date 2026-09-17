@@ -4,3 +4,9 @@ alwaysApply: true
 ---
 
 # Glossary
+
+- **Product** — a pizza or add-on the customer can order; the unit of the menu and the cart.
+- **Cart** — the customer's current selection of products with quantities, the source of truth for the checkout flow.
+- **Delivery** — the fulfillment channel: the order is brought to the customer's address.
+- **Order** — a placed, paid (or pending-payment) request containing the cart's contents and delivery details.
+- **Payment** — the checkout step that settles the order; the trigger for fulfillment.

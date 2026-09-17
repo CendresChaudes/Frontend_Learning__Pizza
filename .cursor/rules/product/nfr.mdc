@@ -8,4 +8,5 @@ alwaysApply: true
 Targets and constraints that shape UI and architecture decisions.
 
 - **UX**: pages must look simple and clear — scannable layout, obvious primary action, minimal cognitive load. Density without clutter; the operator works with lists and forms all day.
+- **Responsive**: every screen must work on both mobile and desktop — layouts, tap targets, and navigation adapt to the viewport. No mobile-only or desktop-only screens.
 - **Browser support**: defined in [.browserslistrc](/.browserslistrc) — `last 2 years` for `development`, `production`, and `e2e`. Don't hardcode browser lists elsewhere; update `.browserslistrc` and let the toolchain (Rspack/Babel/Autoprefixer) pick it up.
