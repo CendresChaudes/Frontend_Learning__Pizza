@@ -34,6 +34,9 @@ test: ## Запустить тесты
 	pnpm run check:tests:all
 	@echo "Тестирование кода завершилось успешно"
 
+docs: ## Запустить генерацию документации
+	pnpm run docs
+
 # --- Docker ---
 docker-dev-build: ## Собрать Docker-образ приложения
 	docker build -t frontend-dev ./docker/dev/Dockerfile.dev
