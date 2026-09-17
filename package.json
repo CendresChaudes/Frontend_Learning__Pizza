@@ -39,11 +39,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "5.9.1",
-    "@mantine/core": "9.6.0",
-    "@mantine/dates": "9.6.0",
-    "@mantine/form": "9.6.0",
-    "@mantine/modals": "9.6.0",
-    "@mantine/notifications": "9.6.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "mobx": "6.16.1",

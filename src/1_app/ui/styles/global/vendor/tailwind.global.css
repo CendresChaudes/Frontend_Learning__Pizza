@@ -14,22 +14,15 @@
 
   /* Colors */
   --color-primary: hsl(214deg 100% 21%);
-  --color-primary-dark: hsl(214deg 100% 14%);
-  --color-primary-light: hsl(216deg 100% 31%);
-  --color-secondary: hsl(216deg 100% 40%);
-  --color-secondary-dark: hsl(216deg 100% 30%);
-  --color-secondary-light: hsl(216deg 100% 50%);
   --color-disabled: hsl(0deg 0% 56%);
   --color-disabled-light: hsl(0deg 0% 76%);
   --color-success: hsl(145deg 63% 42%);
   --color-error: hsl(0deg 100% 50%);
-  --color-error-dark: hsl(0deg 100% 40%);
-  --color-error-light: hsl(0deg 100% 60%);
   --color-white: hsl(0deg 0% 100%);
   --color-black: hsl(0deg 0% 7%);
 
   /* Fonts */
-  --font-primary: "GrtskPeta", sans-serif;
+  --font-primary: sans-serif;
 
   /* Font Sizes (--text-* generates text-* utilities) */
   --text-xs: 0.75rem;

@@ -1,7 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import { ProvidersComposer } from '~shared/lib';
 import { ErrorBoundaryProvider } from './ErrorBoundary.provider';
-import { MantineProvider } from './Mantine.provider';
+
+const providers = [ErrorBoundaryProvider];
 
 type TProperties = Readonly<{
   children: PropsWithChildren['children'];
@@ -10,9 +11,5 @@ type TProperties = Readonly<{
 export function Providers(properties: TProperties): ReactJSX {
   const { children } = properties;
 
-  return (
-    <ProvidersComposer providers={[ErrorBoundaryProvider, MantineProvider]}>
-      {children}
-    </ProvidersComposer>
-  );
+  return <ProvidersComposer providers={providers}>{children}</ProvidersComposer>;
 }

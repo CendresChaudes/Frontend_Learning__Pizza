@@ -11,9 +11,7 @@
           }
         },
         "summary": "страница с отп кодами",
-        "tags": [
-          "📃 pages"
-        ]
+        "tags": ["📃 pages"]
       }
     },
     "/api/auth/sign-in": {
@@ -27,10 +25,7 @@
             "schema": {
               "type": "string",
               "example": "web",
-              "enum": [
-                "web",
-                "mobile"
-              ]
+              "enum": ["web", "mobile"]
             }
           }
         ],
@@ -67,9 +62,7 @@
           }
         },
         "summary": "Войти",
-        "tags": [
-          "🔒 auth"
-        ]
+        "tags": ["🔒 auth"]
       }
     },
     "/api/auth/sign-out": {
@@ -83,10 +76,7 @@
             "schema": {
               "type": "string",
               "example": "web",
-              "enum": [
-                "web",
-                "mobile"
-              ]
+              "enum": ["web", "mobile"]
             }
           }
         ],
@@ -131,9 +121,7 @@
           }
         ],
         "summary": "Выйти",
-        "tags": [
-          "🔒 auth"
-        ]
+        "tags": ["🔒 auth"]
       }
     },
     "/api/users/profile": {
@@ -191,9 +179,7 @@
           }
         ],
         "summary": "Обновить профиль пользователя",
-        "tags": [
-          "💂‍♂️ users"
-        ]
+        "tags": ["💂‍♂️ users"]
       },
       "get": {
         "operationId": "UsersController_getProfile",
@@ -239,9 +225,7 @@
           }
         ],
         "summary": "Получить профиль пользователя",
-        "tags": [
-          "💂‍♂️ users"
-        ]
+        "tags": ["💂‍♂️ users"]
       }
     },
     "/api/otps/otp": {
@@ -281,9 +265,7 @@
           }
         },
         "summary": "Создание отп кода",
-        "tags": [
-          "🔑 otps"
-        ]
+        "tags": ["🔑 otps"]
       }
     },
     "/api/cards/cards": {
@@ -311,9 +293,7 @@
           }
         ],
         "summary": "Получить список сохраненных карт пользователя",
-        "tags": [
-          "💳 cards"
-        ]
+        "tags": ["💳 cards"]
       }
     },
     "/api/cards/cards/{id}": {
@@ -350,9 +330,7 @@
           }
         ],
         "summary": "Удалить сохраненную карту пользователя",
-        "tags": [
-          "💳 cards"
-        ]
+        "tags": ["💳 cards"]
       }
     },
     "/api/transactions/{id}": {
@@ -391,9 +369,7 @@
           }
         },
         "summary": "Получить транзакцию по ID",
-        "tags": [
-          "💸 transactions"
-        ]
+        "tags": ["💸 transactions"]
       }
     },
     "/api/transactions/pay": {
@@ -433,9 +409,7 @@
           }
         },
         "summary": "Оплатить (закрыть) транзакцию картой",
-        "tags": [
-          "💸 transactions"
-        ]
+        "tags": ["💸 transactions"]
       }
     },
     "/api/transactions/{id}/pay/qr": {
@@ -474,9 +448,7 @@
           }
         },
         "summary": "Оплатить транзакцию по QR",
-        "tags": [
-          "💸 transactions"
-        ]
+        "tags": ["💸 transactions"]
       }
     },
     "/api/pizzas/catalog": {
@@ -516,9 +488,7 @@
           }
         },
         "summary": "Получить каталог",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/pizzas/calculate": {
@@ -558,9 +528,7 @@
           }
         },
         "summary": "Рассчитать стоимость корзины и комиссию",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/pizzas/payment": {
@@ -600,9 +568,7 @@
           }
         },
         "summary": "Создать заказ и транзакцию для оплаты",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/pizzas/orders": {
@@ -650,9 +616,7 @@
           }
         ],
         "summary": "Получить все заказы",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/pizzas/orders/paid": {
@@ -693,9 +657,7 @@
           }
         },
         "summary": "Получить оплаченный заказ по одноразовому токену",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/pizzas/orders/{orderId}": {
@@ -753,9 +715,7 @@
           }
         ],
         "summary": "Получить заказ",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/pizzas/orders/{orderId}/cancel": {
@@ -813,9 +773,7 @@
           }
         ],
         "summary": "Отменить заказ",
-        "tags": [
-          "🍕 pizzas"
-        ]
+        "tags": ["🍕 pizzas"]
       }
     },
     "/api/games/info": {
@@ -899,9 +857,7 @@
           }
         },
         "summary": "Получить игры",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/search": {
@@ -951,9 +907,7 @@
           }
         },
         "summary": "Поиск по играм",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/info/{slug}": {
@@ -993,9 +947,7 @@
           }
         },
         "summary": "Получить игру",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/regions": {
@@ -1054,9 +1006,7 @@
           }
         },
         "summary": "Получить регионы",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/price-variants": {
@@ -1124,9 +1074,7 @@
           }
         },
         "summary": "Получить варианты цен",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/order": {
@@ -1176,9 +1124,7 @@
           }
         },
         "summary": "Создать заказ игры и транзакцию для оплаты",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/orders": {
@@ -1226,9 +1172,7 @@
           }
         ],
         "summary": "Получить все заказы игр",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/orders/paid": {
@@ -1279,9 +1223,7 @@
           }
         },
         "summary": "Получить оплаченный заказ игры по одноразовому токену",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/games/orders/{orderId}": {
@@ -1349,9 +1291,7 @@
           }
         ],
         "summary": "Получить заказ игры",
-        "tags": [
-          "🎮 games"
-        ]
+        "tags": ["🎮 games"]
       }
     },
     "/api/tester/otps/otp": {
@@ -1381,9 +1321,7 @@
           }
         },
         "summary": "Создание отп кода",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/auth/sign-in": {
@@ -1397,10 +1335,7 @@
             "schema": {
               "type": "string",
               "example": "web",
-              "enum": [
-                "web",
-                "mobile"
-              ]
+              "enum": ["web", "mobile"]
             }
           }
         ],
@@ -1427,9 +1362,7 @@
           }
         },
         "summary": "Авторизация",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/auth/sign-out": {
@@ -1443,10 +1376,7 @@
             "schema": {
               "type": "string",
               "example": "web",
-              "enum": [
-                "web",
-                "mobile"
-              ]
+              "enum": ["web", "mobile"]
             }
           }
         ],
@@ -1471,9 +1401,7 @@
           }
         ],
         "summary": "Выйти",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/users/profile": {
@@ -1511,9 +1439,7 @@
           }
         ],
         "summary": "Обновить профиль пользователя",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       },
       "get": {
         "operationId": "TesterController_getProfile",
@@ -1539,9 +1465,7 @@
           }
         ],
         "summary": "Получить профиль пользователя",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/cards/cards": {
@@ -1569,9 +1493,7 @@
           }
         ],
         "summary": "Получить список сохраненных карт пользователя",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/cards/cards/{id}": {
@@ -1608,9 +1530,7 @@
           }
         ],
         "summary": "Удалить сохраненную карту пользователя",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/info": {
@@ -1684,9 +1604,7 @@
           }
         },
         "summary": "Получить игры",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/search": {
@@ -1726,9 +1644,7 @@
           }
         },
         "summary": "Поиск по играм",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/info/{slug}": {
@@ -1758,9 +1674,7 @@
           }
         },
         "summary": "Получить игру",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/regions": {
@@ -1799,9 +1713,7 @@
           }
         },
         "summary": "Получить регионы",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/price-variants": {
@@ -1849,9 +1761,7 @@
           }
         },
         "summary": "Получить варианты цен",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/order": {
@@ -1881,9 +1791,7 @@
           }
         },
         "summary": "Создать заказ игры и транзакцию для оплаты",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/orders": {
@@ -1911,9 +1819,7 @@
           }
         ],
         "summary": "Получить все заказы игр",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/orders/paid": {
@@ -1944,9 +1850,7 @@
           }
         },
         "summary": "Получить оплаченный заказ игры",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     },
     "/api/tester/games/orders/{orderId}": {
@@ -1984,9 +1888,7 @@
           }
         ],
         "summary": "Получить заказ игры",
-        "tags": [
-          "🧪 tester"
-        ]
+        "tags": ["🧪 tester"]
       }
     }
   },
@@ -2027,10 +1929,7 @@
             "description": "Отп код"
           }
         },
-        "required": [
-          "phone",
-          "code"
-        ]
+        "required": ["phone", "code"]
       },
       "User": {
         "type": "object",
@@ -2070,10 +1969,7 @@
             "example": "Москва"
           }
         },
-        "required": [
-          "_id",
-          "phone"
-        ]
+        "required": ["_id", "phone"]
       },
       "SignInResponse": {
         "type": "object",
@@ -2082,9 +1978,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2103,11 +1997,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "token",
-          "user"
-        ]
+        "required": ["success", "token", "user"]
       },
       "ErrorResponse": {
         "type": "object",
@@ -2116,9 +2006,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": false,
-            "enum": [
-              false
-            ]
+            "enum": [false]
           },
           "reason": {
             "type": "string",
@@ -2126,10 +2014,7 @@
             "example": "Не авторизован"
           }
         },
-        "required": [
-          "success",
-          "reason"
-        ]
+        "required": ["success", "reason"]
       },
       "BaseResponse": {
         "type": "object",
@@ -2138,18 +2023,14 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
             "description": "Причина ошибки"
           }
         },
-        "required": [
-          "success"
-        ]
+        "required": ["success"]
       },
       "UpdateProfileDto": {
         "type": "object",
@@ -2188,9 +2069,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2205,10 +2084,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "user"
-        ]
+        "required": ["success", "user"]
       },
       "GetProfileResponse": {
         "type": "object",
@@ -2217,9 +2093,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2234,10 +2108,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "user"
-        ]
+        "required": ["success", "user"]
       },
       "CreateOtpDto": {
         "type": "object",
@@ -2248,9 +2119,7 @@
             "example": "89990009999"
           }
         },
-        "required": [
-          "phone"
-        ]
+        "required": ["phone"]
       },
       "CreateOtpResponse": {
         "type": "object",
@@ -2259,9 +2128,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2273,10 +2140,7 @@
             "example": 120000
           }
         },
-        "required": [
-          "success",
-          "retryDelay"
-        ]
+        "required": ["success", "retryDelay"]
       },
       "Card": {
         "type": "object",
@@ -2306,12 +2170,7 @@
             "nullable": true
           }
         },
-        "required": [
-          "_id",
-          "phone",
-          "panMasked",
-          "expiry"
-        ]
+        "required": ["_id", "phone", "panMasked", "expiry"]
       },
       "GetCardsResponse": {
         "type": "object",
@@ -2320,9 +2179,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2336,10 +2193,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "cards"
-        ]
+        "required": ["success", "cards"]
       },
       "DeleteCardResponse": {
         "type": "object",
@@ -2348,9 +2202,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2361,29 +2213,16 @@
             "description": "ID удаленной карты"
           }
         },
-        "required": [
-          "success",
-          "id"
-        ]
+        "required": ["success", "id"]
       },
       "TransactionOrderType": {
         "type": "string",
-        "enum": [
-          "car",
-          "delivery",
-          "pizza",
-          "cinema",
-          "game"
-        ],
+        "enum": ["car", "delivery", "pizza", "cinema", "game"],
         "description": "Тип заказа, связанного с транзакцией"
       },
       "TransactionStatus": {
         "type": "string",
-        "enum": [
-          "pending",
-          "paid",
-          "failed"
-        ]
+        "enum": ["pending", "paid", "failed"]
       },
       "Transaction": {
         "type": "object",
@@ -2471,9 +2310,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2488,18 +2325,11 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "transaction"
-        ]
+        "required": ["success", "transaction"]
       },
       "TransactionPayMethod": {
         "type": "string",
-        "enum": [
-          "new_card",
-          "saved_card",
-          "qr"
-        ],
+        "enum": ["new_card", "saved_card", "qr"],
         "description": "Способ оплаты"
       },
       "PayTransactionDto": {
@@ -2540,10 +2370,7 @@
             "default": true
           }
         },
-        "required": [
-          "transactionId",
-          "method"
-        ]
+        "required": ["transactionId", "method"]
       },
       "PayTransactionResponse": {
         "type": "object",
@@ -2552,9 +2379,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2569,27 +2394,15 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "transaction"
-        ]
+        "required": ["success", "transaction"]
       },
       "PizzaCategory": {
         "type": "string",
-        "enum": [
-          "pizza",
-          "breakfast",
-          "wings",
-          "milkshake"
-        ]
+        "enum": ["pizza", "breakfast", "wings", "milkshake"]
       },
       "PizzaSize": {
         "type": "string",
-        "enum": [
-          "small",
-          "medium",
-          "large"
-        ],
+        "enum": ["small", "medium", "large"],
         "description": "Идентификатор размера продукта"
       },
       "PizzaItemSize": {
@@ -2614,10 +2427,7 @@
             "example": 0.4
           }
         },
-        "required": [
-          "type",
-          "price"
-        ]
+        "required": ["type", "price"]
       },
       "PizzaOptionType": {
         "type": "string",
@@ -2647,10 +2457,7 @@
             "description": "Цена опции"
           }
         },
-        "required": [
-          "type",
-          "price"
-        ]
+        "required": ["type", "price"]
       },
       "PizzaIngredientType": {
         "type": "string",
@@ -2697,11 +2504,7 @@
             "description": "Изображение ингредиента"
           }
         },
-        "required": [
-          "type",
-          "price",
-          "img"
-        ]
+        "required": ["type", "price", "img"]
       },
       "PizzaProduct": {
         "type": "object",
@@ -2823,9 +2626,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -2839,10 +2640,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "catalog"
-        ]
+        "required": ["success", "catalog"]
       },
       "ObjectId": {
         "type": "object",
@@ -2900,11 +2698,7 @@
             }
           }
         },
-        "required": [
-          "_id",
-          "category",
-          "quantity"
-        ]
+        "required": ["_id", "category", "quantity"]
       },
       "CalculatePizzaOrderDto": {
         "type": "object",
@@ -2917,9 +2711,7 @@
             }
           }
         },
-        "required": [
-          "items"
-        ]
+        "required": ["items"]
       },
       "CalculatedItem": {
         "type": "object",
@@ -2945,13 +2737,7 @@
             "description": "Итого по позиции"
           }
         },
-        "required": [
-          "productId",
-          "name",
-          "quantity",
-          "unitPrice",
-          "totalPrice"
-        ]
+        "required": ["productId", "name", "quantity", "unitPrice", "totalPrice"]
       },
       "PizzaCommission": {
         "type": "object",
@@ -2967,10 +2753,7 @@
             "example": "RUB"
           }
         },
-        "required": [
-          "amount",
-          "currency"
-        ]
+        "required": ["amount", "currency"]
       },
       "CalculateOrderResponse": {
         "type": "object",
@@ -2979,9 +2762,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3011,13 +2792,7 @@
             "description": "Итоговая сумма"
           }
         },
-        "required": [
-          "success",
-          "items",
-          "itemsPrice",
-          "commission",
-          "totalPrice"
-        ]
+        "required": ["success", "items", "itemsPrice", "commission", "totalPrice"]
       },
       "CreatePizzaPaymentAddressDto": {
         "type": "object",
@@ -3043,11 +2818,7 @@
             "example": "comment"
           }
         },
-        "required": [
-          "street",
-          "house",
-          "apartment"
-        ]
+        "required": ["street", "house", "apartment"]
       },
       "CreatePizzaPaymentPersonDto": {
         "type": "object",
@@ -3058,9 +2829,7 @@
             "example": "89990009999"
           }
         },
-        "required": [
-          "phone"
-        ]
+        "required": ["phone"]
       },
       "CreatePizzaPaymentDto": {
         "type": "object",
@@ -3089,11 +2858,7 @@
             }
           }
         },
-        "required": [
-          "receiverAddress",
-          "person",
-          "items"
-        ]
+        "required": ["receiverAddress", "person", "items"]
       },
       "PizzaPerson": {
         "type": "object",
@@ -3119,12 +2884,7 @@
             "example": "89990009999"
           }
         },
-        "required": [
-          "firstname",
-          "lastname",
-          "middlename",
-          "phone"
-        ]
+        "required": ["firstname", "lastname", "middlename", "phone"]
       },
       "PizzaAddress": {
         "type": "object",
@@ -3150,12 +2910,7 @@
             "example": "comment"
           }
         },
-        "required": [
-          "street",
-          "house",
-          "apartment",
-          "comment"
-        ]
+        "required": ["street", "house", "apartment", "comment"]
       },
       "PizzaStatus": {
         "type": "string",
@@ -3266,9 +3021,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3283,10 +3036,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "order"
-        ]
+        "required": ["success", "order"]
       },
       "GetPizzaOrdersResponse": {
         "type": "object",
@@ -3295,9 +3045,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3311,10 +3059,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "orders"
-        ]
+        "required": ["success", "orders"]
       },
       "GetPizzaOrderResponse": {
         "type": "object",
@@ -3323,9 +3068,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3340,10 +3083,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "order"
-        ]
+        "required": ["success", "order"]
       },
       "CancelPizzaOrderResponse": {
         "type": "object",
@@ -3352,9 +3092,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3369,24 +3107,15 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "order"
-        ]
+        "required": ["success", "order"]
       },
       "GameFilter": {
         "type": "string",
-        "enum": [
-          "dlc",
-          "discount"
-        ]
+        "enum": ["dlc", "discount"]
       },
       "GameView": {
         "type": "string",
-        "enum": [
-          "popular",
-          "new"
-        ]
+        "enum": ["popular", "new"]
       },
       "GameGenre": {
         "type": "string",
@@ -3406,25 +3135,12 @@
       },
       "GameType": {
         "type": "string",
-        "enum": [
-          "game",
-          "dlc"
-        ],
+        "enum": ["game", "dlc"],
         "description": "Тип"
       },
       "GameRegion": {
         "type": "string",
-        "enum": [
-          "ru",
-          "kz",
-          "by",
-          "ua",
-          "pl",
-          "tr",
-          "all_world",
-          "europe",
-          "asia"
-        ],
+        "enum": ["ru", "kz", "by", "ua", "pl", "tr", "all_world", "europe", "asia"],
         "description": "Регион"
       },
       "GameDeliveryType": {
@@ -3476,12 +3192,7 @@
             "example": "Deluxe"
           }
         },
-        "required": [
-          "region",
-          "price",
-          "deliveryType",
-          "edition"
-        ]
+        "required": ["region", "price", "deliveryType", "edition"]
       },
       "GameFiltered": {
         "type": "object",
@@ -3513,10 +3224,7 @@
           "genres": {
             "type": "array",
             "description": "Жанры игры",
-            "example": [
-              "action",
-              "rpg"
-            ],
+            "example": ["action", "rpg"],
             "items": {
               "$ref": "#/components/schemas/GameGenre"
             }
@@ -3569,12 +3277,7 @@
             "example": 3
           }
         },
-        "required": [
-          "total",
-          "page",
-          "limit",
-          "totalPages"
-        ]
+        "required": ["total", "page", "limit", "totalPages"]
       },
       "GamesPaginatedResponse": {
         "type": "object",
@@ -3583,9 +3286,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3607,11 +3308,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "games",
-          "meta"
-        ]
+        "required": ["success", "games", "meta"]
       },
       "GameSearchResponse": {
         "type": "object",
@@ -3620,9 +3317,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3636,10 +3331,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "games"
-        ]
+        "required": ["success", "games"]
       },
       "GameSystemRequirements": {
         "type": "object",
@@ -3701,10 +3393,7 @@
           "genres": {
             "type": "array",
             "description": "Жанры игры",
-            "example": [
-              "action",
-              "rpg"
-            ],
+            "example": ["action", "rpg"],
             "items": {
               "$ref": "#/components/schemas/GameGenre"
             }
@@ -3717,11 +3406,7 @@
           "deliveryTypes": {
             "type": "array",
             "description": "Способ получения",
-            "example": [
-              "steam_key",
-              "xbox_key",
-              "steam_gift"
-            ],
+            "example": ["steam_key", "xbox_key", "steam_gift"],
             "items": {
               "$ref": "#/components/schemas/GameDeliveryType"
             }
@@ -3764,9 +3449,7 @@
           },
           "screenshots": {
             "description": "Скриншоты игры",
-            "example": [
-              "/static/images/games/cs2.webp"
-            ],
+            "example": ["/static/images/games/cs2.webp"],
             "type": "array",
             "items": {
               "type": "string"
@@ -3797,9 +3480,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3814,10 +3495,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "game"
-        ]
+        "required": ["success", "game"]
       },
       "GameRegionsResponse": {
         "type": "object",
@@ -3826,9 +3504,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3842,10 +3518,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "regions"
-        ]
+        "required": ["success", "regions"]
       },
       "GamePriceVariantsResponse": {
         "type": "object",
@@ -3854,9 +3527,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -3870,10 +3541,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "priceVariants"
-        ]
+        "required": ["success", "priceVariants"]
       },
       "CreateGameOrderPersonDto": {
         "type": "object",
@@ -3894,10 +3562,7 @@
             "example": "https://s.team/p/"
           }
         },
-        "required": [
-          "phone",
-          "email"
-        ]
+        "required": ["phone", "email"]
       },
       "CreateGameOrderDto": {
         "type": "object",
@@ -3939,13 +3604,7 @@
             ]
           }
         },
-        "required": [
-          "gameSlug",
-          "deliveryType",
-          "region",
-          "edition",
-          "person"
-        ]
+        "required": ["gameSlug", "deliveryType", "region", "edition", "person"]
       },
       "GameOrderPerson": {
         "type": "object",
@@ -3966,17 +3625,11 @@
             "example": "https://example.com/invite"
           }
         },
-        "required": [
-          "phone",
-          "email"
-        ]
+        "required": ["phone", "email"]
       },
       "GameOrderStatus": {
         "type": "string",
-        "enum": [
-          "awaiting_payment",
-          "paid"
-        ],
+        "enum": ["awaiting_payment", "paid"],
         "description": "Статус заказа"
       },
       "GameOrder": {
@@ -4091,9 +3744,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -4116,11 +3767,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "order",
-          "transaction"
-        ]
+        "required": ["success", "order", "transaction"]
       },
       "GameOrdersResponse": {
         "type": "object",
@@ -4129,9 +3776,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -4145,10 +3790,7 @@
             }
           }
         },
-        "required": [
-          "success",
-          "orders"
-        ]
+        "required": ["success", "orders"]
       },
       "GameOrderResponse": {
         "type": "object",
@@ -4157,9 +3799,7 @@
             "type": "boolean",
             "description": "Статус запроса",
             "example": true,
-            "enum": [
-              true
-            ]
+            "enum": [true]
           },
           "reason": {
             "type": "string",
@@ -4174,10 +3814,7 @@
             ]
           }
         },
-        "required": [
-          "success",
-          "order"
-        ]
+        "required": ["success", "order"]
       }
     }
   }

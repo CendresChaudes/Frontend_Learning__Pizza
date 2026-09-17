@@ -10,9 +10,9 @@ import unicornPlugin from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import { parser as tsEslintParser } from 'typescript-eslint';
 import { importXRules } from '../rules/importX.rules';
-import { unicornRules } from '../rules/unicorn.rules';
 import { noRestrictedSyntaxRule } from '../rules/noRestrictedSyntax.rule';
 import { noUnusedVarsRule } from '../rules/noUnusedVars.rule';
+import { unicornRules } from '../rules/unicorn.rules';
 
 export const eslintTsConfig: Linter.Config = {
   files: ['**/*.{ts,tsx}'],
