@@ -1,12 +1,7 @@
-import { Rules } from 'eslint-plugin-boundaries';
+import { type Rules } from 'eslint-plugin-boundaries';
 import { LAYER_CAPTURES, LAYERS } from '../constants';
 
-const SLICE_LAYERS = [
-  LAYERS.PAGES,
-  LAYERS.WIDGETS,
-  LAYERS.FEATURES,
-  LAYERS.ENTITIES,
-] as const;
+const SLICE_LAYERS = [LAYERS.PAGES, LAYERS.WIDGETS, LAYERS.MODULES] as const;
 
 const crossSlicePolicies = SLICE_LAYERS.map((layer) => ({
   from: layer,
@@ -31,8 +26,7 @@ export const elementTypesRule = {
           disallow: [
             LAYERS.SHARED,
             LAYERS.CORE,
-            LAYERS.ENTITIES,
-            LAYERS.FEATURES,
+            LAYERS.MODULES,
             LAYERS.WIDGETS,
             LAYERS.PAGES,
             LAYERS.APP,
@@ -42,8 +36,7 @@ export const elementTypesRule = {
           from: LAYERS.SHARED,
           disallow: [
             LAYERS.CORE,
-            LAYERS.ENTITIES,
-            LAYERS.FEATURES,
+            LAYERS.MODULES,
             LAYERS.WIDGETS,
             LAYERS.PAGES,
             LAYERS.APP,
@@ -51,37 +44,17 @@ export const elementTypesRule = {
         },
         {
           from: LAYERS.CORE,
-          disallow: [
-            LAYERS.ENTITIES,
-            LAYERS.FEATURES,
-            LAYERS.WIDGETS,
-            LAYERS.PAGES,
-            LAYERS.APP,
-          ],
+          disallow: [LAYERS.MODULES, LAYERS.WIDGETS, LAYERS.PAGES, LAYERS.APP],
         },
+        { from: LAYERS.MODULES, disallow: [LAYERS.WIDGETS, LAYERS.PAGES, LAYERS.APP] },
         {
-          from: LAYERS.ENTITIES,
-          disallow: [LAYERS.FEATURES, LAYERS.WIDGETS, LAYERS.PAGES, LAYERS.APP],
-        },
-        {
-          from: LAYERS.ENTITIES,
-          message: getCrossSlicePolicyError(LAYERS.ENTITIES),
-          disallow: [
-            LAYERS.ENTITIES,
-            {
-              entity: `!${LAYER_CAPTURES[LAYERS.ENTITIES]}`,
-            },
-          ],
-        },
-        { from: LAYERS.FEATURES, disallow: [LAYERS.WIDGETS, LAYERS.PAGES, LAYERS.APP] },
-        {
-          from: LAYERS.FEATURES,
-          message: getCrossSlicePolicyError(LAYERS.FEATURES),
+          from: LAYERS.MODULES,
+          message: getCrossSlicePolicyError(LAYERS.MODULES),
           disallow: [
             [
-              LAYERS.FEATURES,
+              LAYERS.MODULES,
               {
-                entity: `!${LAYER_CAPTURES[LAYERS.FEATURES]}`,
+                entity: `!${LAYER_CAPTURES[LAYERS.MODULES]}`,
               },
             ],
           ],

@@ -1,4 +1,4 @@
-import { Rules } from 'eslint-plugin-boundaries';
+import { type Rules } from 'eslint-plugin-boundaries';
 import { LAYERS } from '../constants';
 
 export const entryPointRule = {
@@ -11,8 +11,7 @@ export const entryPointRule = {
           target: [
             LAYERS.SHARED,
             LAYERS.CORE,
-            LAYERS.ENTITIES,
-            LAYERS.FEATURES,
+            LAYERS.MODULES,
             LAYERS.WIDGETS,
             LAYERS.PAGES,
             LAYERS.APP,
