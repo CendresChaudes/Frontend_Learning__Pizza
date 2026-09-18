@@ -16,8 +16,6 @@
 ## Стек
 
 ![CSS]
-![Mantine]
-![FramerMotion]
 ![TypeScript]
 ![React]
 ![MobX]
@@ -30,8 +28,6 @@
 <!-- LINKS -->
 
 [CSS]: https://img.shields.io/badge/CSS-000000?logo=css&logoColor=1572B6&style=for-the-badge
-[Mantine]: https://img.shields.io/badge/Mantine-000000?logo=mantine&logoColor=339AF0&style=for-the-badge
-[FramerMotion]: https://img.shields.io/badge/Framer_Motion-000000?logo=framer&logoColor=0055FF&style=for-the-badge
 [TypeScript]: https://img.shields.io/badge/TypeScript-000000?logo=typescript&logoColor=3178C6&style=for-the-badge
 [React]: https://img.shields.io/badge/React-000000?logo=react&logoColor=61DAFB&style=for-the-badge
 [MobX]: https://img.shields.io/badge/MobX-000000?logo=mobx&logoColor=FF9955&style=for-the-badge
