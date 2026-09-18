@@ -13,8 +13,6 @@ function RootLayoutContent(properties: TProperties): ReactJSX {
 
   if (CAppRouting.INTRO.isOpened) {
     title = 'Главная страница';
-  } else if (CAppRouting.INTEGRATIONS.isOpened) {
-    title = 'Интеграции';
   }
 
   return (
