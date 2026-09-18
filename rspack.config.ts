@@ -95,7 +95,7 @@ export default {
         test: /\.css$/i,
         oneOf: [
           {
-            test: /\.module\.css$/i,
+            test: /\.m\.css$/i,
             type: 'javascript/auto',
             use: [
               CEnvironment.IS_DEVELOPMENT

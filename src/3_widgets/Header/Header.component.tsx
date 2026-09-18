@@ -1,4 +1,4 @@
-import styles from './Header.module.css';
+import styles from './Header.component.m.css';
 
 type TProperties = Readonly<{
   title: string;

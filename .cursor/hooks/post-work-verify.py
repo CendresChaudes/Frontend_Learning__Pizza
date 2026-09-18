@@ -6,6 +6,9 @@ Verifies ONLY the agent's changed files (not the whole repo):
   - pnpm run check:tests:fast (unit + int, no e2e) when .ts/.tsx changed
 On failure, emits a JSON object with a followup_message so the agent addresses it.
 
+Skips all checks when the last user prompt is the `/create-slice` slash command
+(scaffolds are not expected to pass lint/tests).
+
 Input: the Cursor stop-event payload on stdin (JSON).
 Output: JSON on stdout -- `{}` on success/no-op, `{"followup_message": ...}` on failure.
 """
@@ -19,6 +22,8 @@ import sys
 from pathlib import Path
 
 LOOP_LIMIT = 3
+USER_QUERY_RE = re.compile(r"<user_query>\s*(.*?)\s*</user_query>", re.DOTALL)
+CREATE_SLICE_RE = re.compile(r"^/create-slice\b", re.IGNORECASE)
 
 ESLINT_RE = re.compile(r"\.(ts|tsx|js|mjs|cjs)$")
 PRETTIER_RE = re.compile(r"\.(ts|tsx|js|mjs|cjs|css|md|mdx|json|html|yaml|yml)$")
@@ -71,6 +76,42 @@ def tail(text: str, n: int = 40) -> str:
     return "\n".join(text.splitlines()[-n:])
 
 
+def last_user_message_text(transcript_path: str) -> str:
+    path = Path(transcript_path)
+    if not path.is_file():
+        return ""
+    last = ""
+    with path.open(encoding="utf-8") as handle:
+        for raw in handle:
+            line = raw.strip()
+            if not line:
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if record.get("role") != "user":
+                continue
+            message = record.get("message") or {}
+            content = message.get("content")
+            chunks: list[str] = []
+            if isinstance(content, list):
+                for part in content:
+                    if isinstance(part, dict) and part.get("type") == "text":
+                        chunks.append(str(part.get("text") or ""))
+            elif isinstance(content, str):
+                chunks.append(content)
+            if chunks:
+                last = "\n".join(chunks)
+    return last
+
+
+def is_create_slice_turn(text: str) -> bool:
+    queries = USER_QUERY_RE.findall(text)
+    candidate = queries[-1].strip() if queries else text.strip()
+    return bool(CREATE_SLICE_RE.match(candidate))
+
+
 def main() -> int:
     try:
         payload = json.load(sys.stdin)
@@ -83,6 +124,11 @@ def main() -> int:
         return 0
 
     if int(payload.get("loop_count") or 0) >= LOOP_LIMIT:
+        emit({})
+        return 0
+
+    transcript_path = payload.get("transcript_path")
+    if isinstance(transcript_path, str) and is_create_slice_turn(last_user_message_text(transcript_path)):
         emit({})
         return 0
 
