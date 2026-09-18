@@ -4,7 +4,7 @@ import styles from './Header.component.m.css';
 function Header(): ReactJSX {
   let title = 'Неизвестная страница';
 
-  if (CAppRouting.INTRO.isOpened) {
+  if (CAppRouting.AUTH.isOpened) {
     title = 'Авторизация';
   }
 
