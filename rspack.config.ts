@@ -77,8 +77,13 @@ export default {
             loader: 'builtin:swc-loader',
             options: {
               jsc: {
-                parser: { syntax: 'typescript', tsx: true },
+                parser: {
+                  syntax: 'typescript',
+                  tsx: true,
+                  decorators: true,
+                },
                 transform: {
+                  legacyDecorator: true,
                   react: {
                     runtime: 'automatic',
                     development: !CEnvironment.IS_PRODUCTION,

@@ -14,16 +14,7 @@ body {
   background-color: var(--color-white);
 }
 
-@media (width >= 1536px) {
-  html,
-  body {
-    font-size: var(--text-base);
-  }
-}
-
-@media (width >= 1920px) {
-  html,
-  body {
-    font-size: var(--text-lg);
-  }
+p {
+  margin: 0;
+  padding: 0;
 }

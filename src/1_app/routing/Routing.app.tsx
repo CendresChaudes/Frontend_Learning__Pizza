@@ -1,7 +1,7 @@
 import { RouteView, RouteViewGroup } from 'mobx-route/react';
 import { lazy, Suspense } from 'react';
-import { DefaultFallbackSkeleton, RootLayout } from '~app/ui';
-import { IntroPageSkeleton } from '~pages/Intro';
+import { DefaultFallbackSkeleton } from '~app/ui';
+import { AuthPageSkeleton } from '~pages/Auth';
 import { CAppRouting } from '~core/config';
 
 const WithSuspense = (
@@ -13,9 +13,9 @@ const WithSuspense = (
   </Suspense>
 );
 
-const IntroPage = lazy(() =>
-  import('~pages/Intro').then((module) => ({
-    default: module.IntroPage,
+const AuthPage = lazy(() =>
+  import('~pages/Auth').then((module) => ({
+    default: module.AuthPage,
   })),
 );
 
@@ -29,14 +29,13 @@ function AppRouting(): ReactJSX {
   return (
     <RouteViewGroup
       fallback={<DefaultFallbackSkeleton />}
-      layout={RootLayout}
       otherwise={CAppRouting.NOT_FOUND}
       suspense
     >
       <RouteView route={CAppRouting.BASE} />
 
-      <RouteView route={CAppRouting.INTRO}>
-        {WithSuspense(IntroPage, <IntroPageSkeleton />)}
+      <RouteView route={CAppRouting.AUTH}>
+        {WithSuspense(AuthPage, <AuthPageSkeleton />)}
       </RouteView>
 
       <RouteView route={CAppRouting.NOT_FOUND}>

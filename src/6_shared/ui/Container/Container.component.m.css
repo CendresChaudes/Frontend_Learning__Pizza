@@ -1,0 +1,6 @@
+.root {
+  max-width: var(--breakpoint-xs);
+  margin: 0 auto;
+  padding-inline: 1rem;
+  outline: 2px dashed var(--orange-500);
+}

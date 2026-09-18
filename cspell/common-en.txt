@@ -8,6 +8,7 @@ flexbox
 frontmatter
 Grtsk
 hocs
+Interactor
 kubb
 lefthook
 lintable

@@ -1,0 +1,36 @@
+.root {
+  --button-bg-default: var(--orange-500);
+  --button-bg-hover: var(--orange-700);
+  --button-bg-active: var(--orange-900);
+  --button-bg-disabled: var(--neutral-700);
+
+  cursor: pointer;
+
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-full);
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-white);
+
+  background-color: var(--button-bg-default);
+
+  &:hover {
+    background-color: var(--button-bg-hover);
+  }
+
+  &:active {
+    background-color: var(--button-bg-active);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--button-bg-disabled);
+  }
+}

@@ -1,11 +1,15 @@
+import { AuthWizard } from '~modules/Auth';
+import { Container } from '~shared/ui';
 import styles from './Auth.page.m.css';
 
-type TProperties = Readonly<{ example: string }>;
-
-function AuthPage(properties: TProperties): ReactJSX {
-  const { example } = properties;
-
-  return <div className={styles.root}>{example}</div>;
+function AuthPage(): ReactJSX {
+  return (
+    <Container>
+      <div className={styles.root}>
+        <AuthWizard />
+      </div>
+    </Container>
+  );
 }
 
 export { AuthPage };

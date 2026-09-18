@@ -30,6 +30,7 @@ export default defineConfig({
     pluginFetch({
       output: { path: 'http', mode: 'directory', banner: '// @ts-nocheck' },
       group,
+      baseURL: 'https://juniorsbootcamp.ru',
     }),
     pluginMsw({
       group,
