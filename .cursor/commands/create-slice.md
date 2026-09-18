@@ -1,5 +1,5 @@
 ---
-description: Create component file, CSS module, and `index.ts` in the attached directory.
+description: [C] — Create component file, CSS module, and `index.ts` in the attached directory.
 ---
 
 # Create slice

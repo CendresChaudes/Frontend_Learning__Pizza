@@ -1,5 +1,5 @@
 ---
-description: Refresh docs/product/ to match product rules and the codebase.
+description: [C] — Refresh docs/product/ to match product rules and the codebase.
 ---
 
 # docs-update
