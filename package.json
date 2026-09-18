@@ -45,7 +45,6 @@
     "mobx": "6.16.1",
     "mobx-react-hook-form": "6.4.1",
     "mobx-route": "2.1.2",
-    "mobx-tanstack-query": "7.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-error-boundary": "6.1.4",

@@ -26,9 +26,6 @@ importers:
       mobx-route:
         specifier: 2.1.2
         version: 2.1.2(mobx-react-lite@4.1.1(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      mobx-tanstack-query:
-        specifier: 7.3.0
-        version: 7.3.0(@tanstack/query-core@5.103.1)(mobx@6.16.1)(react@19.2.8)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -4481,12 +4478,6 @@ packages:
         optional: true
       react-dom:
         optional: true
-
-  mobx-tanstack-query@7.3.0:
-    resolution: {integrity: sha512-VDTmcrfKkYuGZaBd6rR/X54lN/2OMRuKq/MsOpC5FCxmEGJbex0MsLqb90qaifhUDF7glbMqhC0twfXLZAleIg==}
-    peerDependencies:
-      '@tanstack/query-core': ^5.90.2
-      mobx: ^6.12.4
 
   mobx@6.16.1:
     resolution: {integrity: sha512-syNcDdX3KT+Jq3je6eGjBhuc24Z68td2VG0zNFqRswaE433D9SNH5VRy/xrGbJsUixfppLLccXhAW9JSf6n+SQ==}
@@ -10149,15 +10140,6 @@ snapshots:
       mobx-react-lite: 4.1.1(mobx@6.16.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
-
-  mobx-tanstack-query@7.3.0(@tanstack/query-core@5.103.1)(mobx@6.16.1)(react@19.2.8):
-    dependencies:
-      '@tanstack/query-core': 5.103.1
-      linked-abort-controller: 1.1.1
-      mobx: 6.16.1
-      yummies: 7.20.1(mobx@6.16.1)(react@19.2.8)
-    transitivePeerDependencies:
-      - react
 
   mobx@6.16.1: {}
 
