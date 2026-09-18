@@ -6,12 +6,12 @@
 
 ````markdown
 ---
-description: [C] — Create a label helper file in the attached directory.
+description: Create a label helper file in the attached directory.
 ---
 
 # Format label
 
-Scaffold a **label helper** in the **attached directory**. The directory is the only required input.
+Command for scaffolding a **label helper** in the **attached directory**. The directory is the only required input.
 
 ## Context (required)
 
@@ -61,12 +61,12 @@ Etalon, full template, derive-don't-ask, explicit stop — same shape as `/creat
 
 ```markdown
 ---
-description: [C] — Refresh docs/product/ to match product rules and the codebase.
+description: Refresh docs/product/ to match product rules and the codebase.
 ---
 
 # docs-refresh
 
-Audit and update `docs/product/` so it matches the current product rules and codebase.
+Command for auditing and updating `docs/product/` so it matches the current product rules and codebase.
 
 ## Skills (required, first)
 
@@ -96,10 +96,10 @@ Do **not** run the `verify` skill. Propose `prettier` / `cspell` on `docs/produc
 
 The command does not repeat the skill body — it links and adds invocation-only details (context, scope, stop).
 
-## 3. Filename = slash name; `[C] —` description
+## 3. Filename = slash name; opening starts with `Command for`
 
-| File                               | Invoked as      | Frontmatter                                                                                         |
-| ---------------------------------- | --------------- | --------------------------------------------------------------------------------------------------- |
-| `.cursor/commands/create-slice.md` | `/create-slice` | `description: [C] — Create component file, CSS module, and \`index.ts\` in the attached directory.` |
+| File                               | Invoked as      | Frontmatter                                                                                   | Opening after H1                                                                  |
+| ---------------------------------- | --------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `.cursor/commands/create-slice.md` | `/create-slice` | `description: Create component file, CSS module, and \`index.ts\` in the attached directory.` | `Command for scaffolding a **minimal flat slice** in the **attached directory**.` |
 
 Optional `name` in frontmatter, if present, matches the file stem (`create-slice`).

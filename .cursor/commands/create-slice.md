@@ -1,10 +1,10 @@
 ---
-description: [C] — Create component file, CSS module, and `index.ts` in the attached directory.
+description: Create component file, CSS module, and `index.ts` in the attached directory.
 ---
 
 # Create slice
 
-Scaffold a **minimal flat slice** in the **attached directory**. The directory is the only required input.
+Command for scaffolding a **minimal flat slice** in the **attached directory**. The directory is the only required input.
 
 ## Context (required)
 

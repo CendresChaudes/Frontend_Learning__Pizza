@@ -2,8 +2,9 @@
 name: create-command
 description: >-
   Author Cursor slash commands as markdown files in `.cursor/commands/`.
-  Enforce kebab-case filename (= `/name`), `[C] —` description frontmatter,
-  `@` context with derive-don't-ask, an etalon plus full templates, skill
+  Enforce kebab-case filename (= `/name`), a one-line `description` frontmatter,
+  an opening paragraph that starts with `Command for` (not the H1, not
+  frontmatter), `@` context with derive-don't-ask, an etalon plus full templates, skill
   links when a skill owns the methodology, and an explicit stop condition.
   Use when creating or editing a command, adding a slash command, or
   scaffolding `.cursor/commands/*.md`. Triggers: create command, slash
@@ -39,7 +40,8 @@ A command is **one markdown file**. Filename stem = slash name (`create-slice.md
 Do **not** create a directory, `SKILL.md`, or `examples/` under `.cursor/commands/` — those belong to skills.
 
 - kebab-case stem, lowercase, hyphens, no leading/trailing hyphen.
-- YAML frontmatter with `description` (required). Optional `name` must match the file stem.
+- YAML frontmatter with `description` (required, one line, WHAT). Optional `name` must match the file stem.
+- Opening paragraph (after the H1, not the H1 itself) starts with **`Command for`**.
 - Body in English (per `management/general.mdc`); identifiers, paths, and commands stay in their original form. Generated product code inside templates may follow product language (e.g. a Russian CSS comment).
 - Concise: the agent is already smart. Concrete templates over prose. Body under 500 lines; link to skills instead of copying them.
 
@@ -47,19 +49,19 @@ Do **not** create a directory, `SKILL.md`, or `examples/` under `.cursor/command
 
 ```yaml
 ---
-description: [C] — One-line what the command does.
+description: Create a component file in the attached directory.
 ---
 ```
 
-- Prefix **`[C] — `** so the command is recognizable in the slash picker (skills also appear there).
 - One line: WHAT it produces, not WHEN (WHEN is the `/` invocation).
+- Do not start the description with `Command for` — that belongs in the opening paragraph.
 - Do not set `disable-model-invocation` — that field is for skills. Commands are already explicit slash invocations.
 
 ## Body
 
 Use this section order. Skip a section only when it does not apply.
 
-1. **Title + opening** — what it produces and the only required input.
+1. **Title + opening** — H1 is the title only. The **first paragraph after the H1** starts with **`Command for`**, then WHAT it produces and the only required input. Not the frontmatter. Not the H1.
 2. **`## Skills (required, first)`** — when a skill owns the methodology. Link `SKILL.md` and its examples. State: when this command and those skills disagree, **the skills win**.
 3. **`## Context`** — required vs optional. How to read `@` attachments and trailing text after `/name`. Derive names from the attached path; do **not** ask for what the path already gives. If required context is missing, ask the user to attach it with `@` and **stop**.
 4. **Decision table / naming** — variants (e.g. page vs component file suffix) in a table, not a paragraph.

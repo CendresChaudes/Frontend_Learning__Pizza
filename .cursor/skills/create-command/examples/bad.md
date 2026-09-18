@@ -12,17 +12,23 @@ Why: a command is one `.md` file. `SKILL.md` + `examples/` belong in `.cursor/sk
 
 **Use instead**: `.cursor/commands/create-slice.md`.
 
-## ❌ Description without `[C] —`
+## ❌ Opening without `Command for`
 
-```yaml
----
-description: Create component files in the attached directory.
----
+```md
+# Create slice
+
+Scaffold a **minimal flat slice** in the **attached directory**.
 ```
 
-Why: skills also appear in the slash picker. `[C] —` marks this as a command.
+Why: the first paragraph after the H1 always starts with `Command for`. Not the frontmatter. Not the H1.
 
-**Use instead**: `description: [C] — Create component files in the attached directory.`
+**Use instead**:
+
+```md
+# Create slice
+
+Command for scaffolding a **minimal flat slice** in the **attached directory**.
+```
 
 ## ❌ Asking for what `@` already gives
 
