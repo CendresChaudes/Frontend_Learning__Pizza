@@ -2,6 +2,7 @@ import { Linter } from 'eslint';
 import prettierConfig from 'eslint-config-prettier';
 import tseslint from 'typescript-eslint';
 import { eslintBoundariesConfig } from './eslint/configs/boundaries/eslint.boundaries.config';
+import { domainNoRestrictedImportsConfig } from './eslint/configs/boundaries/rules/noRestrictedImports.rule';
 import { eslintJsConfig } from './eslint/configs/eslint.js.config';
 import { eslintMdConfig } from './eslint/configs/eslint.md.config';
 import { eslintTestsConfig } from './eslint/configs/eslint.tests.config';
@@ -24,6 +25,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   prettierConfig,
   eslintBoundariesConfig,
+  domainNoRestrictedImportsConfig,
   eslintJsConfig,
   eslintTsConfig,
   dtsConfig,
