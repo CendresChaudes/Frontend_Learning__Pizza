@@ -13,6 +13,7 @@ lefthook
 lintable
 Mantine
 Peta
+Pixelify
 Rspack
 scriptable
 transpiles

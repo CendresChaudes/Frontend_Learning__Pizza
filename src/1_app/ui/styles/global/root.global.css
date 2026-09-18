@@ -1,36 +1,4 @@
 :root {
-  /* Colors */
-  --color-primary: hsl(214deg 100% 21%);
-  --color-disabled: hsl(0deg 0% 56%);
-  --color-disabled-light: hsl(0deg 0% 76%);
-  --color-success: hsl(145deg 63% 42%);
-  --color-error: hsl(0deg 100% 50%);
-  --color-white: hsl(0deg 0% 100%);
-  --color-black: hsl(0deg 0% 7%);
-
-  /* Fonts */
-  --font-primary: sans-serif;
-
-  /* Font sizes */
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-base: 16px;
-  --text-md: 18px;
-  --text-lg: 20px;
-  --text-xl: 24px;
-  --text-2xl: 28px;
-  --text-3xl: 32px;
-  --text-4xl: 36px;
-  --text-5xl: 40px;
-
-  /* Font weights */
-  --font-weight-normal: 400;
-  --font-weight-bold: 700;
-
-  /* Line height */
-  --leading-snug: 1.375;
-  --leading-normal: 1.5;
-
   /* Border radius */
   --radius-none: 0;
   --radius-full: 9999px;
@@ -44,7 +12,8 @@
   --spacing-2xl: 24px;
   --spacing-3xl: 28px;
   --spacing-4xl: 32px;
-  --spacing-5xl: 40px;
+  --spacing-5xl: 36px;
+  --spacing-6xl: 40px;
 
   /* Breakpoints */
   --breakpoint-xl: 1280px;

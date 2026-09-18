@@ -1,3 +1,4 @@
-@import url("./styles/global/theme.global.css");
-@import url("./styles/global/base.global.css");
+@import url("./styles/global/root.global.css");
+@import url("./styles/global/colors.global.css");
 @import url("./styles/global/fonts.global.css");
+@import url("./styles/global/base.global.css");

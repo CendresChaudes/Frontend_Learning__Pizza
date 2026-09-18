@@ -1,9 +1,86 @@
+:root {
+  /* Fonts */
+  --font-primary: "Nunito", sans-serif;
+  --font-secondary: "Pixelify Sans", sans-serif;
+
+  /* Font sizes */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 18px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 28px;
+  --text-3xl: 32px;
+  --text-4xl: 36px;
+  --text-5xl: 40px;
+
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Line height */
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+}
+
+
 @font-face {
-  font-family: "Grtsk Peta";
+  font-family: Nunito;
   font-weight: 400;
   font-style: normal;
 
-  /* src:
-    url("../../../assets/fonts/GrtskPeta-Regular.woff2") format("woff2"),
-    url("../../../assets/fonts/GrtskPeta-Regular.woff") format("woff"); */
+  src:
+    url("/public/fonts/Nunito-VariableFont_wght.woff2") format("woff2"),
+    url("/public/fonts/Nunito-VariableFont_wght.woff") format("woff");
+}
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 500;
+  font-style: normal;
+
+  src:
+    url("/public/fonts/Nunito-VariableFont_wght.woff2") format("woff2"),
+    url("/public/fonts/Nunito-VariableFont_wght.woff") format("woff");
+}
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 600;
+  font-style: normal;
+
+  src:
+    url("/public/fonts/Nunito-VariableFont_wght.woff2") format("woff2"),
+    url("/public/fonts/Nunito-VariableFont_wght.woff") format("woff");
+}
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 700;
+  font-style: normal;
+
+  src:
+    url("/public/fonts/Nunito-VariableFont_wght.woff2") format("woff2"),
+    url("/public/fonts/Nunito-VariableFont_wght.woff") format("woff");
+}
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 800;
+  font-style: normal;
+
+  src:
+    url("/public/fonts/Nunito-VariableFont_wght.woff2") format("woff2"),
+    url("/public/fonts/Nunito-VariableFont_wght.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Pixelify Sans";
+  font-weight: 700;
+  font-style: normal;
+
+  src:
+    url("/public/fonts/PixelifySans-Bold.woff2") format("woff2"),
+    url("/public/fonts/PixelifySans-Bold.woff") format("woff");
 }
