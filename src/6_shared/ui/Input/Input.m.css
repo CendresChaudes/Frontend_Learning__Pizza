@@ -26,7 +26,7 @@
     border-color: var(--input-border-color-hover);
   }
 
-  &:focus {
+  &:focus-visible {
     border-color: var(--orange-500);
   }
 

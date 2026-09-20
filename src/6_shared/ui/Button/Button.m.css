@@ -20,9 +20,14 @@
   color: var(--color-white);
 
   background-color: var(--button-bg-default);
+  outline: none;
 
   &:hover {
     background-color: var(--button-bg-hover);
+  }
+
+  &:focus-visible {
+    background-color: var(--button-bg-active);
   }
 
   &:active {
