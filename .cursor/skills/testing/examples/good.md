@@ -28,60 +28,52 @@ pnpm exec vitest run src/6_shared/lib/formatDate.test.ts --config vitest.unit.no
 
 ## 2. `.tsx` component — behavior, not implementation
 
-`src/4_modules/user-profile/ui/UserProfile.test.tsx`:
+`src/4_modules/Auth/presentation/CreateOtpForm.component.test.tsx`:
 
 ```tsx
 import { render, screen } from 'vitest-browser-react';
 import { userEvent } from '@vitest/browser/playwright';
 
-import { UserProfile } from './UserProfile';
+import { CreateOtpForm } from './CreateOtpForm.component';
 
-it('shows the full name and fires onEdit on click', async () => {
-  const onEdit = vi.fn();
-  render(
-    <UserProfile
-      user={{ id: '1', fullName: 'Ada Lovelace' }}
-      onEdit={onEdit}
-    />,
-  );
-  await expect.element(screen.getByText('Ada Lovelace')).toBeInTheDocument();
-  await userEvent.click(screen.getByRole('button', { name: /edit/i }));
-  expect(onEdit).toHaveBeenCalledWith('1');
+it('submits the phone number from the form', async () => {
+  render(<CreateOtpForm />);
+  await userEvent.type(screen.getByRole('textbox'), '+79991234567');
+  await userEvent.click(screen.getByRole('button', { name: /продолжить/i }));
+  await expect
+    .element(screen.getByRole('button', { name: /отправка/i }))
+    .toBeInTheDocument();
 });
 ```
 
 Run with the browser config (component behavior):
 
 ```sh
-pnpm exec vitest run src/4_modules/user-profile/ui/UserProfile.test.tsx --config vitest.unit.browser.config.ts
+pnpm exec vitest run src/4_modules/Auth/presentation/CreateOtpForm.component.test.tsx --config vitest.unit.browser.config.ts
 ```
 
-## 3. API hook against MSW at the boundary
+## 3. API class against MSW at the boundary
 
 ```ts
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 const server = setupServer(
-  http.get('/api/users/:id', () =>
-    HttpResponse.json({ id: '1', fullName: 'Ada Lovelace' }),
-  ),
+  http.post('/otps/otp', () => HttpResponse.json(null, { status: 204 })),
 );
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-it('exposes loading then success', async () => {
-  const { result } = renderHook(() => useUser('1'), { wrapper: QueryProvider });
-  expect(result.current.isLoading).toBe(true);
-  await waitFor(() => expect(result.current.isSuccess).toBe(true));
-  expect(result.current.data?.fullName).toBe('Ada Lovelace');
+it('resolves createOtp on 204', async () => {
+  const api = new OtpApi(new AbortController().signal);
+  await expect(api.createOtp({ phone: '+79991234567' })).resolves.toBeUndefined();
 });
 ```
 
-The hook's internals stay real; only the network boundary is mocked.
+The API class stays real; only the network boundary is mocked. Colocate next to `data/Otp.api.ts`.
 
-## 4. Integration — component + real dependencies
+## 4. Integration — widget + real routing
 
-`src/3_widgets/dashboard/ui/Dashboard.test.tsx` rendered with a real query client and router, asserting the composed behavior (not the internals of each piece). Run with `vitest.int.browser.config.ts`.
+`src/3_widgets/Header/Header.component.test.tsx` rendered with the real `CAppRouting`, asserting the title for the opened route (not the internals of `HeaderViewModel`). Run with `vitest.int.browser.config.ts`.

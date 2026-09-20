@@ -15,7 +15,7 @@ global → shared → core → modules → widgets → pages → app
 
 A layer may import only layers to its right (lower in the flow). No cross-imports between slices of the same layer. Slice layers (pages, widgets, modules) are imported only via their `index.ts` public API.
 
-Layer-by-layer definitions live in [`architecture/layers.mdc`](./layers.mdc). Segment contents (`api`/`model`/`domain`/`lib`/`ui`) live in [`architecture/segments.mdc`](./segments.mdc).
+Layer-by-layer definitions live in [`architecture/layers.mdc`](./layers.mdc). Segment contents (`presentation`/`model`/`data`/`domain`) live in [`architecture/segments.mdc`](./segments.mdc). Etalons: `src/4_modules/Auth`, `src/3_widgets/Header`.
 
 ## Cross-cutting rules
 

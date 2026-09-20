@@ -14,16 +14,16 @@ User: «оцени текущий код в src»
 
 ```
 ## 4_modules
-- src/4_modules/user/model/mapper.ts:12-40 — DTO→domain mapping duplicated in 2 callers.
-  Why: blocks adding a 3rd consumer; unreadable. Proposed: extract `toUserDomain(dto)` into `model/domain`.
-  Risk: low (mechanical extract, public API preserved via index.ts).
-- src/4_modules/login/ui/LoginForm.tsx:80-120 — inline validation logic mixed with UI.
-  Why: slows down the next person; hard to test. Proposed: extract `validateLogin` into `lib`.
+- src/4_modules/Auth/model/Otp.interactor.ts:8-10 — public `_otpApi` leaks the data layer.
+  Why: blocks treating the interactor as the only port; unreadable. Proposed: make `_otpApi` private.
+  Risk: low (mechanical rename, public API of the slice is still AuthWizard).
+- src/4_modules/Auth/presentation/CreateOtpForm.component.tsx:14-19 — submit try/catch only `console.error`.
+  Why: slows down the next person; errors never reach the UI. Proposed: surface the error on the view-model.
   Risk: low.
 
 ## Приоритет
-1. extract toUserDomain (4_modules/user) — low risk, unblocks consumers
-2. extract validateLogin (4_modules/login) — low risk, improves testability
+1. private _otpApi (4_modules/Auth) — low risk, restores the port
+2. surface submit error (4_modules/Auth) — low risk, improves UX
 ```
 
 - Read-only: nothing edited.

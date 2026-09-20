@@ -17,5 +17,6 @@ globs: "**/*.{ts,tsx}"
 
 ## Stack wiring
 
-- Drive forms through React Hook Form + `@hookform/resolvers`; validate on schema, surface errors accessibly. Don't hand-roll validation or store form state in MobX. UI-kit inputs wired to RHF (see `stack/uikit`); Zod schemas (see `stack/api`).
-- Error boundaries via `react-error-boundary`; pair with Suspense fallbacks. Server state/cache via TanStack Query (see `stack/api`); MobX for client state (see `stack/model`); UI kit (see `stack/uikit`).
+- Drive forms through `mobx-react-hook-form` `createForm` **on the view-model** (etalon `AuthWizardViewModel`), with `zodResolver` and the slice's `*.schema.ts`. The component uses `Controller` + kit inputs; it does not call `useForm`. Don't hand-roll validation or keep form state in a separate MobX store. See `stack/uikit`, `stack/api`.
+- Bind the VM with `useViewModel`; wrap reading components in `observer` (see `stack/model`). Inner function is `XxxComponent`; exported name is `Xxx`.
+- Error boundaries via `react-error-boundary`; pair with Suspense fallbacks. Server state via `mobx-tanstack-query` in `data/` (see `stack/api`); UI kit (see `stack/uikit`).

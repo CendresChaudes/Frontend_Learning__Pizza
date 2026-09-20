@@ -52,7 +52,7 @@ Don't call `kubb generate` directly: bypassing the script loses the post type-ch
 
 Generated code is a port, not the app's public API. Wrap it with hand-written adapters:
 
-- **`~modules/<module>/api`** — hooks and clients for a domain module: re-export the tanstack hook with a typed query key, map DTO → domain type, handle errors.
+- **`~modules/<Module>/data`** — API class (`*.api.ts`) for a domain module: wrap generated clients, map DTO → domain type, expose `Mutation`/`Query`. Etalon: `src/4_modules/Auth/data/Otp.api.ts`.
 - **`~shared/api`** — cross-cutting infrastructure: base fetcher, interceptors, auth, when not covered by the generated client.
 - **`~shared/lib`** — wrap zod schemas from `generated/zod` into domain validators with narrow types; don't pull raw generated schemas into forms.
 

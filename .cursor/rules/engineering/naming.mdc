@@ -8,19 +8,21 @@ globs: "**/*.{ts,tsx}"
 
 ## Generic
 
-- Components: `PascalCase` for the component name and its file (`UserProfile.tsx`, `export function UserProfile`). One component per file; the file name matches the default export.
-- Hooks: `use*` prefix for any function that calls other hooks (`useDebounce`, `useAuth`). Hook files are `camelCase` (`useDebounce.ts`); barrel-export them named.
+- Components: `PascalCase` name; file is `<Name>.component.tsx` exporting `<Name>` (`Header.component.tsx` → `Header`). Pages: `<Name>.page.tsx` exporting `<Name>Page` (`Auth.page.tsx` → `AuthPage`). One component per file.
+- Hooks: `use*` prefix for any function that calls other hooks (`useViewModel`, `useDebounce`). Hook files are `camelCase` (`useViewModel.ts`); barrel-export them named.
 - Utilities and helpers: `camelCase` for functions and files (`formatDate.ts`, `export function formatDate`).
-- Constants: `UPPER_SNAKE_CASE` for true scalar constants (`MAX_RETRIES`, `API_URL`).
-- Files by role: `*.config.ts` for configs, `*.test.ts`/`*.test.tsx` for tests, `*.types.ts` for type-only modules, `*.mock.ts` for mocks. Keep suffixes consistent — the toolchain relies on them.
-- Boolean props and variables: prefix with `is`/`has`/`should`/`can` (`isLoading`, `hasError`, `shouldRetry`); avoid negated names (`isNotLoading` — flip the polarity instead).
+- Constants: `UPPER_SNAKE_CASE` for true scalar constants (`PHONE_PATTERN`, `MAX_RETRIES`).
+- Files by role (slice layers): `*.component.tsx` / `*.component.m.css` (UI), `*.vm.ts` (view-model class `XxxViewModel`), `*.interactor.ts` (use-case), `*.api.ts` (API class), `*.schema.ts` (Zod), `*.interface.ts` (domain interface), `*.page.tsx` / `*.page.m.css` / `*.page.skeleton.tsx` (pages), `*.config.ts`, `*.test.ts` / `*.test.tsx`, `*.types.ts`, `*.mock.ts`. Keep suffixes consistent — the toolchain relies on them.
+- Boolean props and variables: prefix with `is`/`has`/`should`/`can` (`isCreateOtpPending`, `isOpened`); avoid negated names (`isNotLoading` — flip the polarity instead).
 - Event handlers: `on*` for props (`onSubmit`, `onChange`), `handle*` for internal handlers (`handleSubmit`, `handleChange`). Don't mix the two within one component.
 
 ## Stack-specific
 
-- Types and interfaces: Hungarian notation — `I` prefix for interfaces (`IUser`, `IAuthResponse`), `T` prefix for type aliases (`TUserRole`, `TStatus`). The `type` vs `interface` choice is covered in `engineering/typescript`.
-- Enums: Hungarian notation — `E` prefix (`EColor`, `EUserRole`). Prefer `as const` objects + union types over enums (see `engineering/typescript`); when you do use an `enum`, prefix it `E`.
-- Static arrays and objects: `UPPER_SNAKE_CASE` (CONSTANT_CASE) — `ROUTES`, `DEFAULT_HEADERS`, `STATUS_MAP`.
-- Configs: `PascalCase` with Hungarian `C` prefix (`CAppConfig`, `CRouterConfig`, `CAuthConfig`). Config values/objects live in the `config` segment; keep `*.config.ts` file suffix.
-- Slices and segments: `kebab-case` for directories (`user-profile`, `auth-form`); segments are the canonical `ui`, `model`, `lib`, `api`, `config`, `constants` — don't invent new segment names without reason. Pure helpers live in `~shared/lib` or the feature's `lib` segment.
+- Types and interfaces: Hungarian notation — `I` prefix for interfaces (`IPhone`, `IUser`), `T` prefix for type aliases (`TPhoneFormInputValues`, `TDestroyableViewModel`). The `type` vs `interface` choice is covered in `engineering/typescript`.
+- Enums: Hungarian notation — `E` prefix (`EField`, `EUserRole`). Form field names follow Auth: `export enum EField { PHONE = 'phone' }`. Prefer `as const` objects + union types otherwise (see `engineering/typescript`).
+- Static arrays and objects: `UPPER_SNAKE_CASE` (CONSTANT_CASE) — `PHONE_PATTERN`, `DEFAULT_HEADERS`.
+- Configs: `PascalCase` with Hungarian `C` prefix (`CAppRouting`, `CAppConfig`). Config values/objects live in the `config` segment; keep `*.config.ts` file suffix.
+- Slices: PascalCase directories matching the export (`Auth`, `Header`, `NotFoundError`) — not kebab-case.
+- Segments (modules): canonical `presentation`, `model`, `data`, `domain`; optional `lib`, `config`, `constants`. Do not use `ui/` or `api/`. Widgets stay flat until they outgrow one component + VM (see `architecture/segments`). Pure helpers live in `~shared/lib` or the feature's `lib`.
+- View-models: class `<Name>ViewModel` in `<Name>.vm.ts`, colocated with the component. Interactors: class `<Name>Interactor` in `model/`. API: class `<Name>Api` in `data/`.
 - Generated code keeps its own naming: Kubb output is read-only (see `stack/general`); don't rename generated files or re-export them under hand-made names.

@@ -26,37 +26,37 @@ Then write the minimum `formatDate.ts` to turn it green, and refactor with the t
 
 ## 2. `.tsx` component — behavior, not implementation
 
-`src/4_modules/user-profile/ui/UserProfile.test.tsx`:
+`src/4_modules/Auth/presentation/CreateOtpForm.component.test.tsx`:
 
 ```tsx
 import { render, screen } from 'vitest-browser-react';
 
-import { UserProfile } from './UserProfile';
+import { CreateOtpForm } from './CreateOtpForm.component';
 
-it('shows the user full name', async () => {
-  render(<UserProfile user={{ id: '1', fullName: 'Ada Lovelace' }} />);
-  await expect.element(screen.getByText('Ada Lovelace')).toBeInTheDocument();
+it('shows the continue button', async () => {
+  render(<CreateOtpForm />);
+  await expect
+    .element(screen.getByRole('button', { name: /продолжить/i }))
+    .toBeInTheDocument();
 });
 ```
 
 Run with the browser config (auto-selected by `.tsx`):
 
 ```sh
-python3 .cursor/skills/tdd/scripts/tdd.py src/4_modules/user-profile/ui/UserProfile.test.tsx
+python3 .cursor/skills/tdd/scripts/tdd.py src/4_modules/Auth/presentation/CreateOtpForm.component.test.tsx
 ```
 
 ## 3. HTTP via MSW at the boundary
 
-Test an entity hook against MSW, not a mocked internal fetch:
+Test `OtpApi` against MSW, not a mocked internal client:
 
 ```ts
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 const server = setupServer(
-  http.get('/api/users/:id', () =>
-    HttpResponse.json({ id: '1', fullName: 'Ada Lovelace' }),
-  ),
+  http.post('/otps/otp', () => HttpResponse.json(null, { status: 204 })),
 );
 
 beforeAll(() => server.listen());
@@ -64,4 +64,4 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 ```
 
-The hook's internals stay real; only the network boundary is mocked.
+The API class stays real; only the network boundary is mocked.

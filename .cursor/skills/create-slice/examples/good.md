@@ -1,47 +1,64 @@
 # Good examples — `create-slice`
 
-## 1. Module slice with the segments it actually needs
+## 1. Module slice — Auth shape
 
 ```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py modules user-profile ui model api
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules Auth presentation model data domain
 ```
 
 Result:
 
 ```text
-src/4_modules/user-profile/
-├── index.ts        # public API: re-export useUserProfile, UserProfile, …
-├── ui/             # UserProfile.tsx + its UI hooks
-├── model/          # MobX store, selectors, domain types
-└── api/            # query keys, hook wrapping the generated client, DTO mapping
+src/4_modules/Auth/
+├── index.ts              # public API: re-export AuthWizard
+├── presentation/         # AuthWizard.component.tsx, AuthWizard.vm.ts, CreateOtpForm.*
+├── model/                # Otp.interactor.ts, Phone.schema.ts
+├── data/                 # Otp.api.ts
+└── domain/               # Phone.interface.ts
 ```
 
-Only three segments — the slice uses `ui`, `model`, `api`. No empty `config`/`constants`/`lib` rotting unused.
-
-## 2. Module slice — data + types, no UI
-
-```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py modules user model api
-```
-
-A domain module with no UI of its own; `ui` is correctly absent. `model` holds the domain type and selectors, `api` wraps the generated client.
-
-## 3. Shared UI-kit slice
-
-```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py shared button ui
-```
-
-A pure presentational slice needs only `ui`. One segment, one role.
-
-## 4. `index.ts` exports a stable surface
-
-`src/4_modules/user-profile/index.ts`:
+No empty `lib`/`config`/`constants`. No segment barrels — `index.ts` re-exports from presentation:
 
 ```ts
-export { UserProfile } from './ui/UserProfile';
-export { useUserProfile } from './model/useUserProfile';
-export type { UserProfileProps } from './ui/UserProfile';
+export { AuthWizard } from './presentation/AuthWizard.component';
 ```
 
-Consumers import `~modules/user-profile`, never `~modules/user-profile/ui/UserProfile`. Internals (mappers, internal hooks) stay private.
+Consumers import `~modules/Auth`, never `~modules/Auth/presentation/AuthWizard.component`.
+
+## 2. Flat widget — Header shape
+
+Do **not** run the segment script. Use `/create-slice` on `@src/3_widgets/Header` (or create the files by hand):
+
+```text
+src/3_widgets/Header/
+├── index.ts
+├── Header.component.tsx
+├── Header.vm.ts
+└── Header.component.m.css
+```
+
+`index.ts`:
+
+```ts
+export { Header } from './Header.component';
+```
+
+## 3. Flat page — Auth page shape
+
+```text
+src/2_pages/Auth/
+├── index.ts
+├── Auth.page.tsx
+├── Auth.page.m.css
+└── Auth.page.skeleton.tsx   # optional
+```
+
+The page only composes widgets/modules. No view-model, no `presentation/` folder.
+
+## 4. Module without UI
+
+```sh
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules Session model data domain
+```
+
+A domain module with no presentation of its own; `presentation` is correctly absent.

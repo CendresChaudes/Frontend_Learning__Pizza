@@ -1,11 +1,16 @@
 ---
-description: Stack state model — MobX (mobx-react-lite) for client domain state, not server data
+description: Stack state model — MobX view-models, interactors, useViewModel, observer. Etalons: Header.vm and AuthWizard.vm.
 alwaysApply: false
 globs: "**/*.{ts,tsx}"
 ---
 
 # Model (stack)
 
-- Use MobX correctly and sparingly: `mobx-react-lite` `observer` only for components that read observable state; keep actions and computed derivations explicit.
-- Don't mirror server state into observables — server data lives in the TanStack Query cache (see `stack/api`). Reserve MobX for genuine client domain state.
-- Keep stores slice-scoped (feature/entity `model` segment); avoid global stores for what belongs to a feature (see `architecture/segments`).
+Etalons: `src/3_widgets/Header/Header.vm.ts`, `src/4_modules/Auth/presentation/AuthWizard.vm.ts`, `src/4_modules/Auth/model/Otp.interactor.ts`.
+
+- View-model is a class (`XxxViewModel`) in `*.vm.ts`, next to the component (flat widget) or in `presentation/` (module). `makeObservable(this, undefined, { autoBind: true })`. Derived UI state is `@computed`. Optional `destroy()` when the VM owns resources (forms, `AbortController`).
+- Wire the VM with `useViewModel(() => new XxxViewModel())` from `~shared/lib`. Wrap the component in `observer` (`function XxxComponent` + `const Xxx = observer(XxxComponent)`).
+- Don't put view-models in `model/` — that segment holds interactors and schemas. The VM calls the interactor; the component does not.
+- Interactor (`*.interactor.ts` in `model/`): constructs the API class, exposes mutations, runs use-cases (`createOtp`). Pass `AbortSignal` into the constructor.
+- Don't mirror server state into observables — mutations/queries live in `data/` via `mobx-tanstack-query` (see `stack/api`). The VM reads `mutation.isPending` through the interactor.
+- Keep this slice-scoped. Avoid a global store for what belongs to a feature.

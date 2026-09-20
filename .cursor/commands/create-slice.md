@@ -1,101 +1,108 @@
 ---
-description: Create component file, CSS module, and `index.ts` in the attached directory.
+description: Create a flat slice (component + view-model + CSS + index.ts, or a page) in the attached directory.
 ---
 
 # Create slice
 
-Command for scaffolding a **minimal flat slice** in the **attached directory**. The directory is the only required input.
+Command for scaffolding a **flat slice** in the **attached directory**. The directory is the only required input.
+
+For a **segmented module** (`presentation`/`model`/`data`/`domain`, etalon Auth), follow [`.cursor/skills/create-slice/SKILL.md`](../skills/create-slice/SKILL.md) instead — this command does not create segment folders.
+
+## Skills (required, first)
+
+When this command and the create-slice skill disagree on **module** structure, **the skill wins**. For widgets and pages, this command wins (flat etalons).
+
+1. [`.cursor/skills/create-slice/SKILL.md`](../skills/create-slice/SKILL.md) — examples: [`examples/good.md`](../skills/create-slice/examples/good.md), [`examples/bad.md`](../skills/create-slice/examples/bad.md).
 
 ## Context (required)
 
-The user attaches the **target directory** with `@` (e.g. `@src/2_pages/Auth`).
+The user attaches the **target directory** with `@` (e.g. `@src/3_widgets/Header`, `@src/2_pages/Auth`).
 
 1. Read the directory path from context — do **not** ask for layer or slice name when the directory is attached.
-2. `<dir-name>` = the **basename** of that directory (`Auth`, `Header`, `user-profile`, …).
+2. `<dir-name>` = the **basename** of that directory (`Auth`, `Header`).
 3. All files are created **inside** that directory.
 
 If no directory is attached, ask the user to attach it with `@` and stop.
 
-## Component file suffix
+## File suffix
 
-| Location              | Component file             | CSS module                   | Public API |
-| --------------------- | -------------------------- | ---------------------------- | ---------- |
-| Inside `src/2_pages/` | `<dir-name>.page.tsx`      | `<dir-name>.page.m.css`      | `index.ts` |
-| Any other layer       | `<dir-name>.component.tsx` | `<dir-name>.component.m.css` | `index.ts` |
+| Location              | Component                  | View-model         | CSS module                   | Public API |
+| --------------------- | -------------------------- | ------------------ | ---------------------------- | ---------- |
+| Inside `src/2_pages/` | `<dir-name>.page.tsx`      | none               | `<dir-name>.page.m.css`      | `index.ts` |
+| Any other layer       | `<dir-name>.component.tsx` | `<dir-name>.vm.ts` | `<dir-name>.component.m.css` | `index.ts` |
 
-The CSS module stem matches the component file: `.page.tsx` → `.page.m.css`, `.component.tsx` → `.component.m.css`.
-
-Do not create segment folders (`ui/`, `model/`, …). Do not overwrite non-empty files.
+Do not create segment folders (`presentation/`, `ui/`, `model/`, …). Do not overwrite non-empty files.
 
 ## Naming
 
 - **Component name** in `.tsx`:
-  - Non-page: PascalCase from `<dir-name>` (`auth` → `Auth`, `user-profile` → `UserProfile`).
-  - Page (`src/2_pages/`): the same PascalCase plus the `Page` suffix (`auth` → `AuthPage`, `user-profile` → `UserProfilePage`). Do not double the suffix if the name already ends with `Page`.
-- **`index.ts`:** re-export the component from the `.tsx` stem (no extension):
-  - Pages: `export { AuthPage } from './Auth.page';`
-  - Components: `export { UserProfile } from './UserProfile.component';`
+  - Non-page: PascalCase from `<dir-name>` (`Header` → `Header`). Inner function is `<Name>Component`; export is `observer(<Name>Component)` as `<Name>`.
+  - Page (`src/2_pages/`): PascalCase plus `Page` (`Auth` → `AuthPage`). Do not double the suffix if the name already ends with `Page`.
+- **View-model:** class `<Name>ViewModel` in `<Name>.vm.ts`.
+- **`index.ts`:** re-export the component from the `.tsx` stem (no extension).
 
 ---
 
-## Etalon — `rfc` snippet (not an existing slice)
+## Etalon — frozen Header / Auth.page (do not re-read living files)
 
-Do **not** read Header or any other slice to copy structure. That slice may not exist.
+Templates below are frozen copies of:
 
-The component body comes from the user snippet `rfc` ("Create React functional component template"):
+- Widget: `src/3_widgets/Header` — `observer` + `useViewModel` + `*.vm.ts`.
+- Page: `src/2_pages/Auth` — composition only, no view-model.
 
-```tsx
-import styles from './$TM_FILENAME_BASE.m.css';
-
-type TProperties = Readonly<{ example: string }>;
-
-function $TM_FILENAME_BASE(properties: TProperties): ReactJSX {
-  const { example } = properties;
-
-  return <div className={styles.root}>$1</div>;
-}
-
-export { $TM_FILENAME_BASE };
-```
-
-Map snippet tokens to this project's files:
-
-| Snippet                                 | Scaffold                                                                |
-| --------------------------------------- | ----------------------------------------------------------------------- |
-| `$TM_FILENAME_BASE` (function / export) | PascalCase from `<dir-name>`; pages append `Page` (`Auth` → `AuthPage`) |
-| `./$TM_FILENAME_BASE.m.css`             | `./<dir-name>.component.m.css` or, for pages, `./<dir-name>.page.m.css` |
-| `$1`                                    | `{example}`                                                             |
-
-Keep the snippet's code shape: `TProperties`, `properties` argument, `ReactJSX` return, named export. Scaffold props are the placeholder `example: string`.
+Do **not** open those files to copy them at runtime; use the templates in this command.
 
 ---
 
-## Template — non-page (`<dir-name>.component.tsx`)
+## Template — widget (`<dir-name>.component.tsx` + `.vm.ts`)
 
 ```text
 <dir-name>/
 ├── <dir-name>.component.tsx
+├── <dir-name>.vm.ts
 ├── <dir-name>.component.m.css
 └── index.ts
 ```
 
-**`<dir-name>.component.tsx`** (example: `UserProfile`)
+**`<dir-name>.component.tsx`** (example: `Header`)
 
 ```tsx
-import styles from './UserProfile.component.m.css';
+import { observer } from 'mobx-react-lite';
+import { useViewModel } from '~shared/lib';
+import styles from './Header.component.m.css';
+import { HeaderViewModel } from './Header.vm';
 
-type TProperties = Readonly<{ example: string }>;
+function HeaderComponent(): ReactJSX {
+  const viewModel = useViewModel(() => new HeaderViewModel());
 
-function UserProfile(properties: TProperties): ReactJSX {
-  const { example } = properties;
-
-  return <div className={styles.root}>{example}</div>;
+  return <div className={styles.root}>{viewModel.title}</div>;
 }
 
-export { UserProfile };
+const Header = observer(HeaderComponent);
+
+export { Header };
 ```
 
-Replace `UserProfile` / paths with the derived names. If the slice has real props, replace `example` in `TProperties` and the destructure.
+**`<dir-name>.vm.ts`** (example: `Header`)
+
+```ts
+import { computed, makeObservable } from 'mobx';
+
+export class HeaderViewModel {
+  @computed
+  public get title(): string {
+    return '';
+  }
+
+  constructor() {
+    makeObservable(this, undefined, {
+      autoBind: true,
+    });
+  }
+}
+```
+
+Replace `Header` / paths with the derived names. Drop unused `@computed` members rather than leaving placeholders if the VM has nothing to expose yet — keep `makeObservable`.
 
 **`<dir-name>.component.m.css`**
 
@@ -108,26 +115,22 @@ Replace `UserProfile` / paths with the derived names. If the slice has real prop
 **`index.ts`**
 
 ```ts
-export { UserProfile } from './UserProfile.component';
+export { Header } from './Header.component';
 ```
 
 ---
 
 ## Template — `@src/2_pages/<dir-name>` (page)
 
-Same `rfc` shape. File names use `.page.tsx` / `.page.m.css`. The **component** is PascalCase + `Page`.
+No view-model. File names use `.page.tsx` / `.page.m.css`. The **component** is PascalCase + `Page`.
 
 **`<dir-name>.page.tsx`** (example: dir `Auth` → `AuthPage`)
 
 ```tsx
 import styles from './Auth.page.m.css';
 
-type TProperties = Readonly<{ example: string }>;
-
-function AuthPage(properties: TProperties): ReactJSX {
-  const { example } = properties;
-
-  return <div className={styles.root}>{example}</div>;
+function AuthPage(): ReactJSX {
+  return <div className={styles.root} />;
 }
 
 export { AuthPage };
@@ -147,13 +150,13 @@ export { AuthPage };
 export { AuthPage } from './Auth.page';
 ```
 
-Replace `Auth` / `AuthPage` / paths with the derived names.
+Replace `Auth` / `AuthPage` / paths with the derived names. Compose widgets/modules inside the page; do not put interactors or API classes here.
 
 ---
 
 ## Rules
 
-- Component body follows the `rfc` snippet, not any existing slice.
+- Widgets follow the Header template (VM + observer). Pages follow the Auth.page template (composition only).
 - Import styles from `./<dir-name>.page.m.css` (pages) or `./<dir-name>.component.m.css` (components).
 - Use design tokens from `:root` when adding styles.
 - Respect FSD boundaries (`.cursor/rules/architecture/`).

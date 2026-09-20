@@ -8,7 +8,7 @@ globs: "**/*.{ts,tsx}"
 
 Generic testing practices (levels, placement, mocking, structure, coverage) live in `engineering/testing`. Below is this stack's tooling.
 
-- Unit tests run via `vitest` (node + browser configs); pure logic lives in `~shared/lib` and feature `lib`/`model` segments.
+- Unit tests run via `vitest` (node + browser configs); pure logic lives in `~shared/lib` and module `model`/`domain`; API classes in `data/`.
 - Component/integration tests use `vitest-browser-react`.
 - E2E tests run via Playwright (`check:tests:e2e`); reserve for critical flows.
 - Test files are `*.test.ts`/`*.test.tsx` colocated with the source; the project excludes `src/**/__tests__` from the app build.

@@ -8,5 +8,5 @@ globs: "**/*.{ts,tsx}"
 
 - Reach for the project's UI-kit components and hooks first; don't reinvent what the kit provides. Override via the kit's style props / `classNames` API, not by fighting kit internals (see `stack/css`).
 - Style variants via `class-variance-authority` routed through the project's `cn` helper; don't scatter raw `clsx` calls (see `stack/css`).
-- Forms: kit inputs wired to React Hook Form; wire `label`/`error` props — don't strip them for layout. Form driver is React Hook Form (see `stack/react`); schemas are Zod (see `stack/api`).
+- Forms: kit inputs wired through `Controller` from `mobx-react-hook-form` (the form lives on the view-model — see `stack/react`). Don't strip `label`/`error` for layout. Schemas are Zod in `model/` (see `stack/api`).
 - Don't break the kit's a11y when overriding: keep `role`, `aria-*`, and keyboard handlers intact (see `stack/accessibility`).

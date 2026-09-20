@@ -20,8 +20,8 @@ Application initialization — the root that wires everything together.
 
 Page-level composition for a route.
 
-- Lives here: one slice per route (`<route>/index.tsx`), assembling widgets and modules into a screen. No business logic — only composition and route-bound wiring.
-- Structure: slice-based. Each page is a slice with `ui` (the page component) and optionally `model`/`api` for route-local state/data. Capture is `page`.
+- Lives here: one PascalCase slice per route. No business logic — only composition and route-bound wiring.
+- Structure: flat slice. Files: `<Name>.page.tsx`, `<Name>.page.m.css`, optional `<Name>.page.skeleton.tsx`, `index.ts`. Etalon: `src/2_pages/Auth`. Capture is `page`.
 - May import: widgets, modules, core, shared, global. Not `app`. Not other pages.
 - Cross-import between pages is forbidden.
 
@@ -29,20 +29,20 @@ Page-level composition for a route.
 
 Compositional blocks combining modules into self-sufficient chunks used by pages.
 
-- Lives here: UI sections too composed to be a single module — dashboards, sidebars, page sections aggregating multiple modules.
-- Structure: slice-based. Segments `ui` (the widget + its hooks), `model`/`lib`/`api` as needed. Capture is `widget`.
+- Lives here: UI sections too composed to be a single module — header, dashboards, sidebars.
+- Structure: slice-based, PascalCase directory. Simple widgets are **flat** (no segment folders): `<Name>.component.tsx`, `<Name>.vm.ts`, `<Name>.component.m.css`, `index.ts`. Etalon: `src/3_widgets/Header`. Add `presentation/`/`model/` only when the widget outgrows that. Capture is `widget`.
 - May import: modules, core, shared, global. Not pages. Not `app`. Not other widgets.
 - Public API via `index.ts`.
 
 ## `4_modules` — `~modules`, layer `modules`
 
-Business modules — self-contained slices delivering a piece of business value: user scenarios (login, add-to-cart, filter) and domain models (user, product, order). A module owns its UI, business logic, domain rules, and API.
+Business modules — self-contained slices delivering a piece of business value: user scenarios (login, add-to-cart, filter) and domain models (user, product, order). A module owns its UI, use-cases, domain rules, and API.
 
-- Lives here: a user-facing scenario and/or a domain model with its UI, business logic, and API. Self-contained.
-- Structure: slice-based. Segments `ui`, `model` (incl. `domain`), `api`, `lib`, `config`, `constants` as needed. Capture is `module`.
-  - The `domain` segment (a `model` subtype) holds pure domain rules and imports nothing (enforced by `no-restricted-imports`).
+- Lives here: a user-facing scenario and/or a domain model with presentation, interactors, data, and domain. Self-contained.
+- Structure: slice-based, PascalCase directory. Segments `presentation`, `model`, `data`, `domain` as needed (`lib`/`config`/`constants` only when used). Etalon: `src/4_modules/Auth`. Capture is `module`.
+  - `domain` imports nothing (enforced by `no-restricted-imports`). No segment barrels — files are imported by path (`../model/Otp.interactor`).
 - May import: core, shared, global. Not widgets/pages/app. Not other modules (cross-slice imports forbidden).
-- Public API via `index.ts`.
+- Public API via `index.ts` (re-export the presentation entry, e.g. `AuthWizard`).
 
 ## `5_core` — `~core`, layer `core`
 

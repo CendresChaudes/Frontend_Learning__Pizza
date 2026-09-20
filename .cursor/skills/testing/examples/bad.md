@@ -15,7 +15,7 @@ Why: this breaks on every refactor and re-asserts the library. Assert the output
 ## ❌ Mock an internal module
 
 ```ts
-vi.mock('~modules/user/api/user', () => ({ useUser: () => ({ data: stub }) }));
+vi.mock('~modules/Auth/data/Otp.api', () => ({ OtpApi: vi.fn() }));
 ```
 
 Why: mocks at the wrong layer couple the test to the module graph and hide real wiring. Mock HTTP with MSW at the network boundary; keep internals real.

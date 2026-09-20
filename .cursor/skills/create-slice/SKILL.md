@@ -1,13 +1,11 @@
 ---
 name: create-slice
 description: >-
-  Scaffold and structure an FSD slice in a numbered layer with role-based
-  segments only. Allow the canonical segments (ui, model, lib, api, config,
-  constants) and forbid abstract role-less ones (hooks, components, utils,
-  helpers, services, store, types, providers). Use when creating a new slice
-  or segment in any layer (app, pages, widgets, modules, core, shared, global).
-  Triggers: create slice, new module, new widget, new page, add segment,
-  scaffold slice, FSD slice.
+  Scaffold and structure an FSD slice in a numbered layer. Modules use
+  presentation/model/data/domain (etalon Auth); widgets stay flat with
+  component + view-model (etalon Header); pages use .page.tsx. Use when
+  creating a new slice or segment in any layer. Triggers: create slice, new
+  module, new widget, new page, add segment, scaffold slice, FSD slice.
 ---
 
 # Create Slice
@@ -16,68 +14,69 @@ description: >-
 
 Apply automatically when creating a new slice or segment in any layer (`1_app` … `7_global`), or when adding a segment to an existing slice. Don't apply to `generated/`.
 
-## Allowed segments (role-based)
+Etalons in code: `src/4_modules/Auth` (module), `src/3_widgets/Header` (widget), `src/2_pages/Auth` (page). Copy those shapes.
 
-A segment name must describe a **role**, not a code shape. Only these are canonical:
+## Slice directory
 
-- `ui` — the slice's UI: components and the hooks that drive them. A hook lives here when it's tied to rendering this slice's UI.
-- `model` — business logic and domain state: MobX stores, selectors, domain types, business rules. The `domain` segment (a `model` subtype) imports nothing.
-- `lib` — infrastructure helpers local to the slice: pure functions, formatting, mappers that are not business logic.
-- `api` — network boundary for the slice: query keys, hooks wrapping generated clients, DTO → domain mapping. (Typically `~modules`.)
-- `config` — the slice's configuration values.
-- `constants` — the slice's constants (`constants.ts`).
+PascalCase, matching the export (`Auth`, `Header`, `NotFoundError`) — not kebab-case.
 
-## Forbidden segments (abstract, role-less)
+## Allowed segments (modules)
 
-Do not create segments named after code shapes — they don't answer "what role does this play?". Map them to a canonical segment instead:
+A segment name must describe a **role**. Canonical set for `~modules` (etalon Auth):
 
-- `hooks` → `ui` (UI hooks) or `model` (business hooks). A hook is an implementation detail, not a role.
-- `components` → `ui` (that's what `ui` is).
+- `presentation` — `*.component.tsx`, `*.component.m.css`, `*.vm.ts`.
+- `model` — `*.interactor.ts`, `*.schema.ts`.
+- `data` — `*.api.ts` (HTTP + `mobx-tanstack-query`).
+- `domain` — `*.interface.ts`; imports nothing.
+- `lib` / `config` / `constants` — only when the slice needs them.
+
+No segment barrels — files are imported by path. Slice `index.ts` re-exports the presentation entry.
+
+`~shared` / `~core` / `~app` keep infra names (`ui`, `lib`, `api`, `config`, `constants`) — do not rename those to `presentation`/`data`.
+
+## Flat widgets and pages (no segment folders)
+
+- **Widget** — etalon Header: `<Name>.component.tsx`, `<Name>.vm.ts`, `<Name>.component.m.css`, `index.ts` at the slice root. `/create-slice` scaffolds this.
+- **Page** — etalon `Auth.page.tsx`: `<Name>.page.tsx`, `<Name>.page.m.css`, `index.ts`. Composition only; no view-model.
+
+Add `presentation/`/`model/` to a widget only when it outgrows one component + VM.
+
+## Forbidden names
+
+Do not create segments named after a code shape. Map them:
+
+- `ui` / `components` / `hooks` / `hocs` → `presentation` on **modules** (or a flat `*.component.tsx` on a widget). `~shared` / `~app` keep `ui`.
+- `api` / `services` → `data` (network) or `model` (interactor) on **modules**. `~core` / `~shared` keep `api`.
 - `utils` / `helpers` → `lib`.
-- `services` → `api` (network) or `model` (business), or the `core` layer for app-wide services.
-- `store` / `stores` → `model`.
-- `types` → not a segment. Types live in the segment that owns them, by ownership — a domain type in `model`, a UI props type in `ui`, an API DTO/mapping type in `api`. One type per file (`User.types.ts`, `UserProfileProps.types.ts`). Exception: a complex type decomposed into smaller helper types stays together in one file — the helper types are implementation detail of the complex one, not separate exports.
-- `providers` → `ui` for a slice, or the `app` layer for app-wide providers.
-- `hocs` → `ui`.
+- `store` / `stores` → `model` (`*.interactor.ts`) and/or `*.vm.ts` in presentation.
+- `types` → not a segment. Domain type → `domain/*.interface.ts`; form types → `model/*.schema.ts`.
+- `providers` → `1_app` for app-wide; don't add a `providers/` segment inside a module.
 
-If you believe a new segment name is genuinely needed, justify it in the reply and check `eslint-plugin-boundaries` first — the canonical set is enforced by convention.
+## Intra-slice imports
 
-## Structure
-
-```text
-src/<n>_<layer>/<slice-name>/   # kebab-case slice
-├── index.ts                    # public API — re-export only what consumers need
-├── ui/
-├── model/
-├── lib/
-└── …                           # only the segments this slice actually needs
+```
+presentation → model → data
+                 ↘     ↙
+                  domain
 ```
 
-Create only the segments the slice uses — don't pre-create all six. An empty segment rots.
+`domain` imports nothing. `presentation` does not import `data`. Layer flow: `architecture/general`.
 
-## `index.ts` contract
-
-The slice's `index.ts` is its public API. Re-export only what consumers in higher layers need; keep internals private. Don't re-export every file — export named, stable surface. Renaming or removing an exported name is a breaking change that requires updating consumers in the same edit.
-
-## Import flow
-
-Respect the layer flow (`global → shared → core → modules → widgets → pages → app`), enforced by `eslint-plugin-boundaries`. No cross-imports within the same slice layer; no imports against the flow. The `domain` segment imports nothing.
-
-## Scaffold
-
-Create the slice skeleton (validates the layer and segments, refuses abstract ones):
+## Scaffold (module segments)
 
 ```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py <layer-alias> <slice-name> [segment...]
+python3 .cursor/skills/create-slice/scripts/create-slice.py <layer-alias> <SliceName> [segment...]
 ```
 
-`<layer-alias>` is one of `app pages widgets modules core shared global`. Example:
+`<layer-alias>`: `app pages widgets modules core shared global`. Example (Auth-shaped module):
 
 ```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py modules user-profile ui model api
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules Auth presentation model data domain
 ```
+
+For a flat widget or page, use `/create-slice` on the attached directory instead of this script.
 
 ## Examples
 
 - Correct slices — see [`examples/good.md`](examples/good.md).
-- Forbidden abstract segments — see [`examples/bad.md`](examples/bad.md).
+- Forbidden names — see [`examples/bad.md`](examples/bad.md).

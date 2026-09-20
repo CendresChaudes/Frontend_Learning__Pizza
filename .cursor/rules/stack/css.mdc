@@ -8,7 +8,7 @@ globs: "**/*.css"
 
 Generic CSS practices (escape-hatch principle, cascade hygiene, inline styles, selectors, variables) live in `engineering/styles`. Below is this stack's setup.
 
-- CSS Modules are the default for component styles: colocate `*.module.css` with the component; use global CSS only for resets, fonts, and design tokens.
+- CSS Modules are the default for component styles: colocate `*.component.m.css` / `*.page.m.css` (or `*.m.css` in the UI kit) with the component; use global CSS only for resets, fonts, and design tokens.
 - Honor the stylelint config: `stylelint-config-standard` + `stylelint-config-clean-order` enforce property order. `check:styles` must pass; run `check:styles:fix` only when asked.
 - Keep CSS files minimal and colocated: a component's styles live with the component, not in a global stylesheet. Global CSS (`src/1_app/ui/index.css`) is only for tokens, base resets, and fonts.
 - Static design tokens belong in `:root` (`src/1_app/ui/styles/global/theme.global.css`); CSS variables for runtime-driven values only elsewhere. Don't duplicate tokens across both systems.

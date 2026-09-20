@@ -1,50 +1,65 @@
 # Bad examples — `create-slice`
 
-## ❌ `hooks` segment
+## ❌ `ui` or `components` segment
+
+```text
+src/4_modules/Auth/ui/AuthWizard.tsx
+src/4_modules/Auth/components/AuthWizard.tsx
+```
+
+Why: the etalon is `presentation/` with `*.component.tsx`. `ui`/`components` are the old/wrong names.
 
 ```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py modules user-profile hooks
-# create-slice.py: refusing abstract segment 'hooks'. hooks -> ui (UI hooks) or model (business hooks).
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules Auth ui
+# create-slice.py: refusing abstract segment 'ui'. ui -> presentation
 ```
 
-Why: a hook is an implementation detail, not a role. A UI hook belongs in `ui` next to its component; a business hook belongs in `model`.
-
-## ❌ `components` segment
-
-```text
-src/4_modules/user-profile/components/UserProfile.tsx
-```
-
-Why: `components` describes a code shape, not a role. That's exactly what `ui` is — use `ui/`.
-
-## ❌ `utils` / `helpers` segment
-
-```text
-src/4_modules/user-profile/utils/formatDate.ts
-```
-
-Why: `utils` is role-less. Pure helpers local to the slice go in `lib`; app-wide pure helpers go in `~shared/lib`.
-
-## ❌ `store` segment
-
-```text
-src/4_modules/user-profile/store/UserProfileStore.ts
-```
-
-Why: business state and its rules live in `model`. `store` names the mechanism, not the role.
-
-## ❌ `types` segment
-
-```text
-src/4_modules/user/types/User.ts
-```
-
-Why: a type is a file, not a segment. Put `User` in the segment that owns it by ownership — e.g. `model/User.types.ts` for a domain type, `ui/UserProfileProps.types.ts` for UI props. One type per file; the toolchain matches `*.types.ts` by suffix, not by a `types/` folder. A complex type decomposed into smaller helper types stays in one file (the helpers are its implementation detail).
-
-## ❌ Pre-creating all six segments
+## ❌ `api` segment / kebab-case slice
 
 ```sh
-python3 .cursor/skills/create-slice/scripts/create-slice.py modules user-profile ui model lib api config constants
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules user-profile api
 ```
 
-Why: empty segments rot. Create only the segments the slice uses; add more later when a real need appears.
+Why: slice directories are PascalCase (`Auth`, not `user-profile`). Network code lives in `data/` (`Otp.api.ts`), not `api/`.
+
+## ❌ View-model in `model/`
+
+```text
+src/4_modules/Auth/model/AuthWizard.vm.ts
+```
+
+Why: `*.vm.ts` sits next to the component in `presentation/` (or at the widget root). `model/` holds interactors and schemas.
+
+## ❌ Presentation importing `data/`
+
+```ts
+// presentation/CreateOtpForm.component.tsx
+import { OtpApi } from '../data/Otp.api';
+```
+
+Why: intra-slice flow is `presentation → model → data`. The component talks to the view-model; the VM talks to the interactor.
+
+## ❌ Segment barrels
+
+```text
+src/4_modules/Auth/presentation/index.ts
+src/4_modules/Auth/model/index.ts
+```
+
+Why: Auth has none. Import files by path; only the slice `index.ts` is a public API.
+
+## ❌ Segment folders on a simple widget
+
+```text
+src/3_widgets/Header/presentation/Header.component.tsx
+```
+
+Why: Header is flat — component + VM + CSS at the slice root. Don't add `presentation/` until the widget outgrows that.
+
+## ❌ Pre-creating unused segments
+
+```sh
+python3 .cursor/skills/create-slice/scripts/create-slice.py modules Auth presentation model data domain lib config constants
+```
+
+Why: empty segments rot. Create only what the slice uses.

@@ -1,12 +1,15 @@
 ---
-description: Stack API layer — Zod schemas, TanStack Query server state, mobx-tanstack-query bridge, MSW mocking
+description: Stack API layer — data/ API classes, mobx-tanstack-query Mutation, HttpClient, Zod schemas. Etalon: Otp.api.
 alwaysApply: false
 globs: "**/*.{ts,tsx}"
 ---
 
 # API (stack)
 
-- Server state via TanStack Query: define query keys deliberately, handle loading/error/success explicitly, invalidate or optimistically update on mutation. Never fire fetches in effects without a cache layer.
-- Bridge to MobX via `mobx-tanstack-query` observer — observe query results in components/stores without copying data into observables (see `stack/model`).
-- Validate with Zod schemas: request/response shapes, form schemas (via `@hookform/resolvers` — see `stack/react`). Generated schemas come from Kubb in `generated/` (see `stack/general`, the `openapi-codegen` skill); wrap generated clients in adapters in `~shared`/`~modules`.
-- Mock with MSW (`~msw`): request handlers for dev/e2e; keep mocks aligned with Zod schemas and the OpenAPI spec.
+Etalon: `src/4_modules/Auth/data/Otp.api.ts` + `model/Otp.interactor.ts`.
+
+- Network code lives in the slice `data/` segment as an API class (`XxxApi`). Construct `Mutation`/`Query` from `mobx-tanstack-query` with `queryClient` from `~core/api`, `abortSignal`, a `mutationKey`/`queryKey`, and `mutationFn` that calls `HttpClient` from `~shared/api`.
+- The interactor in `model/` is the only consumer of the API class. Presentation never imports `data/`.
+- Don't fire fetches in effects. Don't copy server results into MobX observables (see `stack/model`).
+- Validate with Zod schemas in `model/` (`*.schema.ts`) — form input/output types via `z.input` / `z.output`. Generated schemas from Kubb stay behind adapters (see `stack/general`, the `openapi-codegen` skill).
+- Mock with MSW (`~msw`); keep mocks aligned with Zod schemas and the OpenAPI spec.

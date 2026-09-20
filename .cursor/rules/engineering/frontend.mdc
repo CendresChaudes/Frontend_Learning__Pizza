@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Frontend
 
-Generic frontend expectations. Stack wiring (CSS, React Hook Form) lives in `stack/` — see `stack/react`, `stack/css`, `stack/accessibility`.
+Generic frontend expectations. Stack wiring (CSS, `mobx-react-hook-form`) lives in `stack/` — see `stack/react`, `stack/css`, `stack/accessibility`.
 
 ## Forms
 

@@ -98,8 +98,8 @@ The command does not repeat the skill body — it links and adds invocation-only
 
 ## 3. Filename = slash name; opening starts with `Command for`
 
-| File                               | Invoked as      | Frontmatter                                                                                   | Opening after H1                                                                  |
-| ---------------------------------- | --------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `.cursor/commands/create-slice.md` | `/create-slice` | `description: Create component file, CSS module, and \`index.ts\` in the attached directory.` | `Command for scaffolding a **minimal flat slice** in the **attached directory**.` |
+| File                               | Invoked as      | Frontmatter                                                                                                        | Opening after H1                                                          |
+| ---------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| `.cursor/commands/create-slice.md` | `/create-slice` | `description: Create a flat slice (component + view-model + CSS + index.ts, or a page) in the attached directory.` | `Command for scaffolding a **flat slice** in the **attached directory**.` |
 
 Optional `name` in frontmatter, if present, matches the file stem (`create-slice`).
