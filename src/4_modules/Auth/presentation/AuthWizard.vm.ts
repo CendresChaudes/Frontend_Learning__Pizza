@@ -2,10 +2,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { computed, makeObservable } from 'mobx';
 import { createForm, type Form } from 'mobx-react-hook-form';
 import { OtpInteractor } from '../model/Otp.interactor';
-import { phoneSchema, type TPhoneFormValues } from '../model/Phone.schema';
+import {
+  phoneSchema,
+  type TPhoneFormInputValues,
+  type TPhoneFormOutputValues,
+} from '../model/Phone.schema';
 
 export class AuthWizardViewModel {
-  public readonly form: Form<TPhoneFormValues, undefined, TPhoneFormValues>;
+  public readonly form: Form<TPhoneFormInputValues, undefined, TPhoneFormOutputValues>;
 
   private readonly _abortController = new AbortController();
   private readonly _otpInteractor: OtpInteractor;
@@ -22,7 +26,7 @@ export class AuthWizardViewModel {
 
     this._otpInteractor = new OtpInteractor(this._abortController.signal);
 
-    this.form = createForm<TPhoneFormValues, undefined, TPhoneFormValues>({
+    this.form = createForm<TPhoneFormInputValues, undefined, TPhoneFormOutputValues>({
       abortSignal: this._abortController.signal,
       defaultValues: { phone: '' },
       resolver: zodResolver(phoneSchema),

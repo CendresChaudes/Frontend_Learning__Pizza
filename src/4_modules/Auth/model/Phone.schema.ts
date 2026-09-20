@@ -13,4 +13,5 @@ export const phoneSchema = z.object({
     .regex(PHONE_PATTERN, { message: 'Формат: +7XXXXXXXXXX' }),
 });
 
-export type TPhoneFormValues = z.infer<typeof phoneSchema>;
+export type TPhoneFormInputValues = z.input<typeof phoneSchema>;
+export type TPhoneFormOutputValues = z.output<typeof phoneSchema>;
