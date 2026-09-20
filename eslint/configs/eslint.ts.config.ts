@@ -53,6 +53,7 @@ export const eslintTsConfig: Linter.Config = {
     ...noRestrictedSyntaxRule,
     ...noUnusedVarsRule,
     'prettier/prettier': 'error',
+    'no-unused-vars': 'off',
     'no-undef': 'off',
     '@typescript-eslint/no-empty-object-type': 'off',
     'no-throw-literal': 'error',
