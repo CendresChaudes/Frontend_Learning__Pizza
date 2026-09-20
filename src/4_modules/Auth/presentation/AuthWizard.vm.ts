@@ -1,23 +1,29 @@
-import { action, makeObservable, observable } from 'mobx';
-import { OtpApi } from '../data/Otp.api';
-import { Phone } from '../domain/Phone.entity';
+import { action, computed, makeObservable, observable } from 'mobx';
+import type { IPhone } from '../domain/Phone.interface';
 import { OtpInteractor } from '../model/Otp.interactor';
 
 export class AuthWizardViewModel {
-  @observable public phone = '';
+  @observable
+  public phone: IPhone['phone'] = '';
+
+  private readonly _abortController = new AbortController();
   private readonly _otpInteractor: OtpInteractor;
+
+  @computed
+  public get isCreateOtpPending(): boolean {
+    return this._otpInteractor.createOtpMutation.isPending;
+  }
 
   constructor() {
     makeObservable(this, undefined, {
       autoBind: true,
     });
 
-    const otpApi = new OtpApi();
-    this._otpInteractor = new OtpInteractor(otpApi);
+    this._otpInteractor = new OtpInteractor(this._abortController.signal);
   }
 
   @action
-  public setPhone(phone: string) {
+  public setPhone(phone: IPhone['phone']) {
     this.phone = phone;
   }
 
@@ -27,8 +33,7 @@ export class AuthWizardViewModel {
       throw new Error('Номер телефона не установлен');
     }
 
-    const phone = new Phone(this.phone);
-    await this._otpInteractor.createOtp(phone.value);
+    await this._otpInteractor.createOtp(this.phone);
     this.setPhone('');
   }
 

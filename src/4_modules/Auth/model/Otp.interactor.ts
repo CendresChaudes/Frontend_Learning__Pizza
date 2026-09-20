@@ -1,13 +1,19 @@
-import type { OtpApi } from '../data/Otp.api';
+import type { Mutation } from 'mobx-tanstack-query';
+import { OtpApi } from '../data/Otp.api';
+import type { IPhone } from '../domain/Phone.interface';
 
 export class OtpInteractor {
-  private readonly _otpApi: OtpApi;
+  public readonly _otpApi: OtpApi;
 
-  constructor(otpApi: OtpApi) {
-    this._otpApi = otpApi;
+  public get createOtpMutation(): Mutation<void, IPhone> {
+    return this._otpApi.createOtpMutation;
   }
 
-  public async createOtp(phone: string): Promise<void> {
-    await this._otpApi.createOtp(phone);
+  constructor(abortSignal: AbortSignal) {
+    this._otpApi = new OtpApi(abortSignal);
+  }
+
+  public async createOtp(phone: IPhone['phone']): Promise<void> {
+    await this._otpApi.createOtp({ phone });
   }
 }

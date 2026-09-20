@@ -26,7 +26,12 @@ function CreateOtpFormComponent(): ReactJSX {
         placeholder="Номер телефона"
       />
 
-      <Button onClick={handleOtpCreate}>Продолжить</Button>
+      <Button
+        onClick={handleOtpCreate}
+        disabled={viewModel.isCreateOtpPending}
+      >
+        Продолжить
+      </Button>
     </div>
   );
 }

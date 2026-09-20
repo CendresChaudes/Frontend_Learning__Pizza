@@ -1,25 +1,23 @@
-import {
-  otpsControllerCreateOtpMutationKey,
-  otpsControllerCreateOtpMutationOptions,
-} from '~generated/tanstack/🔑 otpsService/useOtpsControllerCreateOtp';
+import { Mutation } from 'mobx-tanstack-query';
 import { queryClient } from '~core/api';
+import { HttpClient } from '~shared/api';
+import type { IPhone } from '../domain/Phone.interface';
 
 export class OtpApi {
-  public async createOtp(phone: string): Promise<void> {
-    const mutationOptions = otpsControllerCreateOtpMutationOptions();
-    const { mutationFn } = mutationOptions;
+  public readonly createOtpMutation: Mutation<void, IPhone>;
 
-    if (!mutationFn) {
-      throw new Error('OTP mutation is not configured');
-    }
-
-    await mutationFn(
-      { body: { phone } },
-      {
-        client: queryClient,
-        meta: undefined,
-        mutationKey: otpsControllerCreateOtpMutationKey(),
+  constructor(abortSignal: AbortSignal) {
+    this.createOtpMutation = new Mutation({
+      queryClient,
+      abortSignal,
+      mutationKey: ['otp'],
+      mutationFn: async (phone: IPhone, { signal }) => {
+        await HttpClient.post('/otps/otp', phone, { signal });
       },
-    );
+    });
+  }
+
+  public async createOtp(phone: IPhone): Promise<void> {
+    await this.createOtpMutation.mutate(phone);
   }
 }
