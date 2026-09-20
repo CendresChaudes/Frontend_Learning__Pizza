@@ -1,14 +1,14 @@
-import { CAppRouting } from '~core/config';
+import { observer } from 'mobx-react-lite';
+import { useViewModel } from '~shared/lib';
 import styles from './Header.component.m.css';
+import { HeaderViewModel } from './Header.vm';
 
-function Header(): ReactJSX {
-  let title = 'Неизвестная страница';
+function HeaderComponent(): ReactJSX {
+  const viewModel = useViewModel(() => new HeaderViewModel());
 
-  if (CAppRouting.AUTH.isOpened) {
-    title = 'Авторизация';
-  }
-
-  return <div className={styles.root}>{title}</div>;
+  return <div className={styles.root}>{viewModel.title}</div>;
 }
+
+const Header = observer(HeaderComponent);
 
 export { Header };

@@ -4,14 +4,18 @@ type TDestroyableViewModel = {
   destroy?: () => void;
 };
 
-export function useViewModel<TViewModel extends TDestroyableViewModel>(
-  createViewModel: () => TViewModel,
-) {
+function isDestroyableViewModel(viewModel: unknown): viewModel is TDestroyableViewModel {
+  return typeof viewModel === 'object' && viewModel !== null && 'destroy' in viewModel;
+}
+
+export function useViewModel<TViewModel>(createViewModel: () => TViewModel) {
   const [viewModel] = useState(createViewModel);
 
   useEffect(() => {
     return () => {
-      if (viewModel.destroy) viewModel.destroy();
+      if (isDestroyableViewModel(viewModel)) {
+        viewModel.destroy?.();
+      }
     };
   }, [viewModel]);
 
